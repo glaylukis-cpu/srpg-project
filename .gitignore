@@ -8,3 +8,6 @@
 .vs/
 **/[Bb]in/
 **/[Oo]bj/
+*.log
+.dotnet-install.ps1
+.dotnet-sdk/
