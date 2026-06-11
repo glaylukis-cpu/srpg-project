@@ -1,0 +1,2967 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.4/staging' branch; Version is '6000.4.9f1 (f7258d6eebbe) revision 16197005'; Using compiler version '194234433'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) Professional' Language: 'ja' Physical Memory: 65197 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-06-03T01:39:42Z
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-glayl" at "2026-06-03T01:39:42.7498632Z"
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Unity.com
+-batchmode
+-quit
+-nographics
+-projectPath
+C:\Users\glayl\Documents\Codex\2026-06-02\unity-2d-srpg-tile-cs-gridmanager
+-executeMethod
+SRPG.EditorTools.SRPGRuntimeVerifier.Run
+-logFile
+C:\Users\glayl\Documents\Codex\2026-06-02\unity-2d-srpg-tile-cs-gridmanager\UnityVerification.log
+Successfully changed project path to: C:\Users\glayl\Documents\Codex\2026-06-02\unity-2d-srpg-tile-cs-gridmanager
+C:/Users/glayl/Documents/Codex/2026-06-02/unity-2d-srpg-tile-cs-gridmanager
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Player connection [47312]  Target information:
+
+Player connection [47312]  * "[IP] 192.168.11.11 [Port] 55504 [Flags] 2 [Guid] 2456104143 [EditorId] 2456104143 [Version] 1048832 [Id] WindowsEditor(7,WIN-E2IAVN1ESMH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [47312] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [47312] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Package Manager] Connected to IPC stream "Upm-47176" after 0.2 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-glayl"
+[Licensing::IpcConnector] LicenseClient-glayl channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-glayl-6000.4.9 doesn't exist
+[Licensing::Module] Successfully launched the LicensingClient (PId: 52524)
+Starting IPC server.
+Waiting for clients to connect on \\.\pipe\Unity-LicenseClient-glayl-6000.4.9, press Ctrl-C to exit.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-glayl-6000.4.9" at "2026-06-03T01:39:43.6363186Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 52524, path: "C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              fd54e69cce0b40ca9a096946fe5cb747
+  Correlation Id:          f81ae8934b845d866f3b3c67ad19af4e
+  External correlation Id: 1849151697186548762
+  Machine Id:              4CKuddUwAKhfSYybsbtd/spxL/E=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-glayl-6000.4.9" (connect: 0.24s, validation: 0.15s, handshake: 0.00s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-glayl-6000.4.9-notifications" at "2026-06-03T01:39:43.7926217Z"
+[Licensing::Module] Connected to LicensingClient (PId: 52524, launch time: 0.00, total connection time: 0.40s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 15669617799122-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.01
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 1.07s
+[Licensing::Module] Licensing is initialized (took 0.56s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Initialize engine version: 6000.4.9f1 (f7258d6eebbe)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/glayl/Documents/Codex/2026-06-02/unity-2d-srpg-tile-cs-gridmanager/Assets
+Forcing GfxDevice: Null
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56176
+CodeReloadManager initialized
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001685 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.255 seconds
+Domain Reload Profiling: 546ms
+	BeginReloadAssembly (87ms)
+		CreateAndSetChildDomain (3ms)
+	RebuildCommonClasses (24ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (132ms)
+		LoadAssemblies (83ms)
+		AnalyzeDomain (125ms)
+			TypeCache.Refresh (124ms)
+				TypeCache.ScanAssembly (113ms)
+	FinalizeReload (256ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (30ms)
+			BeforeProcessingInitializeOnLoad (52ms)
+			ProcessInitializeOnLoadAttributes (67ms)
+			ProcessInitializeOnLoadMethodAttributes (63ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 5 packages:
+  Built-in packages:
+    com.unity.2d.sprite@1.0.0 (location: C:\Users\glayl\Documents\Codex\2026-06-02\unity-2d-srpg-tile-cs-gridmanager\Library\PackageCache\com.unity.2d.sprite@b95cc7beb645)
+    com.unity.modules.physics2d@1.0.0 (location: C:\Users\glayl\Documents\Codex\2026-06-02\unity-2d-srpg-tile-cs-gridmanager\Library\PackageCache\com.unity.modules.physics2d)
+    com.unity.ugui@2.0.0 (location: C:\Users\glayl\Documents\Codex\2026-06-02\unity-2d-srpg-tile-cs-gridmanager\Library\PackageCache\com.unity.ugui@1f2d1ab0d950)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\glayl\Documents\Codex\2026-06-02\unity-2d-srpg-tile-cs-gridmanager\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\glayl\Documents\Codex\2026-06-02\unity-2d-srpg-tile-cs-gridmanager\Library\PackageCache\com.unity.modules.imgui)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.00 seconds
+[ScriptCompilation] Requested script compilation because: AssetDatabase observed changes in script compilation related files
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\glayl\Documents\Codex\2026-06-02\unity-2d-srpg-tile-cs-gridmanager
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - 200 - application/grpc 22.7101ms
+Starting: C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/glayl/Documents/Codex/2026-06-02/unity-2d-srpg-tile-cs-gridmanager
+DisplayProgressbar: Compiling Scripts
+ExitCode: 4 Duration: 0s56ms
+Rebuilding DAG because FileSignature timestamp changed: Library/Bee/1900b0aE-inputdata.json
+*** Tundra requires additional run (0.03 seconds), 0 items updated, 214 evaluated
+Starting: C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Data\netcorerun\netcorerun.exe "C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Data\Tools\BuildPipeline\ScriptCompilationBuildProgram.exe" "Library/Bee/1900b0aE.dag.json" "Library/Bee/1900b0aE-inputdata.json" "Library\Bee\buildprogram0.traceevents"
+WorkingDir: C:/Users/glayl/Documents/Codex/2026-06-02/unity-2d-srpg-tile-cs-gridmanager
+ExitCode: 0 Duration: 0s173ms
+Starting: C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --dagfilejson="Library\Bee\1900b0aE.dag.json" --profile="Library/Bee/backend2.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/glayl/Documents/Codex/2026-06-02/unity-2d-srpg-tile-cs-gridmanager
+ExitCode: 0 Duration: 1s405ms
+Finished compiling graph: 225 nodes, 1763 flattened edges (1655 ToBuild, 18 ToUse), maximum node priority 113
+[176/222    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.UnityAdditionalFile.txt
+[177/222    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.rsp2
+[178/222    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll.mvfrm.rsp
+[217/222    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.rsp
+[218/222    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll.mvfrm
+[219/222    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[220/222    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[221/222    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (1.39 seconds), 8 items updated, 222 evaluated
+AssetDatabase: script compilation time: 1.896611s
+Begin MonoManager ReloadAssembly
+Total cache size 30792808
+Total cache size after purge 30792808, took 00:00:00.0227238
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Unity.2D.Sprite.Package.EditorTests.dll at Library/ScriptAssemblies/Unity.2D.Sprite.Package.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+Start importing Assets/Editor using Guid(caac9be2aed26da478907371e0cc0541) (DefaultImporter) -> (Import Result ID: 'd2d0e485e5595f4331cca8096374d38d') in 0.0158094 seconds [static dependencies only]. Details - ImportResultOutputID=b1a1318da35bff046e021aa99116438f DependenciesID=c642f6fdfe0f50af3a48761add881b56 StaticDependenciesID=2887c75b1ec59ff8ebb9b8c1ef52278b 
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.281 seconds
+Domain Reload Profiling: 591ms
+	BeginReloadAssembly (184ms)
+		DisableScriptedObjects (52ms)
+		CreateAndSetChildDomain (36ms)
+	RebuildCommonClasses (23ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (68ms)
+	LoadAllAssembliesAndSetupDomain (27ms)
+		LoadAssemblies (76ms)
+		AnalyzeDomain (14ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (4ms)
+	FinalizeReload (282ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (17ms)
+			BeforeProcessingInitializeOnLoad (73ms)
+			ProcessInitializeOnLoadAttributes (56ms)
+			ProcessInitializeOnLoadMethodAttributes (34ms)
+			AfterProcessingInitializeOnLoad (5ms)
+		AwakeInstancesAfterBackupRestoration (15ms)
+(Values over 0.050ms)
+Asset Pipeline Refresh (id=736d6041275772b40905ad26e88bb648): Total: 2.675 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=2 ms, native=406 ms
+		Asset DB Callback time: managed=40 ms, native=6 ms
+		Scripting: domain reloads=1, domain reload time=311 ms, compile time=1898 ms, other=8 ms
+		Project Asset Count: scripts=143, non-scripts=96
+		Asset File Changes: new=2, changed=2, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokePackagesCallback: 6.274ms
+	ApplyChangesToAssetFolders: 0.246ms
+	Scan: 48.137ms
+	OnSourceAssetsModified: 0.539ms
+	CategorizeScriptCompilationAssets: 0.746ms
+	ProcessAssetsWithTransientArtifactChanges: 4.784ms
+	CategorizeAssets: 1.939ms
+	CompileScripts: 1898.117ms
+	ImportOutOfDateAssets: 302.474ms (282.730ms without children)
+		ImportManagerImport: 19.430ms (3.415ms without children)
+		UnloadImportedAssets: 0.151ms
+		OnDemandSchedulerStart: 0.132ms
+	PostProcessAllAssets: 41.257ms
+		VCAutoAddAssetPostprocess 0.848ms
+		VersionControlSettings.HiddenFilePostprocess 0.076ms
+		MonoPostProcessAllAssets: 39.892ms
+			AssetPostprocessor.OnPostprocessAllAssets 9.570ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 9.236ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 4.478ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 3.591ms
+			AssetChangedListener.OnPostprocessAllAssets 0.990ms
+			SyncVS.PostprocessSyncProject 0.858ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 0.731ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 0.495ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.375ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.344ms
+			SpriteEditorTexturePostprocessor.OnPostprocessAllAssets 0.330ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 0.298ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.212ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.190ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.154ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.154ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.132ms
+			AssetEvents.OnPostprocessAllAssets 0.131ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.128ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.110ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.060ms
+	PostAssetChangesProfiler: 0.531ms
+	UnloadStreamsBegin: 1.167ms
+	GenerateScriptTypeHashes: 0.708ms
+	GenerateScriptTypeSerializationHashes: 1.534ms
+	Untracked: 363.912ms
+
+Application.AssetDatabase Initial Refresh End
+Scanning for USB devices : 1.922ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-unity-2d-srpg-tile-cs-gridmanager
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 436 unused Assets / (0.7 MB). Loaded Objects now: 1075.
+Memory consumption went from 98.0 MB to 97.3 MB.
+Total: 3.552400 ms (FindLiveObjects: 0.071100 ms CreateObjectMapping: 0.013900 ms MarkObjects: 3.156300 ms  DeleteObjects: 0.309200 ms)
+
+SRPG runtime verification started.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:19)
+
+(Filename: Assets/Editor/SRPGRuntimeVerifier.cs Line: 19)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets / (1.5 KB). Loaded Objects now: 1075.
+Memory consumption went from 97.1 MB to 97.0 MB.
+Total: 3.609200 ms (FindLiveObjects: 0.048900 ms CreateObjectMapping: 0.009500 ms MarkObjects: 3.546500 ms  DeleteObjects: 0.003200 ms)
+
+SRPG Prototype Controls:
+Click Ally: Select
+Hover Enemy: Preview
+Click Enemy: Info / Attack
+Click Blue Tile: Move
+W: Wait / Confirm
+U: Undo Move
+R: Restart Stage
+Space: Toggle Threat
+Enter: Next/Retry
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.UI.BattleUI:LogControlsOnce () (at Assets/Scripts/UI/BattleUI.cs:322)
+SRPG.UI.BattleUI:Awake () (at Assets/Scripts/UI/BattleUI.cs:211)
+System.Reflection.RuntimeMethodInfo:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
+System.Reflection.MethodBase:Invoke (object,object[])
+SRPG.EditorTools.SRPGRuntimeVerifier:InvokePrivateVoid (object,string,object[]) (at Assets/Editor/SRPGRuntimeVerifier.cs:134)
+SRPG.EditorTools.SRPGRuntimeVerifier:CreateRuntime () (at Assets/Editor/SRPGRuntimeVerifier.cs:85)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:27)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+(Filename: Assets/Scripts/UI/BattleUI.cs Line: 322)
+
+Stage loaded: 8x8, Units: 4, Terrains: 3
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:39)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:30)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+(Filename: Assets/Scripts/Stage/StageLoader.cs Line: 39)
+
+Stage 1/3 started.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:54)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:30)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+(Filename: Assets/Scripts/Stage/StageManager.cs Line: 54)
+
+Highlights cleared.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Battle.PlayerController:ClearSelection () (at Assets/Scripts/Battle/PlayerController.cs:296)
+SRPG.Battle.PlayerController:SelectPlayerUnit (SRPG.Units.Unit) (at Assets/Scripts/Battle/PlayerController.cs:217)
+SRPG.Battle.PlayerController:HandleUnitClicked (SRPG.Units.Unit) (at Assets/Scripts/Battle/PlayerController.cs:118)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:34)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+(Filename: Assets/Scripts/Battle/PlayerController.cs Line: 296)
+
+PlayerUnit_A attack range shown.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Battle.PlayerController:ShowSelectedUnitRanges (SRPG.Units.Unit) (at Assets/Scripts/Battle/PlayerController.cs:259)
+SRPG.Battle.PlayerController:SelectPlayerUnit (SRPG.Units.Unit) (at Assets/Scripts/Battle/PlayerController.cs:224)
+SRPG.Battle.PlayerController:HandleUnitClicked (SRPG.Units.Unit) (at Assets/Scripts/Battle/PlayerController.cs:118)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:34)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+(Filename: Assets/Scripts/Battle/PlayerController.cs Line: 259)
+
+PlayerUnit_A post-move attack range shown.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Battle.PlayerController:ShowSelectedUnitAttackRange (SRPG.Units.Unit) (at Assets/Scripts/Battle/PlayerController.cs:275)
+SRPG.Battle.PlayerController:HandleTileClicked (SRPG.Grid.Tile) (at Assets/Scripts/Battle/PlayerController.cs:66)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:35)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+(Filename: Assets/Scripts/Battle/PlayerController.cs Line: 275)
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Stage loaded: 8x8, Units: 4, Terrains: 3
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:39)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+(Filename: Assets/Scripts/Stage/StageLoader.cs Line: 39)
+
+Stage 1/3 started.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:54)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+(Filename: Assets/Scripts/Stage/StageManager.cs Line: 54)
+
+Stage 1 restarted.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:76)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryDuringUnconfirmedMove () (at Assets/Editor/SRPGRuntimeVerifier.cs:41)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:20)
+
+(Filename: Assets/Scripts/Stage/StageManager.cs Line: 76)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets / (2.2 KB). Loaded Objects now: 1077.
+Memory consumption went from 95.3 MB to 95.3 MB.
+Total: 2.971200 ms (FindLiveObjects: 0.036900 ms CreateObjectMapping: 0.008100 ms MarkObjects: 2.923000 ms  DeleteObjects: 0.002700 ms)
+
+Stage loaded: 8x8, Units: 4, Terrains: 3
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:39)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:61)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Stage/StageLoader.cs Line: 39)
+
+Stage 1/3 started.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:54)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:61)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Stage/StageManager.cs Line: 54)
+
+EnemyUnit_A took 999 damage. HP: 0/10
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Units.Unit:TakeDamage (int) (at Assets/Scripts/Units/Unit.cs:177)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:65)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Units/Unit.cs Line: 177)
+
+EnemyUnit_A defeated.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Units.Unit:Die () (at Assets/Scripts/Units/Unit.cs:272)
+SRPG.Units.Unit:TakeDamage (int) (at Assets/Scripts/Units/Unit.cs:181)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:65)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Units/Unit.cs Line: 272)
+
+EnemyUnit_B took 999 damage. HP: 0/8
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Units.Unit:TakeDamage (int) (at Assets/Scripts/Units/Unit.cs:177)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:65)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Units/Unit.cs Line: 177)
+
+EnemyUnit_B defeated.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Units.Unit:Die () (at Assets/Scripts/Units/Unit.cs:272)
+SRPG.Units.Unit:TakeDamage (int) (at Assets/Scripts/Units/Unit.cs:181)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:65)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Units/Unit.cs Line: 272)
+
+PlayerUnit_A acted.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Battle.TurnManager:NotifyPlayerUnitActed (SRPG.Units.Unit) (at Assets/Scripts/Battle/TurnManager.cs:91)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:69)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Battle/TurnManager.cs Line: 91)
+
+Victory: all enemies defeated
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Battle.TurnManager:CheckVictory () (at Assets/Scripts/Battle/TurnManager.cs:506)
+SRPG.Battle.TurnManager:NotifyPlayerUnitActed (SRPG.Units.Unit) (at Assets/Scripts/Battle/TurnManager.cs:93)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:69)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Battle/TurnManager.cs Line: 506)
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Destroy (UnityEngine.Object,single)
+UnityEngine.Object:Destroy (UnityEngine.Object)
+SRPG.Grid.GridManager:ClearStage () (at Assets/Scripts/Grid/GridManager.cs:379)
+SRPG.Grid.GridManager:GenerateGrid () (at Assets/Scripts/Grid/GridManager.cs:36)
+SRPG.Grid.GridManager:GenerateGrid (int,int) (at Assets/Scripts/Grid/GridManager.cs:65)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:26)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+[Assets/Scripts/Grid/GridManager.cs line 379]
+
+Stage loaded: 8x8, Units: 4, Terrains: 3
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageLoader:LoadStage (SRPG.Stage.StageData) (at Assets/Scripts/Stage/StageLoader.cs:39)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:48)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Stage/StageLoader.cs Line: 39)
+
+Stage 1/3 started.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageManager:LoadCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:54)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:74)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Stage/StageManager.cs Line: 54)
+
+Stage 1 restarted.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.Stage.StageManager:RetryCurrentStage () (at Assets/Scripts/Stage/StageManager.cs:76)
+SRPG.EditorTools.SRPGRuntimeVerifier:VerifyRetryAfterVictoryKeepsStageIndex () (at Assets/Editor/SRPGRuntimeVerifier.cs:72)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:21)
+
+(Filename: Assets/Scripts/Stage/StageManager.cs Line: 76)
+
+SRPG_RUNTIME_VERIFICATION_PASS
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+SRPG.EditorTools.SRPGRuntimeVerifier:Run () (at Assets/Editor/SRPGRuntimeVerifier.cs:22)
+
+(Filename: Assets/Editor/SRPGRuntimeVerifier.cs Line: 22)
+
+Batchmode quit successfully invoked - shutting down!
+Curl error 42: Callback aborted
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-glayl-6000.4.9-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-glayl-6000.4.9 channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+CodeReloadManager destroyed
+Shut down.
+abort_threads: Failed aborting id: 0000000000008774, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 000000000000D28C, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 0000000000008774, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 000000000000D28C, mono_thread_manage will ignore it
+
+debugger-agent: Unable to listen on 3760
+Exiting batchmode successfully now!
+Exiting without the bug reporter. Application will terminate with return code 0
