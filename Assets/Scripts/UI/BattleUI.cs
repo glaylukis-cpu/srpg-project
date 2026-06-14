@@ -455,8 +455,9 @@ namespace SRPG.UI
             if (!optionsOverlayInitialized)
             {
                 optionsOverlayInitialized = true;
-                SetOptionsOverlayVisible(false);
             }
+
+            SetOptionsOverlayVisible(false);
         }
 
         public void HideStageSelect()
@@ -1908,12 +1909,12 @@ namespace SRPG.UI
 
             if (titlePromptText == null)
             {
-                titlePromptText = CreateText("ControlText", new Vector2(0f, 52f), new Vector2(0.5f, 0f), TextAnchor.MiddleCenter, 20, new Vector2(920f, 34f));
+                titlePromptText = CreateText("ControlText", Vector2.zero, new Vector2(0.5f, 0.5f), TextAnchor.MiddleCenter, 20, new Vector2(920f, 34f));
                 titlePromptText.color = ThemeTextMutedGold();
             }
-            titlePromptText.transform.SetParent(transform, false);
+            titlePromptText.transform.SetParent(titleFooterFrame.transform, false);
             titlePromptText.fontSize = 20;
-            ConfigureRect(titlePromptText.rectTransform, new Vector2(0f, 52f), new Vector2(0.5f, 0f), new Vector2(920f, 34f));
+            ConfigureRect(titlePromptText.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(920f, 34f));
 
             RefreshTitleMenuText();
             RefreshTitlePromptText(false);
@@ -2050,7 +2051,11 @@ namespace SRPG.UI
             optionsFooterText.text = "Left / Right: Adjust    Enter: Toggle / Back    Esc: Title";
             ConfigureRect(optionsFooterText.rectTransform, new Vector2(0f, -158f), new Vector2(0.5f, 0.5f), new Vector2(540f, 30f));
 
-            SetOptionsOverlayVisible(false);
+            if (!optionsOverlayInitialized)
+            {
+                optionsOverlayInitialized = true;
+                SetOptionsOverlayVisible(false);
+            }
         }
 
         private Text EnsureTitleMenuChildText(Text text, string objectName, Vector2 localPosition, TextAnchor alignment, int fontSize, Vector2 size)
@@ -2137,8 +2142,8 @@ namespace SRPG.UI
             BringToFront(titleFooterPanel);
             if (titlePromptText != null)
             {
-                titlePromptText.transform.SetParent(transform, false);
-                ConfigureRect(titlePromptText.rectTransform, new Vector2(0f, 52f), new Vector2(0.5f, 0f), new Vector2(920f, 34f));
+                titlePromptText.transform.SetParent(titleFooterFrame.transform, false);
+                ConfigureRect(titlePromptText.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(920f, 34f));
             }
             BringToFront(titlePromptText);
         }
@@ -2160,8 +2165,8 @@ namespace SRPG.UI
             BringToFront(titleFooterPanel);
             if (titlePromptText != null)
             {
-                titlePromptText.transform.SetParent(transform, false);
-                ConfigureRect(titlePromptText.rectTransform, new Vector2(0f, 52f), new Vector2(0.5f, 0f), new Vector2(920f, 34f));
+                titlePromptText.transform.SetParent(titleFooterFrame.transform, false);
+                ConfigureRect(titlePromptText.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(920f, 34f));
             }
             BringToFront(titlePromptText);
         }
