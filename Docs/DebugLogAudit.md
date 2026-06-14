@@ -57,3 +57,12 @@
 1. Codexに、リリースビルドでは開発ログを抑制できるLogger導入を依頼する。
 2. Codexに、頻繁に出る操作ログや敵AIログを条件付きログへ置き換える作業を依頼する。
 3. OpenHands/Qwen3に、リリース前チェックリストをDocsへ作成させる。
+
+## Logger Status
+
+- DevLogger.cs を導入済み。
+- DevLogger.Log は UNITY_EDITOR または DEVELOPMENT_BUILD のときのみ Debug.Log を出力する。
+- Release build では開発用ログを抑制できる。
+- Debug.LogWarning / Debug.LogError は原則として残す方針。
+- 初回置換では PlayerController / TurnManager / StageManager の一部開発ログのみ DevLogger.Log に置き換え済み。
+- Victory / Defeat / ALL CLEAR / 評価ログは未置換で残している。
