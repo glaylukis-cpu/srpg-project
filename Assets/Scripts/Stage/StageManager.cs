@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using SRPG.Audio;
 using SRPG.Battle;
+using SRPG.Debugging;
 using SRPG.UI;
 using UnityEngine;
 
@@ -80,7 +81,7 @@ namespace SRPG.Stage
             BattleUI.Instance?.SetObjectiveInfo(stageData);
             BattleUI.Instance?.ShowStageIntro(CurrentStageNumber, TotalStages, stageData);
             AudioManager.Instance?.PlayBattleBgm();
-            Debug.Log($"Stage {CurrentStageNumber}/{TotalStages} started.");
+            DevLogger.Log($"Stage {CurrentStageNumber}/{TotalStages} started.");
         }
 
         public void LoadStageAt(int stageIndex)
@@ -119,7 +120,7 @@ namespace SRPG.Stage
             AudioManager.Instance?.PlayRestartSe();
             LoadCurrentStage();
             BattleUI.Instance?.AddBattleLog($"Stage {CurrentStageNumber} restarted");
-            Debug.Log($"Stage {CurrentStageNumber} restarted.");
+            DevLogger.Log($"Stage {CurrentStageNumber} restarted.");
         }
 
         public bool HasNextStage()
@@ -240,7 +241,7 @@ namespace SRPG.Stage
             BattleUI.Instance?.HideOptionsScreen();
             BattleUI.Instance?.ShowStageSelect(stages, selectedStageIndex);
             AudioManager.Instance?.PlayStageSelectBgm();
-            Debug.Log("Stage select opened.");
+            DevLogger.Log("Stage select opened.");
         }
 
         private void ShowTitleScreen(int selectedMenuIndex = 0)
@@ -255,7 +256,7 @@ namespace SRPG.Stage
             BattleUI.Instance?.HideOptionsScreen();
             BattleUI.Instance?.ShowTitleScreen(selectedTitleMenuIndex);
             AudioManager.Instance?.PlayTitleBgm();
-            Debug.Log("Title screen opened.");
+            DevLogger.Log("Title screen opened.");
         }
 
         private void HandleTitleScreenInput()
@@ -300,7 +301,7 @@ namespace SRPG.Stage
                     break;
                 case 3:
                     AudioManager.Instance?.PlayConfirmSe();
-                    Debug.Log("EXIT selected.");
+                    DevLogger.Log("EXIT selected.");
                     Application.Quit();
                     break;
             }
@@ -315,7 +316,7 @@ namespace SRPG.Stage
             selectedResolutionIndex = GetClosestResolutionIndex(Screen.width, Screen.height);
             BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex);
             AudioManager.Instance?.PlayTitleBgm();
-            Debug.Log("Options screen opened.");
+            DevLogger.Log("Options screen opened.");
         }
 
         private void HandleOptionsInput()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using SRPG.Audio;
+using SRPG.Debugging;
 using SRPG.Grid;
 using SRPG.Stage;
 using SRPG.UI;
@@ -252,7 +253,7 @@ namespace SRPG.Battle
             BattleUI.Instance?.SetSelectedUnit(unit);
             RefreshEnemyThreatHighlights();
             AudioManager.Instance?.PlayCursorSe();
-            Debug.Log($"{unit.name} selected for info.");
+            DevLogger.Log($"{unit.name} selected for info.");
         }
 
         private void ShowSelectedUnitRanges(Unit unit)
@@ -280,7 +281,7 @@ namespace SRPG.Battle
                 currentAttackTiles.Add(tile);
             }
 
-            Debug.Log($"{unit.name} movement range and attack targets shown.");
+            DevLogger.Log($"{unit.name} movement range and attack targets shown.");
         }
 
         private void ShowSelectedUnitAttackRange(Unit unit)
@@ -296,7 +297,7 @@ namespace SRPG.Battle
                 currentAttackTiles.Add(tile);
             }
 
-            Debug.Log($"{unit.name} post-move attack range shown.");
+            DevLogger.Log($"{unit.name} post-move attack range shown.");
         }
 
         private bool HasAttackableEnemyOnTile(Unit attacker, Tile tile)
@@ -326,7 +327,7 @@ namespace SRPG.Battle
             if (gridManager != null)
             {
                 gridManager.ClearPlayerHighlights();
-                Debug.Log("Highlights cleared.");
+                DevLogger.Log("Highlights cleared.");
                 RefreshEnemyThreatHighlights();
             }
         }
@@ -416,7 +417,7 @@ namespace SRPG.Battle
             RefreshEnemyThreatHighlights();
             BattleUI.Instance?.SetEnemyThreatVisible(showEnemyThreats);
             AudioManager.Instance?.PlayCursorSe();
-            Debug.Log(showEnemyThreats ? "Enemy threat range ON" : "Enemy threat range OFF");
+            DevLogger.Log(showEnemyThreats ? "Enemy threat range ON" : "Enemy threat range OFF");
         }
 
         private void RefreshEnemyThreatHighlights()

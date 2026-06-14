@@ -1,5 +1,6 @@
 using System.Collections;
 using SRPG.Audio;
+using SRPG.Debugging;
 using SRPG.Grid;
 using SRPG.Stage;
 using SRPG.UI;
@@ -217,7 +218,7 @@ namespace SRPG.Battle
 
                 yield return ActEnemyUnit(enemy);
                 enemy.SetHasActed(true);
-                Debug.Log($"{enemy.name} acted.");
+                DevLogger.Log($"{enemy.name} acted.");
 
                 if (CheckDefeat())
                 {
@@ -255,7 +256,7 @@ namespace SRPG.Battle
         {
             if (target == null)
             {
-                Debug.Log($"{enemy.name} has no target.");
+                DevLogger.Log($"{enemy.name} has no target.");
                 BattleUI.Instance?.AddBattleLog($"{enemy.name} has no target");
                 yield break;
             }
@@ -271,7 +272,7 @@ namespace SRPG.Battle
             var bestTile = FindBestApproachTile(enemy, target, currentDistance);
             if (bestTile != null && enemy.MoveTo(bestTile.Coordinates))
             {
-                Debug.Log($"{enemy.name} moved to ({bestTile.Coordinates.x}, {bestTile.Coordinates.y})");
+                DevLogger.Log($"{enemy.name} moved to ({bestTile.Coordinates.x}, {bestTile.Coordinates.y})");
                 BattleUI.Instance?.AddBattleLog($"{enemy.name} moved to ({bestTile.Coordinates.x}, {bestTile.Coordinates.y})");
             }
 
@@ -286,7 +287,7 @@ namespace SRPG.Battle
             var target = FindAttackableWeakestPlayerUnit(enemy);
             if (target == null)
             {
-                Debug.Log($"{enemy.name} waited.");
+                DevLogger.Log($"{enemy.name} waited.");
                 BattleUI.Instance?.AddBattleLog($"{enemy.name} waited");
                 enemy.PlayWaitEffect();
                 yield break;
@@ -300,7 +301,7 @@ namespace SRPG.Battle
             var target = FindNearestPlayerUnitInsideGuardianRange(enemy, 3);
             if (target == null)
             {
-                Debug.Log($"{enemy.name} guarded.");
+                DevLogger.Log($"{enemy.name} guarded.");
                 BattleUI.Instance?.AddBattleLog($"{enemy.name} guarded");
                 enemy.PlayWaitEffect();
                 yield break;
@@ -356,7 +357,7 @@ namespace SRPG.Battle
                 yield break;
             }
 
-            Debug.Log($"{enemy.name} attacked {target.name} for {damage} damage");
+            DevLogger.Log($"{enemy.name} attacked {target.name} for {damage} damage");
             result.Succeeded = true;
         }
 
