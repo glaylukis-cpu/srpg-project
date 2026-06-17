@@ -23,6 +23,7 @@ namespace SRPG.Grid
         [SerializeField] private Color attackHighlightedColor = new Color(1f, 0.18f, 0.12f, 0.42f);
         [SerializeField] private Color enemyMoveThreatHighlightedColor = new Color(0.36f, 0.13f, 0.72f, 0.48f);
         [SerializeField] private Color enemyAttackThreatHighlightedColor = new Color(0.95f, 0.28f, 0.9f, 0.4f);
+        [SerializeField] private Color guardianReactionHighlightedColor = new Color(0.1f, 0.95f, 0.72f, 0.38f);
 
         private static Sprite stoneTileSprite;
         private static Sprite highlightSprite;
@@ -39,6 +40,7 @@ namespace SRPG.Grid
         private bool isAttackHighlighted;
         private bool isEnemyMoveThreatHighlighted;
         private bool isEnemyAttackThreatHighlighted;
+        private bool isGuardianReactionHighlighted;
         private float goalPulseTimer;
 
         public event Action<Tile> Clicked;
@@ -50,9 +52,10 @@ namespace SRPG.Grid
         public bool IsOccupied => Occupant != null;
         public bool IsMoveHighlighted => isMoveHighlighted;
         public bool IsAttackHighlighted => isAttackHighlighted;
-        public bool IsEnemyThreatHighlighted => isEnemyMoveThreatHighlighted || isEnemyAttackThreatHighlighted;
+        public bool IsEnemyThreatHighlighted => isEnemyMoveThreatHighlighted || isEnemyAttackThreatHighlighted || isGuardianReactionHighlighted;
         public bool IsEnemyMoveThreatHighlighted => isEnemyMoveThreatHighlighted;
         public bool IsEnemyAttackThreatHighlighted => isEnemyAttackThreatHighlighted;
+        public bool IsGuardianReactionHighlighted => isGuardianReactionHighlighted;
 
         public void Initialize(Vector2Int coordinates, Color color)
         {
@@ -108,6 +111,12 @@ namespace SRPG.Grid
             RefreshColor();
         }
 
+        public void SetGuardianReactionHighlight(bool value)
+        {
+            isGuardianReactionHighlighted = value;
+            RefreshColor();
+        }
+
         public void ClearPlayerHighlights()
         {
             isMoveHighlighted = false;
@@ -121,6 +130,7 @@ namespace SRPG.Grid
             isAttackHighlighted = false;
             isEnemyMoveThreatHighlighted = false;
             isEnemyAttackThreatHighlighted = false;
+            isGuardianReactionHighlighted = false;
             RefreshColor();
         }
 
@@ -182,6 +192,12 @@ namespace SRPG.Grid
             if (isEnemyAttackThreatHighlighted)
             {
                 SetHighlight(enemyAttackThreatHighlightedColor);
+                return;
+            }
+
+            if (isGuardianReactionHighlighted)
+            {
+                SetHighlight(guardianReactionHighlightedColor);
                 return;
             }
 

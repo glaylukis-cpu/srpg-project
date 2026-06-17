@@ -358,6 +358,22 @@ namespace SRPG.Grid
             return enemyMoveThreatTiles;
         }
 
+        public HashSet<Tile> GetGuardianReactionTiles()
+        {
+            var guardianReactionTiles = new HashSet<Tile>();
+            var enemies = GetUnitsByFaction(Faction.Enemy);
+
+            foreach (var enemy in enemies)
+            {
+                foreach (var tile in GetGuardianReactionTiles(enemy))
+                {
+                    guardianReactionTiles.Add(tile);
+                }
+            }
+
+            return guardianReactionTiles;
+        }
+
         public HashSet<Tile> GetEnemyThreatTiles(Unit enemy)
         {
             var enemyThreatTiles = new HashSet<Tile>();
@@ -408,6 +424,38 @@ namespace SRPG.Grid
             return enemyMoveThreatTiles;
         }
 
+        public HashSet<Tile> GetGuardianReactionTiles(Unit enemy)
+        {
+            var guardianReactionTiles = new HashSet<Tile>();
+            if (enemy == null || enemy.IsDead || enemy.Faction != Faction.Enemy || enemy.EnemyAIType != EnemyAIType.Guardian)
+            {
+                return guardianReactionTiles;
+            }
+
+            var origin = enemy.InitialGridPosition;
+            for (var y = origin.y - GuardianReactionRange; y <= origin.y + GuardianReactionRange; y++)
+            {
+                for (var x = origin.x - GuardianReactionRange; x <= origin.x + GuardianReactionRange; x++)
+                {
+                    var coordinates = new Vector2Int(x, y);
+                    if (!IsInsideGrid(coordinates) || GetManhattanDistance(origin, coordinates) > GuardianReactionRange)
+                    {
+                        continue;
+                    }
+
+                    var tile = GetTile(coordinates);
+                    if (tile == null || !tile.IsWalkable)
+                    {
+                        continue;
+                    }
+
+                    guardianReactionTiles.Add(tile);
+                }
+            }
+
+            return guardianReactionTiles;
+        }
+
         public void ClearMoveHighlights()
         {
             foreach (var tile in tiles.Values)
@@ -430,6 +478,7 @@ namespace SRPG.Grid
             {
                 tile.SetEnemyThreatHighlight(false);
                 tile.SetEnemyMoveThreatHighlight(false);
+                tile.SetGuardianReactionHighlight(false);
             }
         }
 

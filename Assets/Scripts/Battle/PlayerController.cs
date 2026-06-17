@@ -437,6 +437,15 @@ namespace SRPG.Battle
                 ? selectedUnit
                 : null;
 
+            var guardianReactionTiles = selectedEnemy != null
+                ? gridManager.GetGuardianReactionTiles(selectedEnemy)
+                : gridManager.GetGuardianReactionTiles();
+
+            foreach (var tile in guardianReactionTiles)
+            {
+                tile.SetGuardianReactionHighlight(true);
+            }
+
             var enemyAttackThreatTiles = selectedEnemy != null
                 ? gridManager.GetEnemyThreatTiles(selectedEnemy)
                 : gridManager.GetEnemyThreatTiles();
