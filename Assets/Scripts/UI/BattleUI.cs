@@ -769,7 +769,7 @@ namespace SRPG.UI
             {
                 frame = CreatePanel($"{baseName}Frame", framePosition, anchor, frameSize, ThemePanelBorderGold());
             }
-            frame.color = new Color(0.66f, 0.46f, 0.2f, 0.76f);
+            frame.color = new Color(0.74f, 0.52f, 0.22f, 0.82f);
             ConfigurePanelRect(frame.rectTransform, framePosition, anchor, frameSize);
 
             if (panel == null)
@@ -781,7 +781,7 @@ namespace SRPG.UI
                     panelSize,
                     ThemePanelDark());
             }
-            panel.color = new Color(0.035f, 0.045f, 0.07f, 0.74f);
+            panel.color = new Color(0.024f, 0.04f, 0.064f, 0.82f);
             ConfigurePanelRect(panel.rectTransform, panelPosition, anchor, panelSize);
         }
 
