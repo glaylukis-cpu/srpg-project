@@ -23,7 +23,7 @@ namespace SRPG.Grid
         [SerializeField] private Color attackHighlightedColor = new Color(1f, 0.18f, 0.12f, 0.42f);
         [SerializeField] private Color enemyMoveThreatHighlightedColor = new Color(0.36f, 0.13f, 0.72f, 0.48f);
         [SerializeField] private Color enemyAttackThreatHighlightedColor = new Color(0.95f, 0.28f, 0.9f, 0.4f);
-        [SerializeField] private Color guardianReactionHighlightedColor = new Color(0.1f, 0.95f, 0.72f, 0.38f);
+        [SerializeField] private Color guardianReactionHighlightedColor = new Color(1f, 0.72f, 0.18f, 0.36f);
 
         private static Sprite stoneTileSprite;
         private static Sprite highlightSprite;
@@ -183,15 +183,15 @@ namespace SRPG.Grid
                 return;
             }
 
-            if (isEnemyMoveThreatHighlighted)
-            {
-                SetHighlight(enemyMoveThreatHighlightedColor);
-                return;
-            }
-
             if (isEnemyAttackThreatHighlighted)
             {
                 SetHighlight(enemyAttackThreatHighlightedColor);
+                return;
+            }
+
+            if (isEnemyMoveThreatHighlighted)
+            {
+                SetHighlight(enemyMoveThreatHighlightedColor);
                 return;
             }
 
