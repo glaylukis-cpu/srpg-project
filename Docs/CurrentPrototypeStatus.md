@@ -25,6 +25,7 @@ This is a Unity 2D short puzzle-SRPG prototype. The current build is a playable 
 - v0.5 final visible Windows check: Title, Options, Stage Select, Stage 1 Battle, Result, Exit, and core SE confirmed by user
 - v0.5 latest Windows rebuild: title operation-bar text fix included; hidden smoke reached Title screen
 - v0.5 Options display settings: resolution presets and Windowed / Fullscreen toggle added, build and hidden smoke passed
+- Guardian Reaction Range display: Implemented in `ffd3475` and confirmed in Unity Editor
 
 ## Main Scripts
 
@@ -55,6 +56,7 @@ This is a Unity 2D short puzzle-SRPG prototype. The current build is a playable 
 - Attack range display
 - Enemy threat display
 - Selected enemy movement/attack range display
+- Guardian reaction range display in Enemy Threat view
 - HP, attack, movement, attack range
 - Unit death and board occupancy cleanup
 - Board HP text above units
@@ -282,3 +284,19 @@ Remaining:
 
 - Visible Options check for Resolution and Display switching.
 - Visible layout checks at 1280x720, 1600x900, and 1920x1080.
+
+## Guardian Reaction Range Display
+
+Date: 2026-06-18
+
+- Implementation commit: `ffd3475 Show guardian reaction range in enemy threat view`.
+- Stage 4 manual check confirmed Guardian reaction range appears when Enemy Threat is ON.
+- When no enemy is selected, all Guardian reaction ranges are displayed.
+- When an individual Guardian is selected, only that Guardian's reaction range is displayed.
+- Enemy Threat OFF clears the Guardian reaction range display.
+- Guardians still guard / wait while players remain outside the reaction range.
+- Guardians still activate normally when a player enters the reaction range.
+- Guardian AI behavior was not changed.
+- `GuardianReactionRange = 3` was preserved.
+- `StageManager`, `StageData`, and `TurnManager` were not changed by this implementation.
+- No fatal Console errors were reported during the Unity Editor manual check.
