@@ -27,6 +27,7 @@ This is a Unity 2D short puzzle-SRPG prototype. The current build is a playable 
 - v0.5 Options display settings: resolution presets and Windowed / Fullscreen toggle added, build and hidden smoke passed
 - Guardian Reaction Range display: Implemented in `ffd3475` and confirmed in Unity Editor
 - Battle highlight polish: Implemented in `6cf0287` and confirmed in Unity Editor
+- Battle HUD panel polish: Implemented in `8172c5c` and confirmed in Unity Editor
 
 ## Main Scripts
 
@@ -315,3 +316,19 @@ Date: 2026-06-18
 - Stage 6 manual check confirmed Goal color and Guardian Reaction range are not easily confused.
 - Unit sprites and HP text remain readable over the adjusted highlights.
 - Battle logic, enemy AI, `GuardianReactionRange`, StageData, and victory/defeat conditions were not changed.
+
+## Battle HUD Panel Polish
+
+Date: 2026-06-18
+
+- Implementation commit: `8172c5c Tune battle HUD panel colors`.
+- Battle HUD frame color was adjusted toward the Title / Options gold frame tone.
+- Battle HUD panel background color and opacity were adjusted toward the Options panel tone.
+- Stage 1 manual check confirmed the Stage, Objective, and Selected panels are readable.
+- Battle UI now feels closer to the Title / Options visual tone.
+- Panel backgrounds do not overly obscure the battle board.
+- Stage 4 manual check confirmed Threat, Battle Log, and Controls remain readable.
+- Guardian ranges and enemy Threat highlights do not visually conflict with the adjusted HUD panels.
+- Victory, Defeat, and Result Summary still display as before.
+- 1280x720, 1600x900, and 1920x1080 checks found no major clipping.
+- Battle logic, enemy AI, StageData, victory/defeat conditions, and input handling were not changed.
