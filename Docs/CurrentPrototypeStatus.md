@@ -26,6 +26,7 @@ This is a Unity 2D short puzzle-SRPG prototype. The current build is a playable 
 - v0.5 latest Windows rebuild: title operation-bar text fix included; hidden smoke reached Title screen
 - v0.5 Options display settings: resolution presets and Windowed / Fullscreen toggle added, build and hidden smoke passed
 - Guardian Reaction Range display: Implemented in `ffd3475` and confirmed in Unity Editor
+- Battle highlight polish: Implemented in `6cf0287` and confirmed in Unity Editor
 
 ## Main Scripts
 
@@ -300,3 +301,17 @@ Date: 2026-06-18
 - `GuardianReactionRange = 3` was preserved.
 - `StageManager`, `StageData`, and `TurnManager` were not changed by this implementation.
 - No fatal Console errors were reported during the Unity Editor manual check.
+
+## Battle Highlight Polish
+
+Date: 2026-06-18
+
+- Implementation commit: `6cf0287 Tune battle highlight priority and guardian color`.
+- EnemyAttackThreat is now displayed with higher priority than EnemyMoveThreat when both highlights overlap on the same tile.
+- Guardian Reaction highlight color was changed from blue-green to amber/yellow to reduce confusion with Goal tiles.
+- Stage 1 manual check confirmed Move blue and Attack red are distinguishable.
+- Stage 4 manual check confirmed Guardian reaction range is easier to read.
+- Enemy Threat OFF clears enemy threat-related highlights, including Guardian Reaction highlights.
+- Stage 6 manual check confirmed Goal color and Guardian Reaction range are not easily confused.
+- Unit sprites and HP text remain readable over the adjusted highlights.
+- Battle logic, enemy AI, `GuardianReactionRange`, StageData, and victory/defeat conditions were not changed.
