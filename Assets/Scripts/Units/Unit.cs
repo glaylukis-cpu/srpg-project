@@ -345,7 +345,7 @@ namespace SRPG.Units
             hpBackObject.transform.localScale = new Vector3(0.62f, 0.2f, 1f);
             hpBackRenderer = hpBackObject.AddComponent<SpriteRenderer>();
             hpBackRenderer.sprite = GetHpBackSprite();
-            hpBackRenderer.color = new Color(0f, 0f, 0f, 0.72f);
+            hpBackRenderer.color = new Color(0f, 0f, 0f, 0.62f);
             hpBackRenderer.sortingOrder = 6;
 
             var hpTextRenderer = hpTextObject.AddComponent<MeshRenderer>();

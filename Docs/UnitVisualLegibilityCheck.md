@@ -193,3 +193,46 @@ No major unit visual legibility regression found.
 ### Scope
 
 Documentation only. No C#, image, StageData, battle logic, enemy AI, victory/defeat, or UI layout changes.
+
+---
+
+## HP Background Alpha Adjustment Result
+
+**Date:** 2026-06-21
+
+### Change Summary
+
+Reduced HP background opacity so that it blends better with the tile while keeping the HP text readable:
+- **Change:** HP background alpha `0.72f` → `0.62f`
+- **Scope:** `Assets/Scripts/Units/Unit.cs` only (line 348 inside `CreateHpText()`)
+- All other HP-related settings (text position, font size, color, shadow, background scale) were left unchanged
+
+### Manual Unity Editor Verification: Stage1 / Stage2 / Stage4 / Stage5
+
+| Stage | Focus | Verdict |
+|---|---|---|
+| Stage 1 | HP text readability at reduced opacity | OK |
+| Stage 2 | Dense unit placement HP overlap check | OK |
+| Stage 4 | Archer / Rogue / Guardian + Threat ON legibility | OK |
+| Stage 5 | Multi-enemy dense placement HP visibility | OK |
+
+### Specific HP Values Verified
+
+- [x] 7/7, 8/8 readable
+- [x] 10/10, 12/12, 13/13, 16/16 readable
+- [x] Both friend and enemy units clearly legible
+- [x] Dense placement HP text not fully obscured
+- [x] Black background is less dominant, blends with tiles
+
+### Conflict Check
+
+- [x] No major conflict with selection ring
+- [x] No major conflict with Threat / Guardian range overlays
+
+### Result
+
+HP text remains readable after reducing background opacity. Alpha `0.62f` adopted as final value for HP background. No additional adjustment needed.
+
+### Scope
+
+No C#, image, StageData, battle logic, enemy AI, victory/defeat, input processing, BattleUI.cs, selection ring, shadow, sprite pivot, PPU, or UnitType scale changes other than the alpha value recorded above.
