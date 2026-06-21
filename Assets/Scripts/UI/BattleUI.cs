@@ -818,37 +818,29 @@ namespace SRPG.UI
             }
 
             var builder = new StringBuilder();
-            if (includeDefeatCondition)
+            var objective = data.VictoryCondition == VictoryConditionType.ReachGoal
+                ? "Reach a goal tile"
+                : "Defeat all enemies";
+
+            if (!includeDefeatCondition)
             {
-                builder.AppendLine("<color=#FFD98F>Theme</color>");
-                builder.AppendLine(WrapText(data.ThemeName, 24));
-                builder.AppendLine();
+                builder.AppendLine($"<color=#FFD98F>Objective</color>\n{objective}");
+                return builder.ToString().TrimEnd();
             }
 
-            builder.AppendLine(data.VictoryCondition == VictoryConditionType.ReachGoal
-                ? "<color=#FFD98F>Objective</color>\nReach a goal tile"
-                : "<color=#FFD98F>Objective</color>\nDefeat all enemies");
+            builder.Append("<color=#FFD98F>Theme:</color> ");
+            builder.AppendLine(WrapText(data.ThemeName, 24));
+            builder.AppendLine($"<color=#FFD98F>Goal:</color> {objective}");
+            builder.Append("<color=#FFD98F>Tip:</color> ");
+            builder.AppendLine(BuildBattleTipText(data));
 
-            if (includeDefeatCondition)
+            if (data.DefeatConditions != null && data.DefeatConditions.Contains(DefeatConditionType.AllPlayersDefeated))
             {
-                builder.AppendLine();
-                builder.AppendLine("<color=#FFD98F>Tip</color>");
-                builder.AppendLine(BuildBattleTipText(data));
+                builder.AppendLine("<color=#FFD98F>Lose:</color> All players defeated");
             }
 
-            if (includeDefeatCondition && data.DefeatConditions != null && data.DefeatConditions.Contains(DefeatConditionType.AllPlayersDefeated))
-            {
-                builder.AppendLine();
-                builder.AppendLine("<color=#FFD98F>Defeat</color>");
-                builder.AppendLine("All players defeated");
-            }
-
-            if (includeDefeatCondition)
-            {
-            builder.AppendLine();
-            builder.AppendLine("<color=#FFD98F>Limit</color>");
+            builder.Append("<color=#FFD98F>Limit:</color> ");
             builder.Append(BuildLimitText(data));
-            }
 
             return builder.ToString().TrimEnd();
         }
@@ -862,6 +854,11 @@ namespace SRPG.UI
 
             var firstSentenceEnd = data.Description.IndexOf('.');
             var tip = firstSentenceEnd >= 0 ? data.Description.Substring(0, firstSentenceEnd + 1) : data.Description;
+            if (tip.StartsWith("Learn the core flow:"))
+            {
+                return "Select allies, move, attack.";
+            }
+
             if (tip.Length > 48)
             {
                 tip = tip.Substring(0, 45).TrimEnd() + "...";
