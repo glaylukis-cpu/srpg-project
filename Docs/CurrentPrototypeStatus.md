@@ -28,6 +28,7 @@ This is a Unity 2D short puzzle-SRPG prototype. The current build is a playable 
 - Guardian Reaction Range display: Implemented in `ffd3475` and confirmed in Unity Editor
 - Battle highlight polish: Implemented in `6cf0287` and confirmed in Unity Editor
 - Battle HUD panel polish: Implemented in `8172c5c` and confirmed in Unity Editor
+- Forward-facing player unit sprites: Replaced in `9334f52` and confirmed in Unity Editor
 
 ## Main Scripts
 
@@ -332,3 +333,18 @@ Date: 2026-06-18
 - Victory, Defeat, and Result Summary still display as before.
 - 1280x720, 1600x900, and 1920x1080 checks found no major clipping.
 - Battle logic, enemy AI, StageData, victory/defeat conditions, and input handling were not changed.
+
+## Forward-Facing Player Unit Sprites
+
+Date: 2026-06-21
+
+- Implementation commit: `9334f52 Replace player unit sprites for forward-facing direction`.
+- Updated `Assets/Resources/Units/Player_Soldier.png`.
+- Updated `Assets/Resources/Units/Player_Knight.png`.
+- Updated `Assets/Resources/Units/Player_Archer.png`.
+- Updated `Assets/Resources/Units/Player_Rogue.png`.
+- Soldier, Knight, Archer, and Rogue now face in a direction that better supports the lower-left to upper-right player advance composition.
+- All four player UnitTypes now have matching forward-facing resource sprites.
+- Unity Editor manual verification confirmed the replacement sprites are displayed in battle.
+- Sprite filenames remain compatible with the existing `Unit.cs` Resources loading structure.
+- C# files, meta files, StageData, battle logic, enemy AI, victory/defeat conditions, and input handling were not changed.
