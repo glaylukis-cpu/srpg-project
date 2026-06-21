@@ -30,6 +30,7 @@ This is a Unity 2D short puzzle-SRPG prototype. The current build is a playable 
 - Battle HUD panel polish: Implemented in `8172c5c` and confirmed in Unity Editor
 - Forward-facing player unit sprites: Replaced in `9334f52` and confirmed in Unity Editor
 - Six-stage battle visual regression check: Passed in Unity Editor after the latest visual polish
+- Unit visual legibility check: Passed in Unity Editor (Stage 1/2/4/5) per `Docs/UnitVisualLegibilityCheck.md`
 
 ## Main Scripts
 
