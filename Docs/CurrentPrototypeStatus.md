@@ -29,6 +29,7 @@ This is a Unity 2D short puzzle-SRPG prototype. The current build is a playable 
 - Battle highlight polish: Implemented in `6cf0287` and confirmed in Unity Editor
 - Battle HUD panel polish: Implemented in `8172c5c` and confirmed in Unity Editor
 - Forward-facing player unit sprites: Replaced in `9334f52` and confirmed in Unity Editor
+- Six-stage battle visual regression check: Passed in Unity Editor after the latest visual polish
 
 ## Main Scripts
 
@@ -348,3 +349,18 @@ Date: 2026-06-21
 - Unity Editor manual verification confirmed the replacement sprites are displayed in battle.
 - Sprite filenames remain compatible with the existing `Unit.cs` Resources loading structure.
 - C# files, meta files, StageData, battle logic, enemy AI, victory/defeat conditions, and input handling were not changed.
+
+## Six-Stage Battle Visual Regression Check
+
+Date: 2026-06-21
+
+- Completed a six-stage manual visual regression check after the Tile / Highlight, Battle HUD, Objective panel text, and player sprite updates.
+- Stage 1: Confirmed Soldier, Archer, and the basic Battle UI presentation.
+- Stage 2: Confirmed Soldier, Knight, and enemy placement presentation.
+- Stage 3: Confirmed the Goal condition presentation and player-facing advance direction.
+- Stage 4: Confirmed Guardian, Threat, and replacement player sprite presentation.
+- Stage 5: Confirmed Soldier, Guardian, and multi-enemy presentation.
+- Stage 6: Confirmed Goal, final-stage presentation, and Result display.
+- No major visual layout regressions were found across the six stages.
+- Existing controls and battle progression continued to work during the manual check.
+- This documentation update does not change C# files, image files, StageData, battle logic, enemy AI, or victory/defeat conditions.
