@@ -488,6 +488,36 @@ namespace SRPG.UI
             RefreshBattleLogText();
         }
 
+        public List<string> CaptureBattleLog()
+        {
+            return new List<string>(battleLogEntries);
+        }
+
+        public void RestoreBattleLog(IEnumerable<string> entries)
+        {
+            EnsureTextObjects();
+            battleLogEntries.Clear();
+
+            if (entries != null)
+            {
+                foreach (var entry in entries)
+                {
+                    if (string.IsNullOrEmpty(entry))
+                    {
+                        continue;
+                    }
+
+                    battleLogEntries.Add(entry);
+                    if (battleLogEntries.Count > MaxBattleLogEntries)
+                    {
+                        battleLogEntries.RemoveAt(0);
+                    }
+                }
+            }
+
+            RefreshBattleLogText();
+        }
+
         private static string FormatBattleLogMessage(string message)
         {
             var text = message.Trim().TrimEnd('.');

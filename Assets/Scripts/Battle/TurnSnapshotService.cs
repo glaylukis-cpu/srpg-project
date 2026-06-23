@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using SRPG.Grid;
 using SRPG.Stage;
+using SRPG.UI;
 using SRPG.Units;
 using UnityEngine;
 
@@ -37,7 +38,17 @@ namespace SRPG.Battle
                 }
             }
 
-            snapshot = new TurnStartSnapshot(stageData, gridManager, turnNumber, unitSnapshots);
+            var battleLogEntries = new List<string>();
+            if (BattleUI.Instance != null)
+            {
+                battleLogEntries = BattleUI.Instance.CaptureBattleLog();
+            }
+            else
+            {
+                Debug.LogWarning("Battle Log was unavailable when the turn start snapshot was captured.");
+            }
+
+            snapshot = new TurnStartSnapshot(stageData, gridManager, turnNumber, unitSnapshots, battleLogEntries);
         }
 
         public bool Restore(StageData stageData, GridManager gridManager, int turnNumber)
@@ -78,6 +89,16 @@ namespace SRPG.Battle
                         Debug.LogError($"Turn start undo failed while registering {unitSnapshot.Unit.name}.");
                         return false;
                     }
+                }
+
+                if (BattleUI.Instance != null)
+                {
+                    BattleUI.Instance.RestoreBattleLog(snapshot.BattleLogEntries);
+                    BattleUI.Instance.AddBattleLog("Player turn restored.");
+                }
+                else
+                {
+                    Debug.LogWarning("Battle Log could not be restored because BattleUI is unavailable.");
                 }
 
                 return true;

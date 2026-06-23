@@ -38,17 +38,24 @@ namespace SRPG.Battle
 
     internal sealed class TurnStartSnapshot
     {
-        public TurnStartSnapshot(StageData stageData, GridManager gridManager, int turnNumber, List<UnitSnapshot> units)
+        public TurnStartSnapshot(
+            StageData stageData,
+            GridManager gridManager,
+            int turnNumber,
+            List<UnitSnapshot> units,
+            List<string> battleLogEntries)
         {
             StageData = stageData;
             GridManager = gridManager;
             TurnNumber = turnNumber;
             Units = units;
+            BattleLogEntries = battleLogEntries;
         }
 
         public StageData StageData { get; }
         public GridManager GridManager { get; }
         public int TurnNumber { get; }
         public IReadOnlyList<UnitSnapshot> Units { get; }
+        public IReadOnlyList<string> BattleLogEntries { get; }
     }
 }
