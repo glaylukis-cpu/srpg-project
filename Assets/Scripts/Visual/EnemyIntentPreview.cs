@@ -17,9 +17,9 @@ namespace SRPG.Visual
         private static readonly Color TargetOutlineColor = new Color(0.08f, 0.025f, 0.008f, 0.9f);
         private static readonly Color TargetMarkerColor = new Color(1f, 0.76f, 0.16f, 0.98f);
         private static readonly Color OriginMarkerColor = new Color(1f, 0.5f, 0.1f, 0.92f);
-        private static readonly Color MoveOutlineColor = new Color(0.08f, 0.04f, 0.015f, 0.68f);
-        private static readonly Color MoveMarkerColor = new Color(1f, 0.68f, 0.28f, 0.68f);
-        private static readonly Color MoveArrowColor = new Color(1f, 0.78f, 0.4f, 0.78f);
+        private static readonly Color MoveOutlineColor = new Color(0.08f, 0.04f, 0.015f, 0.78f);
+        private static readonly Color MoveMarkerColor = new Color(1f, 0.72f, 0.3f, 0.78f);
+        private static readonly Color MoveArrowColor = new Color(1f, 0.82f, 0.48f, 0.86f);
         private static readonly Color GuardOutlineColor = new Color(0.08f, 0.055f, 0.01f, 0.78f);
         private static readonly Color GuardMarkerColor = new Color(1f, 0.82f, 0.3f, 0.72f);
 
@@ -153,8 +153,9 @@ namespace SRPG.Visual
             CreateDirectionalVisual("EnemyIntentLine", GetLineSprite(), IntentLineColor, IntentSortingOrder + 1, center, new Vector3(length, 0.065f, 1f), angle);
 
             var arrowPosition = to + new Vector3(0f, 0.04f, -0.19f);
-            CreateDirectionalVisual("EnemyIntentArrowOutline", GetArrowSprite(), IntentOutlineColor, IntentSortingOrder + 2, arrowPosition, new Vector3(0.4f, 0.3f, 1f), angle);
-            CreateDirectionalVisual("EnemyIntentArrow", GetArrowSprite(), IntentArrowColor, IntentSortingOrder + 3, arrowPosition, new Vector3(0.31f, 0.22f, 1f), angle);
+            var attackArrowAngle = angle + 180f;
+            CreateDirectionalVisual("EnemyIntentArrowOutline", GetArrowSprite(), IntentOutlineColor, IntentSortingOrder + 2, arrowPosition, new Vector3(0.4f, 0.3f, 1f), attackArrowAngle);
+            CreateDirectionalVisual("EnemyIntentArrow", GetArrowSprite(), IntentArrowColor, IntentSortingOrder + 3, arrowPosition, new Vector3(0.31f, 0.22f, 1f), attackArrowAngle);
         }
 
         private void CreateMoveTowardVisual(EnemyIntentData intent, float cellSize)
@@ -175,22 +176,37 @@ namespace SRPG.Visual
             var from = BoardProjection.GridToIsoWorld(intent.Enemy.GridPosition, cellSize) + direction * 0.3f;
             var to = intent.HasMoveDestination
                 ? BoardProjection.GridToIsoWorld(intent.MoveDestination, cellSize) - direction * 0.18f
-                : from + direction * 0.8f * cellSize;
+                : from + direction * 1.05f * cellSize;
             var delta = to - from;
             var angle = GetAngle(direction);
-            const int segmentCount = 4;
+            const int segmentCount = 5;
 
             for (var index = 1; index <= segmentCount; index++)
             {
                 var progress = index / (segmentCount + 1f);
                 var position = from + delta * progress + new Vector3(0f, 0.035f, -0.17f);
-                CreateDirectionalVisual("EnemyMoveIntentOutline", GetLineSprite(), MoveOutlineColor, IntentSortingOrder, position, new Vector3(0.16f, 0.075f, 1f), angle);
-                CreateDirectionalVisual("EnemyMoveIntentStep", GetLineSprite(), MoveMarkerColor, IntentSortingOrder + 1, position, new Vector3(0.115f, 0.038f, 1f), angle);
+                CreateDirectionalVisual("EnemyMoveIntentOutline", GetLineSprite(), MoveOutlineColor, IntentSortingOrder, position, new Vector3(0.2f, 0.085f, 1f), angle);
+                CreateDirectionalVisual("EnemyMoveIntentStep", GetLineSprite(), MoveMarkerColor, IntentSortingOrder + 1, position, new Vector3(0.145f, 0.045f, 1f), angle);
             }
 
             var arrowPosition = to + new Vector3(0f, 0.035f, -0.18f);
-            CreateDirectionalVisual("EnemyMoveIntentArrowOutline", GetArrowSprite(), MoveOutlineColor, IntentSortingOrder + 2, arrowPosition, new Vector3(0.3f, 0.21f, 1f), angle);
-            CreateDirectionalVisual("EnemyMoveIntentArrow", GetArrowSprite(), MoveArrowColor, IntentSortingOrder + 3, arrowPosition, new Vector3(0.22f, 0.15f, 1f), angle);
+            var arrowAngle = angle + 180f;
+            CreateMoveDestinationMarker(to, direction, angle, cellSize);
+            CreateDirectionalVisual("EnemyMoveIntentArrowOutline", GetArrowSprite(), MoveOutlineColor, IntentSortingOrder + 2, arrowPosition, new Vector3(0.34f, 0.23f, 1f), arrowAngle);
+            CreateDirectionalVisual("EnemyMoveIntentArrow", GetArrowSprite(), MoveArrowColor, IntentSortingOrder + 3, arrowPosition, new Vector3(0.25f, 0.17f, 1f), arrowAngle);
+        }
+
+        private void CreateMoveDestinationMarker(Vector3 destination, Vector3 direction, float angle, float cellSize)
+        {
+            var perpendicular = new Vector3(-direction.y, direction.x, 0f);
+            var markerCenter = destination - direction * 0.24f * cellSize + new Vector3(0f, 0.035f, -0.18f);
+            var firstStep = markerCenter - direction * 0.065f * cellSize + perpendicular * 0.055f * cellSize;
+            var secondStep = markerCenter + direction * 0.065f * cellSize - perpendicular * 0.055f * cellSize;
+
+            CreateDirectionalVisual("EnemyMoveIntentFootprintOutline", GetLineSprite(), MoveOutlineColor, IntentSortingOrder + 2, firstStep, new Vector3(0.13f, 0.075f, 1f), angle);
+            CreateDirectionalVisual("EnemyMoveIntentFootprint", GetLineSprite(), MoveMarkerColor, IntentSortingOrder + 3, firstStep, new Vector3(0.085f, 0.042f, 1f), angle);
+            CreateDirectionalVisual("EnemyMoveIntentFootprintOutline", GetLineSprite(), MoveOutlineColor, IntentSortingOrder + 2, secondStep, new Vector3(0.13f, 0.075f, 1f), angle);
+            CreateDirectionalVisual("EnemyMoveIntentFootprint", GetLineSprite(), MoveMarkerColor, IntentSortingOrder + 3, secondStep, new Vector3(0.085f, 0.042f, 1f), angle);
         }
 
         private void CreateGuardMarker(Unit enemy, float cellSize)
