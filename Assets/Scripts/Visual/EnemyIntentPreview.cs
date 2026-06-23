@@ -17,6 +17,11 @@ namespace SRPG.Visual
         private static readonly Color TargetOutlineColor = new Color(0.08f, 0.025f, 0.008f, 0.9f);
         private static readonly Color TargetMarkerColor = new Color(1f, 0.76f, 0.16f, 0.98f);
         private static readonly Color OriginMarkerColor = new Color(1f, 0.5f, 0.1f, 0.92f);
+        private static readonly Color MoveOutlineColor = new Color(0.08f, 0.04f, 0.015f, 0.68f);
+        private static readonly Color MoveMarkerColor = new Color(1f, 0.68f, 0.28f, 0.68f);
+        private static readonly Color MoveArrowColor = new Color(1f, 0.78f, 0.4f, 0.78f);
+        private static readonly Color GuardOutlineColor = new Color(0.08f, 0.055f, 0.01f, 0.78f);
+        private static readonly Color GuardMarkerColor = new Color(1f, 0.82f, 0.3f, 0.72f);
 
         private readonly List<GameObject> visualObjects = new List<GameObject>();
         private static Sprite lineSprite;
@@ -27,13 +32,13 @@ namespace SRPG.Visual
         public void Refresh(GridManager gridManager, Unit selectedEnemy)
         {
             var turnManager = TurnManager.Instance;
-            if (gridManager == null || turnManager == null || turnManager.IsBattleEnded)
+            if (gridManager == null || turnManager == null || turnManager.IsBattleEnded || !turnManager.IsPlayerTurn)
             {
                 Clear();
                 return;
             }
 
-            var intents = new List<KeyValuePair<Unit, Unit>>();
+            var intents = new List<EnemyIntentData>();
             if (selectedEnemy != null)
             {
                 AddIntent(intents, turnManager, selectedEnemy);
@@ -58,11 +63,22 @@ namespace SRPG.Visual
             var markedTargets = new HashSet<Unit>();
             foreach (var intent in intents)
             {
-                CreateIntentVisual(intent.Key, intent.Value, gridManager.CellSize);
-                CreateOriginMarker(intent.Key, gridManager.CellSize);
-                if (markedTargets.Add(intent.Value))
+                switch (intent.Type)
                 {
-                    CreateTargetMarker(intent.Value, gridManager.CellSize);
+                    case EnemyIntentType.AttackNow:
+                        CreateAttackIntentVisual(intent.Enemy, intent.Target, gridManager.CellSize);
+                        CreateOriginMarker(intent.Enemy, gridManager.CellSize);
+                        if (intent.Target != null && markedTargets.Add(intent.Target))
+                        {
+                            CreateTargetMarker(intent.Target, gridManager.CellSize);
+                        }
+                        break;
+                    case EnemyIntentType.MoveToward:
+                        CreateMoveTowardVisual(intent, gridManager.CellSize);
+                        break;
+                    case EnemyIntentType.Guard:
+                        CreateGuardMarker(intent.Enemy, gridManager.CellSize);
+                        break;
                 }
             }
         }
@@ -73,37 +89,53 @@ namespace SRPG.Visual
             ClearVisualObjects();
         }
 
-        private static void AddIntent(List<KeyValuePair<Unit, Unit>> intents, TurnManager turnManager, Unit enemy)
+        private static void AddIntent(List<EnemyIntentData> intents, TurnManager turnManager, Unit enemy)
         {
             if (enemy == null || enemy.IsDead || enemy.Faction != Faction.Enemy)
             {
                 return;
             }
 
-            var target = turnManager.GetEnemyCurrentAttackTarget(enemy);
-            if (target != null && !target.IsDead)
+            var intent = turnManager.GetEnemyIntentPreview(enemy);
+            if (intent.Type != EnemyIntentType.None)
             {
-                intents.Add(new KeyValuePair<Unit, Unit>(enemy, target));
+                intents.Add(intent);
             }
         }
 
-        private static string BuildSignature(List<KeyValuePair<Unit, Unit>> intents)
+        private static string BuildSignature(List<EnemyIntentData> intents)
         {
             var builder = new StringBuilder();
             foreach (var intent in intents)
             {
-                builder.Append(intent.Key.name)
-                    .Append('@').Append(intent.Key.GridPosition.x).Append(',').Append(intent.Key.GridPosition.y)
-                    .Append('>').Append(intent.Value.name)
-                    .Append('@').Append(intent.Value.GridPosition.x).Append(',').Append(intent.Value.GridPosition.y)
-                    .Append(';');
+                builder.Append(intent.Enemy.name)
+                    .Append('@').Append(intent.Enemy.GridPosition.x).Append(',').Append(intent.Enemy.GridPosition.y)
+                    .Append(':').Append((int)intent.Type);
+
+                if (intent.Target != null)
+                {
+                    builder.Append('>').Append(intent.Target.name)
+                        .Append('@').Append(intent.Target.GridPosition.x).Append(',').Append(intent.Target.GridPosition.y);
+                }
+
+                if (intent.HasMoveDestination)
+                {
+                    builder.Append("->").Append(intent.MoveDestination.x).Append(',').Append(intent.MoveDestination.y);
+                }
+
+                builder.Append(';');
             }
 
             return builder.ToString();
         }
 
-        private void CreateIntentVisual(Unit enemy, Unit target, float cellSize)
+        private void CreateAttackIntentVisual(Unit enemy, Unit target, float cellSize)
         {
+            if (enemy == null || target == null)
+            {
+                return;
+            }
+
             var direction = BoardProjection.GetIsoDirection(enemy.GridPosition, target.GridPosition);
             if (direction.x == 0f && direction.y == 0f)
             {
@@ -123,6 +155,59 @@ namespace SRPG.Visual
             var arrowPosition = to + new Vector3(0f, 0.04f, -0.19f);
             CreateDirectionalVisual("EnemyIntentArrowOutline", GetArrowSprite(), IntentOutlineColor, IntentSortingOrder + 2, arrowPosition, new Vector3(0.4f, 0.3f, 1f), angle);
             CreateDirectionalVisual("EnemyIntentArrow", GetArrowSprite(), IntentArrowColor, IntentSortingOrder + 3, arrowPosition, new Vector3(0.31f, 0.22f, 1f), angle);
+        }
+
+        private void CreateMoveTowardVisual(EnemyIntentData intent, float cellSize)
+        {
+            if (intent.Enemy == null || intent.Target == null)
+            {
+                return;
+            }
+
+            var directionCoordinates = intent.HasMoveDestination ? intent.MoveDestination : intent.Target.GridPosition;
+            var direction = BoardProjection.GetIsoDirection(intent.Enemy.GridPosition, directionCoordinates);
+
+            if (direction.x == 0f && direction.y == 0f)
+            {
+                return;
+            }
+
+            var from = BoardProjection.GridToIsoWorld(intent.Enemy.GridPosition, cellSize) + direction * 0.3f;
+            var to = intent.HasMoveDestination
+                ? BoardProjection.GridToIsoWorld(intent.MoveDestination, cellSize) - direction * 0.18f
+                : from + direction * 0.8f * cellSize;
+            var delta = to - from;
+            var angle = GetAngle(direction);
+            const int segmentCount = 4;
+
+            for (var index = 1; index <= segmentCount; index++)
+            {
+                var progress = index / (segmentCount + 1f);
+                var position = from + delta * progress + new Vector3(0f, 0.035f, -0.17f);
+                CreateDirectionalVisual("EnemyMoveIntentOutline", GetLineSprite(), MoveOutlineColor, IntentSortingOrder, position, new Vector3(0.16f, 0.075f, 1f), angle);
+                CreateDirectionalVisual("EnemyMoveIntentStep", GetLineSprite(), MoveMarkerColor, IntentSortingOrder + 1, position, new Vector3(0.115f, 0.038f, 1f), angle);
+            }
+
+            var arrowPosition = to + new Vector3(0f, 0.035f, -0.18f);
+            CreateDirectionalVisual("EnemyMoveIntentArrowOutline", GetArrowSprite(), MoveOutlineColor, IntentSortingOrder + 2, arrowPosition, new Vector3(0.3f, 0.21f, 1f), angle);
+            CreateDirectionalVisual("EnemyMoveIntentArrow", GetArrowSprite(), MoveArrowColor, IntentSortingOrder + 3, arrowPosition, new Vector3(0.22f, 0.15f, 1f), angle);
+        }
+
+        private void CreateGuardMarker(Unit enemy, float cellSize)
+        {
+            if (enemy == null)
+            {
+                return;
+            }
+
+            var position = BoardProjection.GridToIsoWorld(enemy.GridPosition, cellSize) + new Vector3(0f, 0.03f, -0.19f);
+            var outline = CreateVisualObject("EnemyGuardIntentOutline", GetTargetMarkerSprite(), GuardOutlineColor, IntentSortingOrder + 2);
+            outline.transform.position = position;
+            outline.transform.localScale = new Vector3(0.62f * cellSize, 0.62f * cellSize, 1f);
+
+            var marker = CreateVisualObject("EnemyGuardIntent", GetTargetMarkerSprite(), GuardMarkerColor, IntentSortingOrder + 3);
+            marker.transform.position = position;
+            marker.transform.localScale = new Vector3(0.5f * cellSize, 0.5f * cellSize, 1f);
         }
 
         private void CreateTargetMarker(Unit target, float cellSize)

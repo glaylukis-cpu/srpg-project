@@ -22,6 +22,32 @@ namespace SRPG.Battle
         EnemyTurn
     }
 
+    public enum EnemyIntentType
+    {
+        None,
+        AttackNow,
+        MoveToward,
+        Guard
+    }
+
+    public struct EnemyIntentData
+    {
+        public EnemyIntentData(EnemyIntentType type, Unit enemy, Unit target, Vector2Int moveDestination, bool hasMoveDestination)
+        {
+            Type = type;
+            Enemy = enemy;
+            Target = target;
+            MoveDestination = moveDestination;
+            HasMoveDestination = hasMoveDestination;
+        }
+
+        public EnemyIntentType Type { get; }
+        public Unit Enemy { get; }
+        public Unit Target { get; }
+        public Vector2Int MoveDestination { get; }
+        public bool HasMoveDestination { get; }
+    }
+
     public class TurnManager : MonoBehaviour
     {
         [SerializeField] private int turnNumber = 1;
@@ -98,6 +124,56 @@ namespace SRPG.Battle
             }
 
             return target != null && enemy.CanAttack(target) ? target : null;
+        }
+
+        public EnemyIntentData GetEnemyIntentPreview(Unit enemy)
+        {
+            if (enemy == null || enemy.IsDead || enemy.Faction != Faction.Enemy || !EnsureGridManager())
+            {
+                return new EnemyIntentData(EnemyIntentType.None, enemy, null, new Vector2Int(), false);
+            }
+
+            Unit target;
+            switch (enemy.EnemyAIType)
+            {
+                case EnemyAIType.WeakTarget:
+                    target = FindWeakestPlayerUnit(enemy);
+                    break;
+                case EnemyAIType.Stationary:
+                    target = FindAttackableWeakestPlayerUnit(enemy);
+                    return target != null
+                        ? new EnemyIntentData(EnemyIntentType.AttackNow, enemy, target, enemy.GridPosition, false)
+                        : new EnemyIntentData(EnemyIntentType.Guard, enemy, null, enemy.GridPosition, false);
+                case EnemyAIType.Guardian:
+                    target = FindNearestPlayerUnitInsideGuardianRange(enemy, 3);
+                    if (target == null)
+                    {
+                        return new EnemyIntentData(EnemyIntentType.Guard, enemy, null, enemy.GridPosition, false);
+                    }
+                    break;
+                default:
+                    target = FindNearestPlayerUnit(enemy);
+                    break;
+            }
+
+            if (target == null)
+            {
+                return new EnemyIntentData(EnemyIntentType.None, enemy, null, enemy.GridPosition, false);
+            }
+
+            if (enemy.CanAttack(target))
+            {
+                return new EnemyIntentData(EnemyIntentType.AttackNow, enemy, target, enemy.GridPosition, false);
+            }
+
+            var currentDistance = gridManager.GetManhattanDistance(enemy.GridPosition, target.GridPosition);
+            var approachTile = FindBestApproachTile(enemy, target, currentDistance);
+            return new EnemyIntentData(
+                EnemyIntentType.MoveToward,
+                enemy,
+                target,
+                approachTile != null ? approachTile.Coordinates : enemy.GridPosition,
+                approachTile != null);
         }
 
         public void NotifyUnitMoved(Unit unit)
