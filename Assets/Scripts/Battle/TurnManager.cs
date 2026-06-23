@@ -39,6 +39,7 @@ namespace SRPG.Battle
         public TurnPhase CurrentPhase => currentPhase;
         public bool IsPlayerTurn => currentPhase == TurnPhase.PlayerTurn;
         public bool IsBattleEnded => battleEnded;
+        public bool CanEndPlayerTurn => !battleEnded && IsPlayerTurn && HaveAllPlayerUnitsActed();
         public BattleResult Result => result;
 
         public void SetStageData(StageData data)
@@ -72,6 +73,33 @@ namespace SRPG.Battle
             }
         }
 
+        public Unit GetEnemyCurrentAttackTarget(Unit enemy)
+        {
+            if (enemy == null || enemy.IsDead || enemy.Faction != Faction.Enemy || !EnsureGridManager())
+            {
+                return null;
+            }
+
+            Unit target;
+            switch (enemy.EnemyAIType)
+            {
+                case EnemyAIType.WeakTarget:
+                    target = FindWeakestPlayerUnit(enemy);
+                    break;
+                case EnemyAIType.Stationary:
+                    target = FindAttackableWeakestPlayerUnit(enemy);
+                    break;
+                case EnemyAIType.Guardian:
+                    target = FindNearestPlayerUnitInsideGuardianRange(enemy, 3);
+                    break;
+                default:
+                    target = FindNearestPlayerUnit(enemy);
+                    break;
+            }
+
+            return target != null && enemy.CanAttack(target) ? target : null;
+        }
+
         public void NotifyUnitMoved(Unit unit)
         {
             NotifyPlayerUnitActed(unit);
@@ -97,10 +125,22 @@ namespace SRPG.Battle
                 return;
             }
 
-            if (HaveAllPlayerUnitsActed())
+            if (CanEndPlayerTurn)
             {
-                BeginEnemyTurn();
+                BattleUI.Instance?.SetTurnInfo(turnNumber, "Enter: End Turn");
             }
+        }
+
+        public bool TryEndPlayerTurn()
+        {
+            if (!CanEndPlayerTurn)
+            {
+                return false;
+            }
+
+            BattleUI.Instance?.AddBattleLog("Player ended turn");
+            BeginEnemyTurn();
+            return true;
         }
 
         public void ResetBattleState()

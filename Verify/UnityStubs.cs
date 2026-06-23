@@ -86,6 +86,7 @@ namespace UnityEngine
         public Vector3 position { get; set; }
         public Vector3 localPosition { get; set; }
         public Vector3 localScale { get; set; }
+        public Vector3 localEulerAngles { get; set; }
         public int childCount => 0;
         public GameObject gameObject { get; set; }
 
@@ -118,6 +119,7 @@ namespace UnityEngine
     {
         public Sprite sprite { get; set; }
         public Color color { get; set; }
+        public bool flipX { get; set; }
         public int sortingOrder { get; set; }
     }
 
@@ -152,6 +154,15 @@ namespace UnityEngine
     public class BoxCollider2D : Component
     {
         public Vector2 size { get; set; }
+    }
+
+    public class PolygonCollider2D : Component
+    {
+        public int pathCount { get; set; }
+
+        public void SetPath(int index, Vector2[] points)
+        {
+        }
     }
 
     public class CircleCollider2D : Component

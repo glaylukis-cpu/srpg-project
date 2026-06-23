@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SRPG.Audio;
 using SRPG.Grid;
 using SRPG.UI;
+using SRPG.Visual;
 using UnityEngine;
 
 namespace SRPG.Units
@@ -48,20 +49,22 @@ namespace SRPG.Units
         [SerializeField] private int currentHp = 10;
         [SerializeField] private int attackPower = 5;
         [SerializeField] private int attackRange = 1;
-        [SerializeField] private Vector3 hpTextOffset = new Vector3(0f, -0.5f, -0.1f);
+        [SerializeField] private Vector3 hpTextOffset = new Vector3(0f, -0.72f, -0.1f);
 
         private static readonly Dictionary<UnitType, Sprite> PixelSprites = new Dictionary<UnitType, Sprite>();
         private static readonly Dictionary<string, Sprite> ResourceUnitSprites = new Dictionary<string, Sprite>();
         private static Sprite shadowSprite;
-        private static Sprite selectionRingSprite;
         private static Sprite hpBackSprite;
         private static Sprite unitTopLightSprite;
         private GridManager gridManager;
         private SpriteRenderer spriteRenderer;
         private SpriteRenderer shadowRenderer;
+        private SpriteRenderer tokenBaseRenderer;
         private SpriteRenderer selectionRingRenderer;
         private SpriteRenderer topLightRenderer;
         private SpriteRenderer hpBackRenderer;
+        private MeshRenderer hpTextRenderer;
+        private MeshRenderer hpShadowRenderer;
         private TextMesh hpText;
         private TextMesh hpShadowText;
         private bool isSelected;
@@ -113,21 +116,53 @@ namespace SRPG.Units
             currentHp = maxHp;
             attackPower = Mathf.Max(0, startingAttackPower);
             attackRange = Mathf.Max(1, startingAttackRange);
+            hpTextOffset = UnitTokenVisual.GetHpTextOffset(faction);
 
             spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = GetUnitSprite(unitType, faction, out usesResourceUnitSprite);
             spriteRenderer.color = GetNormalVisualColor();
-            spriteRenderer.sortingOrder = 8;
 
             transform.localScale = Vector3.one * gridManager.CellSize * 1.06f;
             EnsureUnitVisualLayers();
+            RefreshColor();
 
             var circleCollider = GetComponent<CircleCollider2D>();
             circleCollider.radius = 0.46f;
 
             gridManager.TryPlaceUnit(this, startPosition);
             CreateHpText();
+            SetVisualSortingOrder(BoardProjection.GetUnitSortingOrder(startPosition));
             UpdateHpDisplay();
+        }
+
+        public void SetVisualSortingOrder(int unitSortingOrder)
+        {
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = GetComponent<SpriteRenderer>();
+            }
+
+            EnsureUnitVisualLayers();
+            spriteRenderer.sortingOrder = unitSortingOrder;
+            shadowRenderer.sortingOrder = unitSortingOrder - 4;
+            tokenBaseRenderer.sortingOrder = unitSortingOrder - 3;
+            selectionRingRenderer.sortingOrder = unitSortingOrder - 2;
+            topLightRenderer.sortingOrder = unitSortingOrder + 1;
+
+            if (hpBackRenderer != null)
+            {
+                hpBackRenderer.sortingOrder = unitSortingOrder + UnitTokenVisual.HpBackgroundSortingOffset;
+            }
+
+            if (hpTextRenderer != null)
+            {
+                hpTextRenderer.sortingOrder = unitSortingOrder + UnitTokenVisual.HpTextSortingOffset;
+            }
+
+            if (hpShadowRenderer != null)
+            {
+                hpShadowRenderer.sortingOrder = unitSortingOrder + UnitTokenVisual.HpTextSortingOffset;
+            }
         }
 
         public void InitializeForStage(
@@ -342,52 +377,56 @@ namespace SRPG.Units
             var hpBackObject = new GameObject("HPTextBack");
             hpBackObject.transform.SetParent(transform, false);
             hpBackObject.transform.localPosition = hpTextOffset + new Vector3(0f, 0f, 0.02f);
-            hpBackObject.transform.localScale = new Vector3(0.62f, 0.2f, 1f);
+            hpBackObject.transform.localScale = UnitTokenVisual.HpBackgroundScale;
             hpBackRenderer = hpBackObject.AddComponent<SpriteRenderer>();
             hpBackRenderer.sprite = GetHpBackSprite();
-            hpBackRenderer.color = new Color(0f, 0f, 0f, 0.72f);
+            hpBackRenderer.color = UnitTokenVisual.HpBackgroundColor;
             hpBackRenderer.sortingOrder = 6;
 
-            var hpTextRenderer = hpTextObject.AddComponent<MeshRenderer>();
+            hpTextRenderer = hpTextObject.AddComponent<MeshRenderer>();
             hpText = hpTextObject.AddComponent<TextMesh>();
             hpText.anchor = TextAnchor.MiddleCenter;
             hpText.alignment = TextAlignment.Center;
-            hpText.fontSize = 28;
-            hpText.characterSize = 0.072f;
+            hpText.fontSize = UnitTokenVisual.HpFontSize;
+            hpText.characterSize = UnitTokenVisual.HpCharacterSize;
             hpText.color = Color.white;
             hpTextRenderer.sortingOrder = 7;
 
             var shadowObject = new GameObject("HPTextShadow");
             shadowObject.transform.SetParent(transform, false);
-            shadowObject.transform.localPosition = hpTextOffset + new Vector3(0.018f, -0.018f, 0.01f);
+            shadowObject.transform.localPosition = hpTextOffset + UnitTokenVisual.HpShadowOffset;
 
-            var shadowRenderer = shadowObject.AddComponent<MeshRenderer>();
+            hpShadowRenderer = shadowObject.AddComponent<MeshRenderer>();
             hpShadowText = shadowObject.AddComponent<TextMesh>();
             hpShadowText.anchor = TextAnchor.MiddleCenter;
             hpShadowText.alignment = TextAlignment.Center;
-            hpShadowText.fontSize = 28;
-            hpShadowText.characterSize = 0.072f;
-            hpShadowText.color = new Color(0f, 0f, 0f, 0.9f);
-            shadowRenderer.sortingOrder = 7;
+            hpShadowText.fontSize = UnitTokenVisual.HpFontSize;
+            hpShadowText.characterSize = UnitTokenVisual.HpCharacterSize;
+            hpShadowText.color = UnitTokenVisual.HpShadowColor;
+            hpShadowRenderer.sortingOrder = 7;
         }
 
         private void EnsureUnitVisualLayers()
         {
             if (shadowRenderer == null)
             {
-                shadowRenderer = CreateChildRenderer("UnitShadow", GetShadowSprite(), 6, new Vector3(1.08f, 0.36f, 1f), new Vector3(0f, -0.24f, 0.04f));
-                shadowRenderer.color = new Color(0f, 0f, 0f, 0.38f);
+                shadowRenderer = CreateChildRenderer("UnitShadow", GetShadowSprite(), 6, UnitTokenVisual.UnitShadowScale, new Vector3(0f, -0.25f, 0.04f));
+                shadowRenderer.color = new Color(0f, 0f, 0f, 0.3f);
+            }
+
+            if (tokenBaseRenderer == null)
+            {
+                tokenBaseRenderer = CreateChildRenderer("TokenBase", UnitTokenVisual.GetTokenBaseSprite(), 6, UnitTokenVisual.TokenBaseScale, new Vector3(0f, -0.26f, 0.035f));
             }
 
             if (selectionRingRenderer == null)
             {
-                selectionRingRenderer = CreateChildRenderer("SelectionRing", GetSelectionRingSprite(), 7, new Vector3(1.2f, 0.44f, 1f), new Vector3(0f, -0.25f, 0.03f));
-                selectionRingRenderer.color = new Color(0f, 0f, 0f, 0f);
+                selectionRingRenderer = CreateChildRenderer("SelectionRing", UnitTokenVisual.GetTokenRingSprite(), 7, UnitTokenVisual.SelectionRingScale, new Vector3(0f, -0.26f, 0.03f));
             }
 
             if (topLightRenderer == null)
             {
-                topLightRenderer = CreateChildRenderer("UnitTopLight", GetUnitTopLightSprite(), 9, new Vector3(0.78f, 0.2f, 1f), new Vector3(0f, 0.24f, -0.02f));
+                topLightRenderer = CreateChildRenderer("UnitTopLight", GetUnitTopLightSprite(), 9, UnitTokenVisual.UnitTopLightScale, new Vector3(0f, 0.24f, -0.02f));
                 topLightRenderer.color = new Color(1f, 0.92f, 0.62f, 0.18f);
             }
         }
@@ -412,15 +451,11 @@ namespace SRPG.Units
                 spriteRenderer = GetComponent<SpriteRenderer>();
             }
 
+            RefreshTokenVisual();
+
             if (isSelected)
             {
                 spriteRenderer.color = GetSelectedTint();
-                if (selectionRingRenderer != null)
-                {
-                    selectionRingRenderer.color = IsPlayerControlled
-                        ? new Color(0.46f, 0.86f, 1f, 0.9f)
-                        : new Color(1f, 0.3f, 0.8f, 0.9f);
-                }
                 if (topLightRenderer != null)
                 {
                     topLightRenderer.color = new Color(1f, 0.95f, 0.68f, 0.32f);
@@ -428,16 +463,26 @@ namespace SRPG.Units
                 return;
             }
 
-            if (selectionRingRenderer != null)
-            {
-                selectionRingRenderer.color = new Color(0f, 0f, 0f, 0f);
-            }
             if (topLightRenderer != null)
             {
                 topLightRenderer.color = new Color(1f, 0.92f, 0.62f, 0.16f);
             }
 
             spriteRenderer.color = IsPlayerControlled && hasActed ? GetActedVisualColor() : GetNormalVisualColor();
+        }
+
+        private void RefreshTokenVisual()
+        {
+            var acted = IsPlayerControlled && hasActed;
+            if (tokenBaseRenderer != null)
+            {
+                tokenBaseRenderer.color = UnitTokenVisual.GetTokenBaseColor(acted);
+            }
+
+            if (selectionRingRenderer != null)
+            {
+                selectionRingRenderer.color = UnitTokenVisual.GetTokenRingColor(faction, isSelected, acted);
+            }
         }
 
         private Color GetSelectedTint()
@@ -533,7 +578,9 @@ namespace SRPG.Units
             }
 
             texture.filterMode = FilterMode.Point;
-            var pixelsPerUnit = texture.height > 0 ? texture.height * GetResourcePixelsPerUnitScale(type) : 1f;
+            var pixelsPerUnit = texture.height > 0
+                ? texture.height * GetResourcePixelsPerUnitScale(type) / UnitTokenVisual.UnitVisualScale
+                : 1f;
             var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.22f), pixelsPerUnit);
             ResourceUnitSprites[key] = sprite;
             return sprite;
@@ -745,17 +792,6 @@ namespace SRPG.Units
 
             shadowSprite = CreateDiscSprite(16, new Color(1f, 1f, 1f, 0.9f), true);
             return shadowSprite;
-        }
-
-        private static Sprite GetSelectionRingSprite()
-        {
-            if (selectionRingSprite != null)
-            {
-                return selectionRingSprite;
-            }
-
-            selectionRingSprite = CreateDiscSprite(18, new Color(1f, 1f, 1f, 0.9f), false);
-            return selectionRingSprite;
         }
 
         private static Sprite GetHpBackSprite()

@@ -1,4 +1,5 @@
 using System.Collections;
+using SRPG.Visual;
 using UnityEngine;
 
 namespace SRPG.Units
@@ -26,6 +27,11 @@ namespace SRPG.Units
                 yield break;
             }
 
+            var attackerRenderer = attacker.GetComponent<SpriteRenderer>();
+            var originalFlipX = attackerRenderer != null && attackerRenderer.flipX;
+            // Unit art has one authored facing per faction. Directional motion and effects
+            // follow the projected attack vector without mirroring the character itself.
+
             switch (attacker.UnitType)
             {
                 case UnitType.Knight:
@@ -40,6 +46,11 @@ namespace SRPG.Units
                 default:
                     yield return PlaySoldierAttack(attacker, target);
                     break;
+            }
+
+            if (attackerRenderer != null)
+            {
+                attackerRenderer.flipX = originalFlipX;
             }
         }
 
@@ -113,9 +124,12 @@ namespace SRPG.Units
 
         private static IEnumerator MoveArrow(Unit attacker, Unit target)
         {
-            var startPosition = attacker.transform.position + GetDirectionOffset(attacker, target, 0.18f);
-            var travel = GetDirectionOffset(attacker, target, GetGridDistance(attacker, target));
-            var arrow = CreateEffectObject("ArrowEffect", startPosition, GetArrowSprite(), new Color(1f, 0.86f, 0.42f, 0.95f), new Vector3(0.42f, 0.18f, 1f), 22);
+            var visualDirection = GetVisualDirection(attacker, target);
+            var depthOffset = new Vector3(0f, 0f, -0.04f);
+            var startPosition = attacker.transform.position + visualDirection * 0.18f + depthOffset;
+            var endPosition = target.transform.position + depthOffset;
+            var travel = endPosition - startPosition;
+            var arrow = CreateEffectObject("ArrowEffect", startPosition, GetArrowSprite(), new Color(1f, 0.86f, 0.42f, 0.95f), new Vector3(0.42f, 0.18f, 1f), 22, GetDirectionAngle(visualDirection));
 
             var elapsed = 0f;
             while (elapsed < ArrowTravelDuration)
@@ -131,23 +145,18 @@ namespace SRPG.Units
 
         private static Vector3 GetDirectionOffset(Unit attacker, Unit target, float distance)
         {
-            var dx = target.GridPosition.x - attacker.GridPosition.x;
-            var dy = target.GridPosition.y - attacker.GridPosition.y;
-            var length = System.Math.Sqrt(dx * dx + dy * dy);
-            if (length <= 0.001)
-            {
-                return new Vector3(0f, 0f, 0f);
-            }
-
-            return new Vector3((float)(dx / length) * distance, (float)(dy / length) * distance, -0.04f);
+            var visualDirection = GetVisualDirection(attacker, target);
+            return visualDirection * distance + new Vector3(0f, 0f, -0.04f);
         }
 
-        private static float GetGridDistance(Unit attacker, Unit target)
+        private static Vector3 GetVisualDirection(Unit attacker, Unit target)
         {
-            var dx = target.GridPosition.x - attacker.GridPosition.x;
-            var dy = target.GridPosition.y - attacker.GridPosition.y;
-            var length = (float)System.Math.Sqrt(dx * dx + dy * dy);
-            return (float)System.Math.Max(0.24f, length);
+            return BoardProjection.GetIsoDirection(attacker.GridPosition, target.GridPosition);
+        }
+
+        private static float GetDirectionAngle(Vector3 visualDirection)
+        {
+            return (float)(System.Math.Atan2(visualDirection.y, visualDirection.x) * 180.0 / System.Math.PI);
         }
 
         private static float EaseOut(float t)
@@ -157,8 +166,9 @@ namespace SRPG.Units
 
         private static GameObject ShowSlashEffect(Unit attacker, Unit target, float scale)
         {
+            var visualDirection = GetVisualDirection(attacker, target);
             var position = attacker.transform.position + GetDirectionOffset(attacker, target, 0.42f);
-            return CreateEffectObject("SlashEffect", position, GetSlashSprite(), new Color(1f, 0.92f, 0.62f, 0.92f), new Vector3(0.48f * scale, 0.48f * scale, 1f), 23);
+            return CreateEffectObject("SlashEffect", position, GetSlashSprite(), new Color(1f, 0.92f, 0.62f, 0.92f), new Vector3(0.48f * scale, 0.48f * scale, 1f), 23, GetDirectionAngle(visualDirection) - 45f);
         }
 
         private static GameObject ShowHeavyHitEffect(Unit target)
@@ -166,11 +176,12 @@ namespace SRPG.Units
             return CreateEffectObject("HeavyHitEffect", target.transform.position + new Vector3(0f, 0.08f, -0.1f), GetHeavyHitSprite(), new Color(1f, 0.84f, 0.36f, 0.88f), new Vector3(0.42f, 0.42f, 1f), 23);
         }
 
-        private static GameObject CreateEffectObject(string objectName, Vector3 position, Sprite sprite, Color color, Vector3 scale, int sortingOrder)
+        private static GameObject CreateEffectObject(string objectName, Vector3 position, Sprite sprite, Color color, Vector3 scale, int sortingOrder, float rotationDegrees = 0f)
         {
             var effectObject = new GameObject(objectName);
             effectObject.transform.position = position;
             effectObject.transform.localScale = scale;
+            effectObject.transform.localEulerAngles = new Vector3(0f, 0f, rotationDegrees);
 
             var renderer = effectObject.AddComponent<SpriteRenderer>();
             renderer.sprite = sprite;

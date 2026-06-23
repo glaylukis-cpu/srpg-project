@@ -92,6 +92,10 @@ namespace SRPG.UI
         private const int MaxStageSelectRows = 6;
         private const int StagePreviewSize = 8;
         private const float StageIntroDuration = 1.8f;
+        private const float BattleHudInset = 4f;
+        private const int BattleHudTitleFontSize = 12;
+        private const int BattleHudBodyFontSize = 11;
+        private const int BattleHudSmallFontSize = 9;
         private readonly List<string> battleLogEntries = new List<string>();
         private readonly Dictionary<int, StageBestResult> sessionBestResults = new Dictionary<int, StageBestResult>();
         private readonly Image[] stageSelectRowPanels = new Image[MaxStageSelectRows];
@@ -207,15 +211,13 @@ namespace SRPG.UI
             {
                 selectedUnitText.text =
                     "<color=#FFD98F>Selected</color>\n" +
-                    "No Unit Selected\n" +
-                    "<color=#AEB7C2>Click an ally or enemy.</color>";
+                    "No Unit Selected";
                 return;
             }
 
             var builder = new StringBuilder();
             builder.AppendLine("<color=#FFD98F>Selected</color>");
             builder.AppendLine(unit.name);
-            builder.AppendLine();
             builder.AppendLine($"<color=#FFD98F>Type</color>    {unit.UnitType}");
 
             if (unit.Faction == Faction.Enemy)
@@ -476,7 +478,7 @@ namespace SRPG.UI
             }
 
             EnsureTextObjects();
-            battleLogEntries.Add(message);
+            battleLogEntries.Add(FormatBattleLogMessage(message));
 
             while (battleLogEntries.Count > MaxBattleLogEntries)
             {
@@ -484,6 +486,96 @@ namespace SRPG.UI
             }
 
             RefreshBattleLogText();
+        }
+
+        private static string FormatBattleLogMessage(string message)
+        {
+            var text = message.Trim().TrimEnd('.');
+            var hasInternalUnitId =
+                text.IndexOf("_Player_", System.StringComparison.OrdinalIgnoreCase) >= 0 ||
+                text.IndexOf("_Enemy_", System.StringComparison.OrdinalIgnoreCase) >= 0;
+            if (!hasInternalUnitId)
+            {
+                return text + ".";
+            }
+
+            var undoMarker = " movement undone";
+            var markerIndex = text.IndexOf(undoMarker, System.StringComparison.Ordinal);
+            if (markerIndex > 0)
+            {
+                return $"Undo: {GetBattleUnitLabel(text.Substring(0, markerIndex))} returned.";
+            }
+
+            var moveMarker = " moved to ";
+            markerIndex = text.IndexOf(moveMarker, System.StringComparison.Ordinal);
+            if (markerIndex > 0)
+            {
+                return $"{GetBattleUnitLabel(text.Substring(0, markerIndex))} moved.";
+            }
+
+            var attackMarker = " attacked ";
+            markerIndex = text.IndexOf(attackMarker, System.StringComparison.Ordinal);
+            if (markerIndex > 0)
+            {
+                var actor = GetBattleUnitLabel(text.Substring(0, markerIndex));
+                var attackDetails = text.Substring(markerIndex + attackMarker.Length);
+                var damageMarker = " for ";
+                var damageIndex = attackDetails.IndexOf(damageMarker, System.StringComparison.Ordinal);
+                if (damageIndex > 0)
+                {
+                    var target = GetBattleUnitLabel(attackDetails.Substring(0, damageIndex));
+                    var damage = attackDetails.Substring(damageIndex + damageMarker.Length);
+                    return $"{actor} attacked {target} for {damage}.";
+                }
+
+                return $"{actor} attacked {GetBattleUnitLabel(attackDetails)}.";
+            }
+
+            var noTargetMarker = " has no target";
+            markerIndex = text.IndexOf(noTargetMarker, System.StringComparison.Ordinal);
+            if (markerIndex > 0)
+            {
+                return $"{GetBattleUnitLabel(text.Substring(0, markerIndex))} held position.";
+            }
+
+            var guardMarker = " guarded";
+            markerIndex = text.IndexOf(guardMarker, System.StringComparison.Ordinal);
+            if (markerIndex > 0)
+            {
+                return $"{GetBattleUnitLabel(text.Substring(0, markerIndex))} is guarding.";
+            }
+
+            var waitMarker = " waited";
+            markerIndex = text.IndexOf(waitMarker, System.StringComparison.Ordinal);
+            if (markerIndex > 0)
+            {
+                return $"{GetBattleUnitLabel(text.Substring(0, markerIndex))} waited.";
+            }
+
+            var defeatedMarker = " defeated";
+            markerIndex = text.IndexOf(defeatedMarker, System.StringComparison.Ordinal);
+            if (markerIndex > 0)
+            {
+                return $"{GetBattleUnitLabel(text.Substring(0, markerIndex))} was defeated.";
+            }
+
+            return text + ".";
+        }
+
+        private static string GetBattleUnitLabel(string internalName)
+        {
+            var name = internalName.Trim();
+            if (name.IndexOf("_Player_", System.StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return "Ally";
+            }
+
+            if (name.IndexOf("_Enemy_", System.StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return "Enemy";
+            }
+
+            return name.Replace('_', ' ');
         }
 
         public void ClearBattleLog()
@@ -626,91 +718,91 @@ namespace SRPG.UI
 
             if (turnText == null)
             {
-                turnText = CreateText("TurnText", new Vector2(34f, -98f), new Vector2(0f, 1f), TextAnchor.UpperLeft, 18, new Vector2(238f, 56f));
+                turnText = CreateText("TurnText", new Vector2(24f, -72f), new Vector2(0f, 1f), TextAnchor.UpperLeft, 15, new Vector2(196f, 42f));
             }
-            turnText.fontSize = 18;
+            turnText.fontSize = 15;
             turnText.color = ThemeTextPrimary();
-            ConfigureRect(turnText.rectTransform, new Vector2(34f, -98f), new Vector2(0f, 1f), new Vector2(238f, 56f));
+            ConfigureRect(turnText.rectTransform, new Vector2(24f, -72f), new Vector2(0f, 1f), new Vector2(196f, 42f));
 
             if (stageText == null)
             {
-                stageText = CreateText("StageText", new Vector2(34f, -32f), new Vector2(0f, 1f), TextAnchor.UpperLeft, 18, new Vector2(238f, 62f));
+                stageText = CreateText("StageText", new Vector2(24f, -20f), new Vector2(0f, 1f), TextAnchor.UpperLeft, 15, new Vector2(196f, 50f));
             }
-            stageText.fontSize = 18;
+            stageText.fontSize = 15;
             stageText.color = ThemeTextAccentGold();
-            ConfigureRect(stageText.rectTransform, new Vector2(34f, -32f), new Vector2(0f, 1f), new Vector2(238f, 62f));
+            ConfigureRect(stageText.rectTransform, new Vector2(24f, -20f), new Vector2(0f, 1f), new Vector2(196f, 50f));
 
             if (objectiveText == null)
             {
-                objectiveText = CreateText("ObjectiveText", new Vector2(44f, -192f), new Vector2(0f, 1f), TextAnchor.UpperLeft, 11, new Vector2(216f, 146f));
+                objectiveText = CreateText("ObjectiveText", new Vector2(26f, -146f), new Vector2(0f, 1f), TextAnchor.UpperLeft, BattleHudBodyFontSize, new Vector2(196f, 132f));
             }
-            objectiveText.fontSize = 11;
+            objectiveText.fontSize = BattleHudBodyFontSize;
             objectiveText.color = ThemeTextPrimary();
-            ConfigureRect(objectiveText.rectTransform, new Vector2(44f, -192f), new Vector2(0f, 1f), new Vector2(216f, 146f));
+            ConfigureRect(objectiveText.rectTransform, new Vector2(26f, -146f), new Vector2(0f, 1f), new Vector2(196f, 132f));
 
             if (selectedUnitText == null)
             {
-                selectedUnitText = CreateText("SelectedUnitText", new Vector2(38f, 56f), new Vector2(0f, 0f), TextAnchor.LowerLeft, 15, new Vector2(224f, 136f));
+                selectedUnitText = CreateText("SelectedUnitText", new Vector2(28f, 32f), new Vector2(0f, 0f), TextAnchor.LowerLeft, 13, new Vector2(194f, 112f));
             }
-            selectedUnitText.fontSize = 15;
+            selectedUnitText.fontSize = 13;
             selectedUnitText.alignment = TextAnchor.LowerLeft;
             selectedUnitText.color = ThemeTextPrimary();
-            ConfigureRect(selectedUnitText.rectTransform, new Vector2(38f, 56f), new Vector2(0f, 0f), new Vector2(224f, 136f));
+            ConfigureRect(selectedUnitText.rectTransform, new Vector2(28f, 32f), new Vector2(0f, 0f), new Vector2(194f, 112f));
 
             if (enemyThreatText == null)
             {
-                enemyThreatText = CreateText("EnemyThreatText", new Vector2(-34f, -34f), new Vector2(1f, 1f), TextAnchor.UpperRight, 17, new Vector2(208f, 24f));
+                enemyThreatText = CreateText("EnemyThreatText", new Vector2(-22f, -24f), new Vector2(1f, 1f), TextAnchor.UpperRight, 14, new Vector2(180f, 20f));
             }
-            enemyThreatText.fontSize = 17;
+            enemyThreatText.fontSize = 14;
             enemyThreatText.alignment = TextAnchor.UpperRight;
             enemyThreatText.color = ThemeTextMutedGold();
-            ConfigureRect(enemyThreatText.rectTransform, new Vector2(-34f, -34f), new Vector2(1f, 1f), new Vector2(208f, 24f));
+            ConfigureRect(enemyThreatText.rectTransform, new Vector2(-22f, -24f), new Vector2(1f, 1f), new Vector2(180f, 20f));
 
             if (controlsText == null)
             {
-                controlsText = CreateText("ControlsText", new Vector2(-28f, 152f), new Vector2(1f, 0f), TextAnchor.UpperLeft, 13, new Vector2(220f, 22f));
+                controlsText = CreateText("ControlsText", new Vector2(-22f, 128f), new Vector2(1f, 0f), TextAnchor.UpperLeft, BattleHudTitleFontSize, new Vector2(192f, 18f));
             }
-            controlsText.fontSize = 13;
+            controlsText.fontSize = BattleHudTitleFontSize;
             controlsText.alignment = TextAnchor.UpperLeft;
             controlsText.color = ThemeTextAccentGold();
-            ConfigureRect(controlsText.rectTransform, new Vector2(-28f, 152f), new Vector2(1f, 0f), new Vector2(220f, 22f));
+            ConfigureRect(controlsText.rectTransform, new Vector2(-22f, 128f), new Vector2(1f, 0f), new Vector2(192f, 18f));
 
             if (controlsInputText == null)
             {
-                controlsInputText = CreateText("ControlsInputText", new Vector2(-142f, 44f), new Vector2(1f, 0f), TextAnchor.UpperLeft, 10, new Vector2(110f, 92f));
+                controlsInputText = CreateText("ControlsInputText", new Vector2(-124f, 26f), new Vector2(1f, 0f), TextAnchor.UpperLeft, BattleHudSmallFontSize, new Vector2(94f, 92f));
             }
-            controlsInputText.fontSize = 10;
+            controlsInputText.fontSize = BattleHudSmallFontSize;
             controlsInputText.alignment = TextAnchor.UpperLeft;
             controlsInputText.color = ThemeTextAccentGold();
-            ConfigureRect(controlsInputText.rectTransform, new Vector2(-142f, 44f), new Vector2(1f, 0f), new Vector2(110f, 92f));
+            ConfigureRect(controlsInputText.rectTransform, new Vector2(-124f, 26f), new Vector2(1f, 0f), new Vector2(94f, 92f));
 
             if (controlsActionText == null)
             {
-                controlsActionText = CreateText("ControlsActionText", new Vector2(-28f, 44f), new Vector2(1f, 0f), TextAnchor.UpperLeft, 10, new Vector2(100f, 92f));
+                controlsActionText = CreateText("ControlsActionText", new Vector2(-22f, 26f), new Vector2(1f, 0f), TextAnchor.UpperLeft, BattleHudSmallFontSize, new Vector2(92f, 92f));
             }
-            controlsActionText.fontSize = 10;
+            controlsActionText.fontSize = BattleHudSmallFontSize;
             controlsActionText.alignment = TextAnchor.UpperLeft;
             controlsActionText.color = ThemeTextPrimary();
-            ConfigureRect(controlsActionText.rectTransform, new Vector2(-28f, 44f), new Vector2(1f, 0f), new Vector2(100f, 92f));
+            ConfigureRect(controlsActionText.rectTransform, new Vector2(-22f, 26f), new Vector2(1f, 0f), new Vector2(92f, 92f));
 
             if (battleLogText == null)
             {
-                battleLogText = CreateText("BattleLogText", new Vector2(-28f, -42f), new Vector2(1f, 0.5f), TextAnchor.UpperLeft, 13, new Vector2(222f, 114f));
+                battleLogText = CreateText("BattleLogText", new Vector2(-22f, -30f), new Vector2(1f, 0.5f), TextAnchor.UpperLeft, BattleHudBodyFontSize, new Vector2(194f, 106f));
                 RefreshBattleLogText();
             }
-            battleLogText.fontSize = 13;
+            battleLogText.fontSize = BattleHudBodyFontSize;
             battleLogText.alignment = TextAnchor.UpperLeft;
             battleLogText.color = ThemeTextPrimary();
-            ConfigureRect(battleLogText.rectTransform, new Vector2(-28f, -42f), new Vector2(1f, 0.5f), new Vector2(222f, 114f));
+            ConfigureRect(battleLogText.rectTransform, new Vector2(-22f, -30f), new Vector2(1f, 0.5f), new Vector2(194f, 106f));
 
             if (attackPreviewText == null)
             {
-                attackPreviewText = CreateText("AttackPreviewText", new Vector2(0f, 30f), new Vector2(0.5f, 0f), TextAnchor.MiddleCenter, 16, new Vector2(420f, 78f));
+                attackPreviewText = CreateText("AttackPreviewText", new Vector2(0f, 26f), new Vector2(0.5f, 0f), TextAnchor.MiddleCenter, 14, new Vector2(360f, 56f));
                 attackPreviewText.enabled = false;
             }
-            attackPreviewText.fontSize = 16;
+            attackPreviewText.fontSize = 14;
             attackPreviewText.color = ThemeTextPrimary();
-            ConfigureRect(attackPreviewText.rectTransform, new Vector2(0f, 30f), new Vector2(0.5f, 0f), new Vector2(420f, 78f));
+            ConfigureRect(attackPreviewText.rectTransform, new Vector2(0f, 26f), new Vector2(0.5f, 0f), new Vector2(360f, 56f));
 
             if (resultText == null)
             {
@@ -744,18 +836,21 @@ namespace SRPG.UI
         {
             if (battleBackdropImage == null)
             {
-                battleBackdropImage = CreatePanel("BattleBackdrop", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(1280f, 720f), new Color(0.005f, 0.012f, 0.028f, 0.34f));
+                battleBackdropImage = CreatePanel("BattleBackdrop", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(1280f, 720f), new Color(0.005f, 0.012f, 0.028f, 0.22f));
                 battleBackdropImage.transform.SetAsFirstSibling();
             }
+            battleBackdropImage.color = new Color(0.005f, 0.012f, 0.028f, 0.22f);
 
-            EnsurePanelPair(ref battleStageFrame, ref battleStagePanel, "BattleStage", new Vector2(152f, -88f), new Vector2(152f, -88f), new Vector2(0f, 1f), 280f, 142f, 6f);
-            EnsurePanelPair(ref battleObjectiveFrame, ref battleObjectivePanel, "BattleObjective", new Vector2(152f, -270f), new Vector2(152f, -270f), new Vector2(0f, 1f), 280f, 196f, 6f);
-            EnsurePanelPair(ref battleSelectedFrame, ref battleSelectedPanel, "BattleSelected", new Vector2(152f, 116f), new Vector2(152f, 116f), new Vector2(0f, 0f), 280f, 172f, 6f);
-            EnsurePanelPair(ref battleThreatFrame, ref battleThreatPanel, "BattleThreat", new Vector2(-134f, -38f), new Vector2(-134f, -38f), new Vector2(1f, 1f), 244f, 44f, 5f);
-            EnsurePanelPair(ref battleLogFrame, ref battleLogPanel, "BattleLog", new Vector2(-134f, -42f), new Vector2(-134f, -42f), new Vector2(1f, 0.5f), 274f, 154f, 6f);
-            EnsurePanelPair(ref battleControlsFrame, ref battleControlsPanel, "BattleControls", new Vector2(-134f, 118f), new Vector2(-134f, 118f), new Vector2(1f, 0f), 274f, 178f, 6f);
-            EnsurePanelPair(ref battleAttackPreviewFrame, ref battleAttackPreviewPanel, "BattleAttackPreview", new Vector2(0f, 76f), new Vector2(0f, 76f), new Vector2(0.5f, 0f), 462f, 92f, 6f);
+            EnsurePanelPair(ref battleStageFrame, ref battleStagePanel, "BattleStage", new Vector2(126f, -70f), new Vector2(126f, -70f), new Vector2(0f, 1f), 228f, 116f, BattleHudInset);
+            EnsurePanelPair(ref battleObjectiveFrame, ref battleObjectivePanel, "BattleObjective", new Vector2(126f, -216f), new Vector2(126f, -216f), new Vector2(0f, 1f), 228f, 164f, BattleHudInset);
+            EnsurePanelPair(ref battleSelectedFrame, ref battleSelectedPanel, "BattleSelected", new Vector2(126f, 86f), new Vector2(126f, 86f), new Vector2(0f, 0f), 228f, 140f, BattleHudInset);
+            EnsurePanelPair(ref battleThreatFrame, ref battleThreatPanel, "BattleThreat", new Vector2(-112f, -28f), new Vector2(-112f, -28f), new Vector2(1f, 1f), 208f, 36f, BattleHudInset);
+            EnsurePanelPair(ref battleLogFrame, ref battleLogPanel, "BattleLog", new Vector2(-124f, -30f), new Vector2(-124f, -30f), new Vector2(1f, 0.5f), 228f, 132f, BattleHudInset);
+            EnsurePanelPair(ref battleControlsFrame, ref battleControlsPanel, "BattleControls", new Vector2(-124f, 88f), new Vector2(-124f, 88f), new Vector2(1f, 0f), 228f, 148f, BattleHudInset);
+            EnsurePanelPair(ref battleAttackPreviewFrame, ref battleAttackPreviewPanel, "BattleAttackPreview", new Vector2(0f, 58f), new Vector2(0f, 58f), new Vector2(0.5f, 0f), 396f, 72f, BattleHudInset);
             EnsurePanelPair(ref battleResultFrame, ref battleResultPanel, "BattleResult", Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), 820f, 400f, 7f);
+            battleResultFrame.color = new Color(0.74f, 0.52f, 0.22f, 0.82f);
+            battleResultPanel.color = new Color(0.024f, 0.04f, 0.064f, 0.86f);
 
             SetAttackPreviewPanelVisible(false);
             SetResultPanelVisible(false);
@@ -769,7 +864,7 @@ namespace SRPG.UI
             {
                 frame = CreatePanel($"{baseName}Frame", framePosition, anchor, frameSize, ThemePanelBorderGold());
             }
-            frame.color = new Color(0.74f, 0.52f, 0.22f, 0.82f);
+            frame.color = new Color(0.74f, 0.52f, 0.22f, 0.72f);
             ConfigurePanelRect(frame.rectTransform, framePosition, anchor, frameSize);
 
             if (panel == null)
@@ -781,7 +876,7 @@ namespace SRPG.UI
                     panelSize,
                     ThemePanelDark());
             }
-            panel.color = new Color(0.024f, 0.04f, 0.064f, 0.82f);
+            panel.color = new Color(0.024f, 0.04f, 0.064f, 0.74f);
             ConfigurePanelRect(panel.rectTransform, panelPosition, anchor, panelSize);
         }
 

@@ -6,6 +6,7 @@ using SRPG.Grid;
 using SRPG.Stage;
 using SRPG.UI;
 using SRPG.Units;
+using SRPG.Visual;
 using UnityEngine;
 
 namespace SRPG.Battle
@@ -17,6 +18,7 @@ namespace SRPG.Battle
 
         private GridManager gridManager;
         private TurnManager turnManager;
+        private EnemyIntentPreview enemyIntentPreview;
         private Unit selectedUnit;
         private bool showEnemyThreats;
         private bool selectedUnitHasMovedThisAction;
@@ -41,6 +43,7 @@ namespace SRPG.Battle
             canUndoSelectedUnitMove = false;
             isAnimating = false;
             showEnemyThreats = false;
+            enemyIntentPreview?.Clear();
             currentMoveTiles.Clear();
             currentAttackTiles.Clear();
 
@@ -144,6 +147,11 @@ namespace SRPG.Battle
             }
 
             Instance = this;
+            enemyIntentPreview = GetComponent<EnemyIntentPreview>();
+            if (enemyIntentPreview == null)
+            {
+                enemyIntentPreview = gameObject.AddComponent<EnemyIntentPreview>();
+            }
         }
 
         private void Start()
@@ -199,10 +207,46 @@ namespace SRPG.Battle
                 ToggleEnemyThreatHighlights();
             }
 
-            if (showEnemyThreats && CanPlayerAct())
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                RefreshEnemyThreatHighlights();
+                TryEndPlayerTurn();
             }
+
+            if (showEnemyThreats)
+            {
+                if (CanPlayerAct())
+                {
+                    RefreshEnemyThreatHighlights();
+                }
+                else
+                {
+                    enemyIntentPreview?.Clear();
+                }
+            }
+        }
+
+        private void TryEndPlayerTurn()
+        {
+            if (isAnimating || IsMenuOpen() || IsBattleEnded())
+            {
+                return;
+            }
+
+            var manager = GetTurnManager();
+            if (manager == null || !manager.IsPlayerTurn)
+            {
+                return;
+            }
+
+            if (!manager.TryEndPlayerTurn())
+            {
+                AudioManager.Instance?.PlayCancelSe();
+                return;
+            }
+
+            AudioManager.Instance?.PlayConfirmSe();
+            gridManager?.ClearEnemyThreatHighlights();
+            enemyIntentPreview?.Clear();
         }
 
         private void OnDestroy()
@@ -430,6 +474,7 @@ namespace SRPG.Battle
             gridManager.ClearEnemyThreatHighlights();
             if (!showEnemyThreats)
             {
+                enemyIntentPreview?.Clear();
                 return;
             }
 
@@ -463,6 +508,8 @@ namespace SRPG.Battle
             {
                 tile.SetEnemyMoveThreatHighlight(true);
             }
+
+            enemyIntentPreview?.Refresh(gridManager, selectedEnemy);
         }
 
         private void HandleUnitRegistered(Unit unit)
@@ -587,8 +634,17 @@ namespace SRPG.Battle
             }
 
             camera.orthographic = true;
-            camera.orthographicSize = 5f;
-            camera.transform.position = new Vector3(3.5f, 3.5f, -10f);
+            var grid = FindAnyObjectByType<GridManager>();
+            var width = grid != null ? grid.Width : 8;
+            var height = grid != null ? grid.Height : 8;
+            var cellSize = grid != null ? grid.CellSize : 1f;
+            var boardWidth = BoardProjection.GetBoardWidth(width, height, cellSize);
+            var boardHeight = BoardProjection.GetBoardHeight(width, height, cellSize);
+            var screenAspect = Screen.height > 0 ? (float)Screen.width / Screen.height : 16f / 9f;
+            var verticalSize = boardHeight * 0.5f + 0.75f;
+            var horizontalSize = boardWidth * 0.5f / screenAspect + 0.75f;
+            camera.orthographicSize = verticalSize > horizontalSize ? verticalSize : horizontalSize;
+            camera.transform.position = BoardProjection.GetBoardCenter(width, height, cellSize) + new Vector3(0f, -0.08f, -10f);
             var clearFlagsProperty = typeof(Camera).GetProperty("clearFlags");
             if (clearFlagsProperty != null)
             {

@@ -1,5 +1,6 @@
 using System;
 using SRPG.Units;
+using SRPG.Visual;
 using UnityEngine;
 
 namespace SRPG.Grid
@@ -12,25 +13,29 @@ namespace SRPG.Grid
     }
 
     [RequireComponent(typeof(SpriteRenderer))]
-    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(PolygonCollider2D))]
     public class Tile : MonoBehaviour
     {
+        private static readonly Vector2[] DiamondColliderPoints =
+        {
+            new Vector2(0f, 0.25f),
+            new Vector2(0.5f, 0f),
+            new Vector2(0f, -0.25f),
+            new Vector2(-0.5f, 0f)
+        };
+
         [SerializeField] private Color baseColor = new Color(0.42f, 0.5f, 0.58f, 1f);
         [SerializeField] private Color normalTerrainColor = new Color(0.42f, 0.5f, 0.58f, 1f);
         [SerializeField] private Color obstacleTerrainColor = new Color(0.28f, 0.27f, 0.27f, 1f);
         [SerializeField] private Color goalTerrainColor = new Color(0.04f, 0.74f, 0.6f, 1f);
-        [SerializeField] private Color moveHighlightedColor = new Color(0.12f, 0.52f, 1f, 0.46f);
+        [SerializeField] private Color moveHighlightedColor = new Color(0.16f, 0.62f, 1f, 0.42f);
         [SerializeField] private Color attackHighlightedColor = new Color(1f, 0.18f, 0.12f, 0.42f);
         [SerializeField] private Color enemyMoveThreatHighlightedColor = new Color(0.36f, 0.13f, 0.72f, 0.48f);
-        [SerializeField] private Color enemyAttackThreatHighlightedColor = new Color(0.95f, 0.28f, 0.9f, 0.4f);
+        [SerializeField] private Color enemyAttackThreatHighlightedColor = new Color(1f, 0.28f, 0.12f, 0.72f);
         [SerializeField] private Color guardianReactionHighlightedColor = new Color(1f, 0.72f, 0.18f, 0.36f);
 
-        private static Sprite stoneTileSprite;
-        private static Sprite highlightSprite;
-        private static Sprite obstacleDetailSprite;
-        private static Sprite goalRuneSprite;
-        private static Sprite goalHaloSprite;
         private SpriteRenderer spriteRenderer;
+        private SpriteRenderer tileSideRenderer;
         private SpriteRenderer highlightRenderer;
         private SpriteRenderer terrainDetailRenderer;
         private SpriteRenderer goalRuneRenderer;
@@ -65,13 +70,30 @@ namespace SRPG.Grid
             normalTerrainColor = color;
 
             spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = GetStoneTileSprite();
+            spriteRenderer.sprite = TileVisualFactory.GetStoneTileSprite();
             spriteRenderer.color = baseColor;
-            spriteRenderer.sortingOrder = 0;
             EnsureVisualLayers();
+            SetVisualSortingOrder(BoardProjection.GetTileSortingOrder(coordinates));
 
-            var boxCollider = GetComponent<BoxCollider2D>();
-            boxCollider.size = Vector2.one;
+            var polygonCollider = GetComponent<PolygonCollider2D>();
+            polygonCollider.pathCount = 1;
+            polygonCollider.SetPath(0, DiamondColliderPoints);
+        }
+
+        public void SetVisualSortingOrder(int tileSortingOrder)
+        {
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = GetComponent<SpriteRenderer>();
+            }
+
+            EnsureVisualLayers();
+            tileSideRenderer.sortingOrder = tileSortingOrder - 1;
+            spriteRenderer.sortingOrder = tileSortingOrder;
+            terrainDetailRenderer.sortingOrder = tileSortingOrder + 1;
+            goalHaloRenderer.sortingOrder = tileSortingOrder + 1;
+            goalRuneRenderer.sortingOrder = tileSortingOrder + 2;
+            highlightRenderer.sortingOrder = tileSortingOrder + 3;
         }
 
         public void SetOccupant(Unit unit)
@@ -177,15 +199,21 @@ namespace SRPG.Grid
                 return;
             }
 
+            if (isMoveHighlighted && isEnemyAttackThreatHighlighted)
+            {
+                SetHighlight(Color.white, TileVisualFactory.GetMoveThreatOverlapSprite());
+                return;
+            }
+
             if (isMoveHighlighted)
             {
-                SetHighlight(moveHighlightedColor);
+                SetHighlight(moveHighlightedColor, TileVisualFactory.GetMoveHighlightSprite());
                 return;
             }
 
             if (isEnemyAttackThreatHighlighted)
             {
-                SetHighlight(enemyAttackThreatHighlightedColor);
+                SetHighlight(enemyAttackThreatHighlightedColor, TileVisualFactory.GetEnemyAttackThreatSprite());
                 return;
             }
 
@@ -219,36 +247,42 @@ namespace SRPG.Grid
 
         private void EnsureVisualLayers()
         {
+            if (tileSideRenderer == null)
+            {
+                tileSideRenderer = CreateChildRenderer("TileSide", TileVisualFactory.GetTileSideSprite(), -1, Vector3.one, new Vector3(0f, -0.06f, 0.02f));
+                tileSideRenderer.color = new Color(0.13f, 0.18f, 0.24f, 0.96f);
+            }
+
             if (highlightRenderer == null)
             {
-                highlightRenderer = CreateChildRenderer("HighlightOverlay", GetHighlightSprite(), 3, Vector3.one);
+                highlightRenderer = CreateChildRenderer("HighlightOverlay", TileVisualFactory.GetHighlightSprite(), 3, Vector3.one, new Vector3(0f, 0f, -0.02f));
                 highlightRenderer.color = new Color(0f, 0f, 0f, 0f);
             }
 
             if (terrainDetailRenderer == null)
             {
-                terrainDetailRenderer = CreateChildRenderer("TerrainDetail", GetObstacleDetailSprite(), 1, Vector3.one * 0.82f);
+                terrainDetailRenderer = CreateChildRenderer("TerrainDetail", TileVisualFactory.GetObstacleDetailSprite(), 1, Vector3.one * 0.9f, new Vector3(0f, 0.06f, -0.03f));
                 terrainDetailRenderer.color = new Color(0f, 0f, 0f, 0f);
             }
 
             if (goalRuneRenderer == null)
             {
-                goalRuneRenderer = CreateChildRenderer("GoalRune", GetGoalRuneSprite(), 2, Vector3.one * 0.76f);
+                goalRuneRenderer = CreateChildRenderer("GoalRune", TileVisualFactory.GetGoalRuneSprite(), 2, Vector3.one * 0.82f, new Vector3(0f, 0.02f, -0.03f));
                 goalRuneRenderer.color = new Color(0f, 0f, 0f, 0f);
             }
 
             if (goalHaloRenderer == null)
             {
-                goalHaloRenderer = CreateChildRenderer("GoalHalo", GetGoalHaloSprite(), 1, Vector3.one * 1.04f);
+                goalHaloRenderer = CreateChildRenderer("GoalHalo", TileVisualFactory.GetGoalHaloSprite(), 1, Vector3.one, new Vector3(0f, 0.02f, -0.02f));
                 goalHaloRenderer.color = new Color(0f, 0f, 0f, 0f);
             }
         }
 
-        private SpriteRenderer CreateChildRenderer(string objectName, Sprite sprite, int sortingOrder, Vector3 localScale)
+        private SpriteRenderer CreateChildRenderer(string objectName, Sprite sprite, int sortingOrder, Vector3 localScale, Vector3 localPosition)
         {
             var child = new GameObject(objectName);
             child.transform.SetParent(transform, false);
-            child.transform.localPosition = new Vector3(0f, 0f, -0.02f);
+            child.transform.localPosition = localPosition;
             child.transform.localScale = localScale;
 
             var renderer = child.AddComponent<SpriteRenderer>();
@@ -259,14 +293,21 @@ namespace SRPG.Grid
 
         private void RefreshTerrainDetail()
         {
+            tileSideRenderer.color = GetTerrainSideColor(terrainType);
+            tileSideRenderer.transform.localPosition = terrainType == TileTerrainType.Obstacle
+                ? new Vector3(0f, -0.1f, 0.02f)
+                : new Vector3(0f, -0.06f, 0.02f);
+            terrainDetailRenderer.transform.localPosition = terrainType == TileTerrainType.Obstacle
+                ? new Vector3(0f, 0.1f, -0.03f)
+                : new Vector3(0f, 0.06f, -0.03f);
             terrainDetailRenderer.color = new Color(0f, 0f, 0f, 0f);
             goalRuneRenderer.color = new Color(0f, 0f, 0f, 0f);
             goalHaloRenderer.color = new Color(0f, 0f, 0f, 0f);
 
             if (terrainType == TileTerrainType.Obstacle)
             {
-                terrainDetailRenderer.sprite = GetObstacleDetailSprite();
-                terrainDetailRenderer.color = new Color(0.74f, 0.69f, 0.56f, 0.94f);
+                terrainDetailRenderer.sprite = TileVisualFactory.GetObstacleDetailSprite();
+                terrainDetailRenderer.color = new Color(0.86f, 0.77f, 0.58f, 0.98f);
             }
 
             if (terrainType == TileTerrainType.Goal)
@@ -276,210 +317,27 @@ namespace SRPG.Grid
             }
         }
 
-        private void SetHighlight(Color color)
+        private static Color GetTerrainSideColor(TileTerrainType value)
+        {
+            switch (value)
+            {
+                case TileTerrainType.Obstacle:
+                    return new Color(0.12f, 0.09f, 0.07f, 0.98f);
+                case TileTerrainType.Goal:
+                    return new Color(0.02f, 0.28f, 0.25f, 0.98f);
+                default:
+                    return new Color(0.12f, 0.18f, 0.24f, 0.96f);
+            }
+        }
+
+        private void SetHighlight(Color color, Sprite sprite = null)
         {
             if (highlightRenderer != null)
             {
+                highlightRenderer.sprite = sprite != null ? sprite : TileVisualFactory.GetHighlightSprite();
                 highlightRenderer.color = color;
             }
         }
 
-        private static Sprite GetStoneTileSprite()
-        {
-            if (stoneTileSprite != null)
-            {
-                return stoneTileSprite;
-            }
-
-            const int size = 16;
-            var texture = new Texture2D(size, size);
-            texture.filterMode = FilterMode.Point;
-
-            for (var y = 0; y < size; y++)
-            {
-                for (var x = 0; x < size; x++)
-                {
-                    var shade = 0.82f + y * 0.01f;
-                    if (x == 0 || y == 0 || x == size - 1 || y == size - 1)
-                    {
-                        shade = 0.5f;
-                    }
-                    else if (x == 1 || y == 1)
-                    {
-                        shade = 0.62f;
-                    }
-                    else if (x == 2 || y == size - 3 || y >= size - 4 && x > 2 && x < size - 3)
-                    {
-                        shade = 0.98f;
-                    }
-                    else if ((x + y * 3) % 7 == 0)
-                    {
-                        shade = 0.78f;
-                    }
-                    else if (x > 4 && x < 11 && y > 4 && y < 11)
-                    {
-                        shade += 0.06f;
-                    }
-
-                    texture.SetPixel(x, y, new Color(shade, shade, shade, 1f));
-                }
-            }
-
-            texture.Apply();
-            stoneTileSprite = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), size);
-            return stoneTileSprite;
-        }
-
-        private static Sprite GetHighlightSprite()
-        {
-            if (highlightSprite != null)
-            {
-                return highlightSprite;
-            }
-
-            const int size = 16;
-            var texture = new Texture2D(size, size);
-            texture.filterMode = FilterMode.Point;
-            var transparent = new Color(1f, 1f, 1f, 0.22f);
-            var edge = new Color(1f, 1f, 1f, 0.78f);
-
-            for (var y = 0; y < size; y++)
-            {
-                for (var x = 0; x < size; x++)
-                {
-                    texture.SetPixel(x, y, x <= 1 || y <= 1 || x >= size - 2 || y >= size - 2 ? edge : transparent);
-                }
-            }
-
-            texture.Apply();
-            highlightSprite = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), size);
-            return highlightSprite;
-        }
-
-        private static Sprite GetObstacleDetailSprite()
-        {
-            if (obstacleDetailSprite != null)
-            {
-                return obstacleDetailSprite;
-            }
-
-            const int size = 16;
-            var texture = new Texture2D(size, size);
-            texture.filterMode = FilterMode.Point;
-            var transparent = new Color(0f, 0f, 0f, 0f);
-            var rubble = new Color(1f, 1f, 1f, 0.8f);
-
-            for (var y = 0; y < size; y++)
-            {
-                for (var x = 0; x < size; x++)
-                {
-                    texture.SetPixel(x, y, transparent);
-                }
-            }
-
-            FillRect(texture, 3, 2, 6, 6, rubble);
-            FillRect(texture, 8, 3, 12, 8, rubble);
-            FillRect(texture, 5, 8, 10, 13, rubble);
-            FillRect(texture, 2, 10, 4, 12, new Color(0.75f, 0.72f, 0.64f, 0.72f));
-            SetPixel(texture, 12, 11, rubble);
-            SetPixel(texture, 13, 12, rubble);
-            SetPixel(texture, 4, 6, new Color(1f, 0.95f, 0.78f, 0.92f));
-            SetPixel(texture, 10, 4, new Color(1f, 0.95f, 0.78f, 0.92f));
-            SetPixel(texture, 7, 11, new Color(1f, 0.95f, 0.78f, 0.92f));
-            texture.Apply();
-
-            obstacleDetailSprite = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), size);
-            return obstacleDetailSprite;
-        }
-
-        private static Sprite GetGoalRuneSprite()
-        {
-            if (goalRuneSprite != null)
-            {
-                return goalRuneSprite;
-            }
-
-            const int size = 16;
-            var texture = new Texture2D(size, size);
-            texture.filterMode = FilterMode.Point;
-            var transparent = new Color(0f, 0f, 0f, 0f);
-            var rune = new Color(1f, 1f, 1f, 0.95f);
-
-            for (var y = 0; y < size; y++)
-            {
-                for (var x = 0; x < size; x++)
-                {
-                    texture.SetPixel(x, y, transparent);
-                }
-            }
-
-            for (var i = 0; i < 6; i++)
-            {
-                SetPixel(texture, 8, 3 + i, rune);
-                SetPixel(texture, 8, 13 - i, rune);
-                SetPixel(texture, 3 + i, 8, rune);
-                SetPixel(texture, 13 - i, 8, rune);
-            }
-
-            SetPixel(texture, 7, 7, rune);
-            SetPixel(texture, 8, 7, rune);
-            SetPixel(texture, 7, 8, rune);
-            SetPixel(texture, 8, 8, rune);
-            texture.Apply();
-
-            goalRuneSprite = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), size);
-            return goalRuneSprite;
-        }
-
-        private static Sprite GetGoalHaloSprite()
-        {
-            if (goalHaloSprite != null)
-            {
-                return goalHaloSprite;
-            }
-
-            const int size = 18;
-            var texture = new Texture2D(size, size);
-            texture.filterMode = FilterMode.Point;
-            var transparent = new Color(0f, 0f, 0f, 0f);
-            var halo = new Color(1f, 1f, 1f, 0.72f);
-            var center = (size - 1) * 0.5f;
-
-            for (var y = 0; y < size; y++)
-            {
-                for (var x = 0; x < size; x++)
-                {
-                    var dx = x - center;
-                    var dy = y - center;
-                    var distance = (float)System.Math.Sqrt(dx * dx + dy * dy);
-                    texture.SetPixel(x, y, distance < 7.5f ? halo : transparent);
-                }
-            }
-
-            texture.Apply();
-            goalHaloSprite = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), size);
-            return goalHaloSprite;
-        }
-
-        private static void FillRect(Texture2D texture, int minX, int minY, int maxX, int maxY, Color color)
-        {
-            for (var y = minY; y <= maxY; y++)
-            {
-                for (var x = minX; x <= maxX; x++)
-                {
-                    SetPixel(texture, x, y, color);
-                }
-            }
-        }
-
-        private static void SetPixel(Texture2D texture, int x, int y, Color color)
-        {
-            if (x < 0 || x >= 16 || y < 0 || y >= 16)
-            {
-                return;
-            }
-
-            texture.SetPixel(x, y, color);
-        }
     }
 }

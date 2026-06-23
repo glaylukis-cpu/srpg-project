@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using SRPG.Stage;
 using SRPG.Units;
+using SRPG.Visual;
 using UnityEngine;
 
 namespace SRPG.Grid
@@ -14,7 +15,7 @@ namespace SRPG.Grid
         [SerializeField] private float cellSize = 1f;
         [SerializeField] private Color lightTileColor = new Color(0.42f, 0.5f, 0.58f, 1f);
         [SerializeField] private Color darkTileColor = new Color(0.35f, 0.43f, 0.51f, 1f);
-        [SerializeField] private Color boardFrameColor = new Color(0.68f, 0.46f, 0.18f, 1f);
+        [SerializeField] private Color boardFrameColor = new Color(0.68f, 0.46f, 0.18f, 0.48f);
         [SerializeField] private Color boardBaseColor = new Color(0.018f, 0.04f, 0.065f, 1f);
         [SerializeField] private Color boardBackdropColor = new Color(0.005f, 0.012f, 0.026f, 1f);
         [SerializeField] private Color boardShadowColor = new Color(0f, 0f, 0f, 0.45f);
@@ -52,13 +53,14 @@ namespace SRPG.Grid
                     var tileObject = new GameObject($"Tile_{x}_{y}");
                     tileObject.transform.SetParent(transform);
                     tileObject.transform.position = GridToWorld(coordinates);
-                    tileObject.transform.localScale = Vector3.one * cellSize * 0.96f;
+                    tileObject.transform.localScale = BoardProjection.GetTileScale(cellSize);
 
                     var renderer = tileObject.AddComponent<SpriteRenderer>();
                     renderer.sprite = squareSprite;
 
                     var tile = tileObject.AddComponent<Tile>();
                     tile.Initialize(coordinates, GetTileColor(x, y));
+                    tile.SetVisualSortingOrder(BoardProjection.GetTileSortingOrder(coordinates));
                     tile.Clicked += HandleTileClicked;
 
                     tiles.Add(coordinates, tile);
@@ -106,7 +108,7 @@ namespace SRPG.Grid
 
         public Vector3 GridToWorld(Vector2Int coordinates)
         {
-            return new Vector3(coordinates.x * cellSize, coordinates.y * cellSize, 0f);
+            return BoardProjection.GridToIsoWorld(coordinates, cellSize);
         }
 
         public bool TryPlaceUnit(Unit unit, Vector2Int destination)
@@ -130,7 +132,8 @@ namespace SRPG.Grid
 
             destinationTile.SetOccupant(unit);
             unit.SetGridPositionInternal(destination);
-            unit.transform.position = GridToWorld(destination) + new Vector3(0f, 0f, -0.1f);
+            unit.transform.position = BoardProjection.GetUnitWorldPosition(destination, cellSize);
+            unit.SetVisualSortingOrder(BoardProjection.GetUnitSortingOrder(destination));
 
             if (!units.Contains(unit))
             {
@@ -625,37 +628,39 @@ namespace SRPG.Grid
 
         private void CreateBoardFrame()
         {
-            var center = new Vector3((width - 1) * cellSize * 0.5f, (height - 1) * cellSize * 0.5f, 0.18f);
+            var center = BoardProjection.GetBoardCenter(width, height, cellSize) + new Vector3(0f, 0f, 0.18f);
+            var projectedWidth = BoardProjection.GetBoardWidth(width, height, cellSize);
+            var projectedHeight = BoardProjection.GetBoardHeight(width, height, cellSize);
 
-            CreateWorldPanel("BattleWorldBackdrop", center + new Vector3(0f, 0f, 0.08f), new Vector3(width * cellSize + 8.4f, height * cellSize + 4.2f, 1f), boardBackdropColor, -10);
-            CreateWorldPanel("BattleDistantWall", center + new Vector3(0f, 1.15f, 0.07f), new Vector3(width * cellSize + 6.8f, 1.8f, 1f), new Color(0.02f, 0.055f, 0.08f, 0.72f), -9);
-            CreateWorldPanel("BattleLowerFog", center + new Vector3(0f, -2.9f, 0.06f), new Vector3(width * cellSize + 8f, 1.45f, 1f), battleMistColor, -8);
-            CreateWorldPanel("BattleUpperLight", center + new Vector3(-1.2f, 2.8f, 0.05f), new Vector3(width * cellSize + 3f, 0.72f, 1f), battleLightColor, -7);
-            CreateWorldPanel("BattleLeftPillar", center + new Vector3(-5.6f, 0.45f, 0.04f), new Vector3(0.44f, height * cellSize + 2.4f, 1f), new Color(0f, 0f, 0f, 0.28f), -6);
-            CreateWorldPanel("BattleRightPillar", center + new Vector3(5.6f, 0.05f, 0.04f), new Vector3(0.52f, height * cellSize + 2.1f, 1f), new Color(0f, 0f, 0f, 0.24f), -6);
-            CreateWorldPanel("BoardShadow", center + new Vector3(0.18f, -0.22f, 0.08f), new Vector3(width * cellSize + 1.18f, height * cellSize + 1.12f, 1f), boardShadowColor, -5);
-            CreateWorldPanel("BoardFrontLip", center + new Vector3(0f, -4.28f, 0.05f), new Vector3(width * cellSize + 0.86f, 0.34f, 1f), new Color(0.33f, 0.22f, 0.09f, 0.96f), -4);
+            CreateWorldPanel("BattleWorldBackdrop", center + new Vector3(0f, 0f, 0.08f), new Vector3(projectedWidth + 8.4f, projectedHeight + 4.2f, 1f), boardBackdropColor, -1000);
+            CreateWorldPanel("BattleDistantWall", center + new Vector3(0f, projectedHeight * 0.22f, 0.07f), new Vector3(projectedWidth + 6.8f, 1.8f, 1f), new Color(0.02f, 0.055f, 0.08f, 0.72f), -999);
+            CreateWorldPanel("BattleLowerFog", center + new Vector3(0f, -projectedHeight * 0.44f, 0.06f), new Vector3(projectedWidth + 8f, 1.45f, 1f), battleMistColor, -998);
+            CreateWorldPanel("BattleUpperLight", center + new Vector3(-1.2f, projectedHeight * 0.43f, 0.05f), new Vector3(projectedWidth + 3f, 0.72f, 1f), battleLightColor, -997);
+            CreateWorldPanel("BattleLeftPillar", center + new Vector3(-projectedWidth * 0.5f - 1.2f, 0.45f, 0.04f), new Vector3(0.44f, projectedHeight + 2.4f, 1f), new Color(0f, 0f, 0f, 0.28f), -996);
+            CreateWorldPanel("BattleRightPillar", center + new Vector3(projectedWidth * 0.5f + 1.2f, 0.05f, 0.04f), new Vector3(0.52f, projectedHeight + 2.1f, 1f), new Color(0f, 0f, 0f, 0.24f), -996);
+            CreateWorldPanel("BoardShadow", center + new Vector3(0.18f, -0.22f, 0.08f), new Vector3(projectedWidth + 1.18f, projectedHeight + 1.12f, 1f), boardShadowColor, -995);
+            CreateWorldPanel("BoardFrontLip", center + new Vector3(0f, -projectedHeight * 0.5f - 0.14f, 0.05f), new Vector3(projectedWidth + 0.36f, 0.16f, 1f), new Color(0.33f, 0.22f, 0.09f, 0.42f), -994);
 
             var frameObject = new GameObject("BoardFrame");
             frameObject.transform.SetParent(transform);
             frameObject.transform.position = center;
-            frameObject.transform.localScale = new Vector3(width * cellSize + 0.9f, height * cellSize + 0.9f, 1f);
+            frameObject.transform.localScale = new Vector3(projectedWidth + 0.56f, projectedHeight + 0.56f, 1f);
             var frameRenderer = frameObject.AddComponent<SpriteRenderer>();
             frameRenderer.sprite = squareSprite;
             frameRenderer.color = boardFrameColor;
-            frameRenderer.sortingOrder = -4;
+            frameRenderer.sortingOrder = -994;
 
             var baseObject = new GameObject("BoardBase");
             baseObject.transform.SetParent(transform);
             baseObject.transform.position = center + new Vector3(0f, 0f, -0.01f);
-            baseObject.transform.localScale = new Vector3(width * cellSize + 0.42f, height * cellSize + 0.42f, 1f);
+            baseObject.transform.localScale = new Vector3(projectedWidth + 0.42f, projectedHeight + 0.42f, 1f);
             var baseRenderer = baseObject.AddComponent<SpriteRenderer>();
             baseRenderer.sprite = squareSprite;
             baseRenderer.color = boardBaseColor;
-            baseRenderer.sortingOrder = -3;
+            baseRenderer.sortingOrder = -993;
 
-            CreateWorldPanel("BoardInnerLight", center + new Vector3(-0.7f, 0.8f, -0.02f), new Vector3(width * cellSize - 0.6f, height * cellSize - 0.6f, 1f), new Color(0.55f, 0.62f, 0.72f, 0.08f), -2);
-            CreateWorldPanel("BoardStageLight", center + new Vector3(-0.28f, 0.36f, -0.08f), new Vector3(width * cellSize - 1.2f, height * cellSize - 1.35f, 1f), new Color(0.9f, 0.72f, 0.38f, 0.08f), 4);
+            CreateWorldPanel("BoardInnerLight", center + new Vector3(-0.7f, 0.8f, -0.02f), new Vector3(projectedWidth - 0.6f, projectedHeight - 0.6f, 1f), new Color(0.55f, 0.62f, 0.72f, 0.08f), -992);
+            CreateWorldPanel("BoardStageLight", center + new Vector3(-0.28f, 0.36f, -0.08f), new Vector3(projectedWidth - 1.2f, projectedHeight - 1.35f, 1f), new Color(0.9f, 0.72f, 0.38f, 0.08f), -991);
         }
 
         private void CreateWorldPanel(string objectName, Vector3 position, Vector3 scale, Color color, int sortingOrder)
