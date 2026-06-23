@@ -247,6 +247,35 @@ namespace SRPG.Grid
             units.Remove(unit);
         }
 
+        internal void ClearOccupancyForTurnStartRestore()
+        {
+            foreach (var tile in tiles.Values)
+            {
+                tile.SetOccupant(null);
+            }
+
+            units.Clear();
+        }
+
+        internal bool RegisterRestoredUnit(Unit unit)
+        {
+            if (unit == null || unit.IsDead || !IsInsideGrid(unit.GridPosition))
+            {
+                return false;
+            }
+
+            var tile = GetTile(unit.GridPosition);
+            if (tile == null || !tile.IsWalkable || tile.IsOccupied)
+            {
+                return false;
+            }
+
+            tile.SetOccupant(unit);
+            units.Add(unit);
+            UnitRegistered?.Invoke(unit);
+            return true;
+        }
+
         public List<Tile> GetReachableTiles(Vector2Int start, int movePower)
         {
             var reachableTiles = new List<Tile>();

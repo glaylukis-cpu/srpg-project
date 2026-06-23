@@ -69,8 +69,9 @@ namespace UnityEngine
 
         public Transform transform { get; }
         public string tag { get; set; }
+        public bool activeSelf { get; private set; } = true;
 
-        public void SetActive(bool value) { }
+        public void SetActive(bool value) { activeSelf = value; }
 
         public T AddComponent<T>() where T : Component, new()
         {
@@ -334,12 +335,15 @@ namespace UnityEngine
         Alpha5,
         Alpha6,
         Backspace,
-        Escape
+        Escape,
+        LeftShift,
+        RightShift
     }
 
     public static class Input
     {
         public static bool GetKeyDown(KeyCode key) => false;
+        public static bool GetKey(KeyCode key) => false;
     }
 
     public static class Screen

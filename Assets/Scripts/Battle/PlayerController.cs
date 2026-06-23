@@ -194,6 +194,12 @@ namespace SRPG.Battle
 
             if (Input.GetKeyDown(KeyCode.U))
             {
+                if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                {
+                    TryRestorePlayerTurn();
+                    return;
+                }
+
                 TryUndoSelectedUnitMove();
             }
 
@@ -453,6 +459,43 @@ namespace SRPG.Battle
             ShowSelectedUnitRanges(unit);
             AudioManager.Instance?.PlayUndoSe();
             Debug.Log($"{unit.name} movement undone.");
+        }
+
+        private void TryRestorePlayerTurn()
+        {
+            if (isAnimating || IsMenuOpen() || IsBattleEnded())
+            {
+                return;
+            }
+
+            var manager = GetTurnManager();
+            if (manager == null || !manager.CanRestorePlayerTurn)
+            {
+                AudioManager.Instance?.PlayCancelSe();
+                return;
+            }
+
+            showEnemyThreats = false;
+            ClearSelection();
+            gridManager?.ClearAllHighlights();
+            enemyIntentPreview?.Clear();
+
+            if (!manager.TryRestorePlayerTurn())
+            {
+                AudioManager.Instance?.PlayCancelSe();
+                return;
+            }
+
+            selectedUnitHasMovedThisAction = false;
+            canUndoSelectedUnitMove = false;
+            currentMoveTiles.Clear();
+            currentAttackTiles.Clear();
+            BattleUI.Instance?.SetSelectedUnit(null);
+            BattleUI.Instance?.SetEnemyThreatVisible(false);
+            BattleUI.Instance?.ClearAttackPreview();
+            BattleUI.Instance?.SetTurnInfo(manager.TurnNumber, manager.CurrentPhase.ToString());
+            AudioManager.Instance?.PlayUndoSe();
+            Debug.Log($"Turn {manager.TurnNumber} restored to player turn start.");
         }
 
         private void ToggleEnemyThreatHighlights()

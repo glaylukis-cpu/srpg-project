@@ -277,6 +277,57 @@ namespace SRPG.Units
             gridPosition = coordinates;
         }
 
+        internal bool RestoreTurnStartState(
+            GridManager manager,
+            Vector2Int restoredGridPosition,
+            int restoredCurrentHp,
+            int expectedMaxHp,
+            bool restoredIsDead,
+            bool restoredIsActive,
+            bool restoredHasActed,
+            Faction expectedFaction,
+            UnitType expectedUnitType,
+            EnemyAIType expectedEnemyAIType)
+        {
+            if (manager == null
+                || maxHp != expectedMaxHp
+                || faction != expectedFaction
+                || unitType != expectedUnitType
+                || enemyAIType != expectedEnemyAIType)
+            {
+                return false;
+            }
+
+            gameObject.SetActive(true);
+            gridManager = manager;
+            gridPosition = restoredGridPosition;
+            currentHp = restoredCurrentHp;
+            isDead = restoredIsDead;
+            hasActed = restoredHasActed;
+            isSelected = false;
+
+            if (scaleEffectCoroutine != null)
+            {
+                StopCoroutine(scaleEffectCoroutine);
+                scaleEffectCoroutine = null;
+            }
+
+            if (colorEffectCoroutine != null)
+            {
+                StopCoroutine(colorEffectCoroutine);
+                colorEffectCoroutine = null;
+            }
+
+            transform.position = BoardProjection.GetUnitWorldPosition(restoredGridPosition, manager.CellSize);
+            transform.localScale = Vector3.one * manager.CellSize * 1.06f;
+            SetVisualSortingOrder(BoardProjection.GetUnitSortingOrder(restoredGridPosition));
+            SetHpDisplayVisible(!restoredIsDead);
+            UpdateHpDisplay();
+            RefreshColor();
+            gameObject.SetActive(restoredIsActive);
+            return true;
+        }
+
         public void UpdateHpDisplay()
         {
             if (hpText == null || isDead)
@@ -306,6 +357,24 @@ namespace SRPG.Units
             if (hpBackRenderer != null)
             {
                 hpBackRenderer.gameObject.SetActive(false);
+            }
+        }
+
+        private void SetHpDisplayVisible(bool visible)
+        {
+            if (hpText != null)
+            {
+                hpText.gameObject.SetActive(visible);
+            }
+
+            if (hpShadowText != null)
+            {
+                hpShadowText.gameObject.SetActive(visible);
+            }
+
+            if (hpBackRenderer != null)
+            {
+                hpBackRenderer.gameObject.SetActive(visible);
             }
         }
 

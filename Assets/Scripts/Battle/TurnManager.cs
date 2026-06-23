@@ -58,6 +58,7 @@ namespace SRPG.Battle
         private bool battleEnded;
         private BattleResult result = BattleResult.None;
         private StageData currentStageData;
+        private readonly TurnSnapshotService turnSnapshotService = new TurnSnapshotService();
 
         public static TurnManager Instance { get; private set; }
 
@@ -66,6 +67,10 @@ namespace SRPG.Battle
         public bool IsPlayerTurn => currentPhase == TurnPhase.PlayerTurn;
         public bool IsBattleEnded => battleEnded;
         public bool CanEndPlayerTurn => !battleEnded && IsPlayerTurn && HaveAllPlayerUnitsActed();
+        public bool CanRestorePlayerTurn => !battleEnded
+            && IsPlayerTurn
+            && EnsureGridManager()
+            && turnSnapshotService.CanRestore(currentStageData, gridManager, turnNumber);
         public BattleResult Result => result;
 
         public void SetStageData(StageData data)
@@ -214,13 +219,21 @@ namespace SRPG.Battle
                 return false;
             }
 
+            turnSnapshotService.Invalidate();
             BattleUI.Instance?.AddBattleLog("Player ended turn");
             BeginEnemyTurn();
             return true;
         }
 
+        public bool TryRestorePlayerTurn()
+        {
+            return CanRestorePlayerTurn
+                && turnSnapshotService.Restore(currentStageData, gridManager, turnNumber);
+        }
+
         public void ResetBattleState()
         {
+            turnSnapshotService.Invalidate();
             if (enemyTurnCoroutine != null)
             {
                 StopCoroutine(enemyTurnCoroutine);
@@ -235,10 +248,12 @@ namespace SRPG.Battle
             ResetPlayerUnitActions();
             BattleUI.Instance?.ClearResult();
             BattleUI.Instance?.SetTurnInfo(turnNumber, currentPhase.ToString());
+            CapturePlayerTurnSnapshot();
         }
 
         public void StopActiveEnemyTurn()
         {
+            turnSnapshotService.Invalidate();
             if (enemyTurnCoroutine == null)
             {
                 return;
@@ -270,6 +285,7 @@ namespace SRPG.Battle
 
         private void OnDestroy()
         {
+            turnSnapshotService.Invalidate();
             if (Instance == this)
             {
                 Instance = null;
@@ -293,7 +309,10 @@ namespace SRPG.Battle
             Debug.Log($"Turn {turnNumber}: {currentPhase}");
             BattleUI.Instance?.SetTurnInfo(turnNumber, currentPhase.ToString());
 
-            CheckDefeat();
+            if (!CheckDefeat())
+            {
+                CapturePlayerTurnSnapshot();
+            }
         }
 
         private void BeginEnemyTurn()
@@ -302,6 +321,8 @@ namespace SRPG.Battle
             {
                 return;
             }
+
+            turnSnapshotService.Invalidate();
 
             if (enemyTurnCoroutine != null)
             {
@@ -675,6 +696,7 @@ namespace SRPG.Battle
 
         private void EndBattle(BattleResult battleResult, string resultText)
         {
+            turnSnapshotService.Invalidate();
             battleEnded = true;
             result = battleResult;
             AudioManager.Instance?.StopBgm();
@@ -908,6 +930,14 @@ namespace SRPG.Battle
             }
 
             return gridManager != null;
+        }
+
+        private void CapturePlayerTurnSnapshot()
+        {
+            if (!battleEnded && IsPlayerTurn && EnsureGridManager())
+            {
+                turnSnapshotService.Capture(currentStageData, gridManager, turnNumber);
+            }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
