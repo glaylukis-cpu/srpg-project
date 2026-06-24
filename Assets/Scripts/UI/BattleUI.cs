@@ -1212,6 +1212,7 @@ namespace SRPG.UI
                 "Click Blue\n" +
                 "W\n" +
                 "U\n" +
+                "Shift+U\n" +
                 "R\n" +
                 "Esc";
             controlsActionText.text =
@@ -1221,6 +1222,7 @@ namespace SRPG.UI
                 "Move\n" +
                 "Wait / Confirm\n" +
                 "Undo Move\n" +
+                "Reset Turn\n" +
                 "Restart Stage\n" +
                 "Stage Select";
         }
@@ -1233,7 +1235,7 @@ namespace SRPG.UI
             }
 
             controlsLogged = true;
-            Debug.Log("SRPG Prototype Controls:\nClick Ally: Select\nHover Enemy: Preview\nClick Enemy: Info / Attack\nClick Blue Tile: Move\nW: Wait / Confirm\nU: Undo Move\nR: Restart Stage\nEsc/S: Stage Select\nSpace: Toggle Threat / Selected Enemy Range\nEnter: Start/Next/Retry");
+            Debug.Log("SRPG Prototype Controls:\nClick Ally: Select\nHover Enemy: Preview\nClick Enemy: Info / Attack\nClick Blue Tile: Move\nW: Wait / Confirm\nU: Undo Move\nShift+U: Reset Turn\nR: Restart Stage\nEsc/S: Stage Select\nSpace: Toggle Threat / Selected Enemy Range\nEnter: Start/Next/Retry");
         }
 
         private string BuildStageForceSummary(StageData data)
