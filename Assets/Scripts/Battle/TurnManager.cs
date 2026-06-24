@@ -225,10 +225,11 @@ namespace SRPG.Battle
             return true;
         }
 
-        public bool TryRestorePlayerTurn()
+        public bool TryRestorePlayerTurn(out bool enemyThreatVisible)
         {
+            enemyThreatVisible = false;
             return CanRestorePlayerTurn
-                && turnSnapshotService.Restore(currentStageData, gridManager, turnNumber);
+                && turnSnapshotService.Restore(currentStageData, gridManager, turnNumber, out enemyThreatVisible);
         }
 
         public void ResetBattleState()

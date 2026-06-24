@@ -43,13 +43,15 @@ namespace SRPG.Battle
             GridManager gridManager,
             int turnNumber,
             List<UnitSnapshot> units,
-            List<string> battleLogEntries)
+            List<string> battleLogEntries,
+            bool enemyThreatVisible)
         {
             StageData = stageData;
             GridManager = gridManager;
             TurnNumber = turnNumber;
             Units = units;
             BattleLogEntries = battleLogEntries;
+            EnemyThreatVisible = enemyThreatVisible;
         }
 
         public StageData StageData { get; }
@@ -57,5 +59,6 @@ namespace SRPG.Battle
         public int TurnNumber { get; }
         public IReadOnlyList<UnitSnapshot> Units { get; }
         public IReadOnlyList<string> BattleLogEntries { get; }
+        public bool EnemyThreatVisible { get; }
     }
 }

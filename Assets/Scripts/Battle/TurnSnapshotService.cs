@@ -48,11 +48,19 @@ namespace SRPG.Battle
                 Debug.LogWarning("Battle Log was unavailable when the turn start snapshot was captured.");
             }
 
-            snapshot = new TurnStartSnapshot(stageData, gridManager, turnNumber, unitSnapshots, battleLogEntries);
+            var enemyThreatVisible = PlayerController.Instance != null && PlayerController.Instance.IsEnemyThreatVisible;
+            snapshot = new TurnStartSnapshot(
+                stageData,
+                gridManager,
+                turnNumber,
+                unitSnapshots,
+                battleLogEntries,
+                enemyThreatVisible);
         }
 
-        public bool Restore(StageData stageData, GridManager gridManager, int turnNumber)
+        public bool Restore(StageData stageData, GridManager gridManager, int turnNumber, out bool enemyThreatVisible)
         {
+            enemyThreatVisible = false;
             if (!CanRestore(stageData, gridManager, turnNumber) || !ValidateSnapshot(gridManager))
             {
                 return false;
@@ -101,6 +109,7 @@ namespace SRPG.Battle
                     Debug.LogWarning("Battle Log could not be restored because BattleUI is unavailable.");
                 }
 
+                enemyThreatVisible = snapshot.EnemyThreatVisible;
                 return true;
             }
             finally

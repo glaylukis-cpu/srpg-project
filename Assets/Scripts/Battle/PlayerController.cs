@@ -30,6 +30,7 @@ namespace SRPG.Battle
 
         public Unit SelectedUnit => selectedUnit;
         public bool IsAnimating => isAnimating;
+        public bool IsEnemyThreatVisible => showEnemyThreats;
 
         public void ResetControllerState()
         {
@@ -480,7 +481,7 @@ namespace SRPG.Battle
             gridManager?.ClearAllHighlights();
             enemyIntentPreview?.Clear();
 
-            if (!manager.TryRestorePlayerTurn())
+            if (!manager.TryRestorePlayerTurn(out var restoredEnemyThreatVisible))
             {
                 AudioManager.Instance?.PlayCancelSe();
                 return;
@@ -491,11 +492,24 @@ namespace SRPG.Battle
             currentMoveTiles.Clear();
             currentAttackTiles.Clear();
             BattleUI.Instance?.SetSelectedUnit(null);
-            BattleUI.Instance?.SetEnemyThreatVisible(false);
             BattleUI.Instance?.ClearAttackPreview();
             BattleUI.Instance?.SetTurnInfo(manager.TurnNumber, manager.CurrentPhase.ToString());
+            RestoreEnemyThreatStateAfterUndo(restoredEnemyThreatVisible);
             AudioManager.Instance?.PlayUndoSe();
             Debug.Log($"Turn {manager.TurnNumber} restored to player turn start.");
+        }
+
+        private void RestoreEnemyThreatStateAfterUndo(bool enemyThreatVisible)
+        {
+            showEnemyThreats = enemyThreatVisible;
+            gridManager?.ClearEnemyThreatHighlights();
+            enemyIntentPreview?.Clear();
+            BattleUI.Instance?.SetEnemyThreatVisible(showEnemyThreats);
+
+            if (showEnemyThreats)
+            {
+                RefreshEnemyThreatHighlights();
+            }
         }
 
         private void ToggleEnemyThreatHighlights()
