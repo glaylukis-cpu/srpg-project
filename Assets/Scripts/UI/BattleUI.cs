@@ -26,6 +26,9 @@ namespace SRPG.UI
         [SerializeField] private Text attackPreviewText;
         [SerializeField] private Text resultText;
         [SerializeField] private Text stageIntroText;
+        [SerializeField] private Image tutorialHintFrame;
+        [SerializeField] private Image tutorialHintPanel;
+        [SerializeField] private Text tutorialHintText;
         [SerializeField] private Image battleBackdropImage;
         [SerializeField] private Image battleStageFrame;
         [SerializeField] private Image battleStagePanel;
@@ -96,6 +99,7 @@ namespace SRPG.UI
         private const int BattleHudTitleFontSize = 12;
         private const int BattleHudBodyFontSize = 11;
         private const int BattleHudSmallFontSize = 9;
+        private const int TutorialStageNumber = 1;
         private readonly List<string> battleLogEntries = new List<string>();
         private readonly Dictionary<int, StageBestResult> sessionBestResults = new Dictionary<int, StageBestResult>();
         private readonly Image[] stageSelectRowPanels = new Image[MaxStageSelectRows];
@@ -113,6 +117,8 @@ namespace SRPG.UI
         private bool titleOverlayInitialized;
         private bool optionsOverlayInitialized;
         private bool stageSelectObjectsInitialized;
+        private bool tutorialHintActive;
+        private int tutorialHintStep = -1;
         private StageData currentStageData;
         private int currentStageNumber;
         private int currentTotalStages;
@@ -178,6 +184,7 @@ namespace SRPG.UI
             currentStageNumber = currentStage;
             currentTotalStages = totalStages;
             RefreshStageText();
+            BeginTutorialHintForStage(currentStage);
         }
 
         public void SetObjectiveInfo(StageData data)
@@ -245,11 +252,48 @@ namespace SRPG.UI
             enemyThreatText.text = visible ? "Enemy Threat: ON" : "Enemy Threat: OFF";
         }
 
+        public void NotifyTutorialPlayerSelectionOrMove()
+        {
+            AdvanceTutorialHintTo(1);
+        }
+
+        public void NotifyTutorialEnemyThreatEnabled()
+        {
+            AdvanceTutorialHintTo(2);
+        }
+
+        public void NotifyTutorialPlayerActionCompleted()
+        {
+            if (tutorialHintStep == 2)
+            {
+                AdvanceTutorialHintTo(3);
+            }
+        }
+
+        public void NotifyTutorialResetTurnSucceeded()
+        {
+            AdvanceTutorialHintTo(4);
+        }
+
+        public void NotifyTutorialEndTurnAvailable()
+        {
+            if (tutorialHintStep >= 3)
+            {
+                AdvanceTutorialHintTo(4);
+            }
+        }
+
+        public void NotifyTutorialEndTurnSucceeded()
+        {
+            HideTutorialHint();
+        }
+
         public void ShowResult(string result)
         {
             EnsureTextObjects();
             HideTitleScreen();
             HideStageIntro();
+            HideTutorialHint();
             SetResultPanelVisible(true);
             resultText.fontSize = result != null && result.StartsWith("ALL CLEAR") ? 46 : 32;
             resultText.text = BuildResultText(result);
@@ -269,6 +313,7 @@ namespace SRPG.UI
             EnsureTextObjects();
             HideTitleScreen();
             HideStageIntro();
+            HideTutorialHint();
             UpdateSessionBestResult(result, rating, turnNumber, playersAlive, playerHpTotal);
             SetResultPanelVisible(true);
             resultText.fontSize = 30;
@@ -683,6 +728,61 @@ namespace SRPG.UI
             stageIntroText.enabled = false;
         }
 
+        private void BeginTutorialHintForStage(int stageNumber)
+        {
+            if (stageNumber != TutorialStageNumber)
+            {
+                HideTutorialHint();
+                tutorialHintStep = -1;
+                return;
+            }
+
+            tutorialHintActive = true;
+            tutorialHintStep = 0;
+            ShowTutorialHint(BuildTutorialHintText(tutorialHintStep));
+        }
+
+        private void AdvanceTutorialHintTo(int step)
+        {
+            if (!tutorialHintActive || currentStageNumber != TutorialStageNumber || step <= tutorialHintStep)
+            {
+                return;
+            }
+
+            tutorialHintStep = step;
+            ShowTutorialHint(BuildTutorialHintText(tutorialHintStep));
+        }
+
+        private void ShowTutorialHint(string text)
+        {
+            EnsureTutorialHintObjects();
+            tutorialHintText.text = text;
+            SetTutorialHintVisible(true);
+        }
+
+        private void HideTutorialHint()
+        {
+            tutorialHintActive = false;
+            SetTutorialHintVisible(false);
+        }
+
+        private string BuildTutorialHintText(int step)
+        {
+            switch (step)
+            {
+                case 1:
+                    return "Use Space to preview enemy threat.";
+                case 2:
+                    return "Enemy intent shows attacks, movement, and guards.";
+                case 3:
+                    return "Try Shift+U to reset the turn if your plan looks unsafe.";
+                case 4:
+                    return "When your plan is ready, press Enter to end your turn.";
+                default:
+                    return "Plan your turn.\nSelect an ally and choose a move.";
+            }
+        }
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -849,6 +949,8 @@ namespace SRPG.UI
             }
             stageIntroText.color = ThemeTextPrimary();
 
+            EnsureTutorialHintObjects();
+
             if (stageSelectText == null)
             {
                 stageSelectText = CreateText("StageSelectText", Vector2.zero, new Vector2(0.5f, 0.5f), TextAnchor.MiddleCenter, 25, new Vector2(1040f, 620f));
@@ -884,6 +986,34 @@ namespace SRPG.UI
 
             SetAttackPreviewPanelVisible(false);
             SetResultPanelVisible(false);
+        }
+
+        private void EnsureTutorialHintObjects()
+        {
+            if (tutorialHintFrame == null)
+            {
+                tutorialHintFrame = CreatePanel("TutorialHintFrame", new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(500f, 60f), new Color(0.74f, 0.52f, 0.22f, 0.72f));
+            }
+            tutorialHintFrame.color = new Color(0.74f, 0.52f, 0.22f, 0.72f);
+            ConfigureRect(tutorialHintFrame.rectTransform, new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(500f, 60f));
+
+            if (tutorialHintPanel == null)
+            {
+                tutorialHintPanel = CreatePanel("TutorialHintPanel", new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(490f, 50f), new Color(0.024f, 0.04f, 0.064f, 0.82f));
+            }
+            tutorialHintPanel.color = new Color(0.024f, 0.04f, 0.064f, 0.82f);
+            ConfigureRect(tutorialHintPanel.rectTransform, new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(490f, 50f));
+
+            if (tutorialHintText == null)
+            {
+                tutorialHintText = CreateText("TutorialHintText", new Vector2(0f, -32f), new Vector2(0.5f, 1f), TextAnchor.MiddleCenter, 14, new Vector2(462f, 44f));
+            }
+            tutorialHintText.fontSize = 14;
+            tutorialHintText.alignment = TextAnchor.MiddleCenter;
+            tutorialHintText.color = ThemeTextPrimary();
+            ConfigureRect(tutorialHintText.rectTransform, new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(462f, 44f));
+
+            SetTutorialHintVisible(tutorialHintActive);
         }
 
         private void EnsurePanelPair(ref Image frame, ref Image panel, string baseName, Vector2 framePosition, Vector2 panelPosition, Vector2 anchor, float width, float height, float inset)
@@ -1964,12 +2094,20 @@ namespace SRPG.UI
             SetTextEnabled(controlsInputText, visible);
             SetTextEnabled(controlsActionText, visible);
             SetTextEnabled(battleLogText, visible);
+            SetTutorialHintVisible(visible && tutorialHintActive);
             if (!visible)
             {
                 SetTextEnabled(attackPreviewText, false);
                 SetAttackPreviewPanelVisible(false);
                 SetResultPanelVisible(false);
             }
+        }
+
+        private void SetTutorialHintVisible(bool visible)
+        {
+            SetImageEnabled(tutorialHintFrame, visible);
+            SetImageEnabled(tutorialHintPanel, visible);
+            SetTextEnabled(tutorialHintText, visible);
         }
 
         private void SetAttackPreviewPanelVisible(bool visible)

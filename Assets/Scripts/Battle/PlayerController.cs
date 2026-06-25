@@ -76,6 +76,7 @@ namespace SRPG.Battle
                 BattleUI.Instance?.ClearAttackPreview();
                 ShowSelectedUnitAttackRange(actingUnit);
                 BattleUI.Instance?.SetSelectedUnit(actingUnit);
+                BattleUI.Instance?.NotifyTutorialPlayerSelectionOrMove();
 
                 if (GetTurnManager()?.CheckVictoryConditions() == true)
                 {
@@ -254,6 +255,7 @@ namespace SRPG.Battle
             AudioManager.Instance?.PlayConfirmSe();
             gridManager?.ClearEnemyThreatHighlights();
             enemyIntentPreview?.Clear();
+            BattleUI.Instance?.NotifyTutorialEndTurnSucceeded();
         }
 
         private void OnDestroy()
@@ -291,6 +293,7 @@ namespace SRPG.Battle
             BattleUI.Instance?.SetSelectedUnit(unit);
             ShowSelectedUnitRanges(unit);
             AudioManager.Instance?.PlayConfirmSe();
+            BattleUI.Instance?.NotifyTutorialPlayerSelectionOrMove();
         }
 
         private void SelectEnemyUnit(Unit unit)
@@ -434,7 +437,13 @@ namespace SRPG.Battle
             selectedUnitHasMovedThisAction = false;
             canUndoSelectedUnitMove = false;
             BattleUI.Instance?.ClearAttackPreview();
-            GetTurnManager()?.NotifyPlayerUnitActed(actingUnit);
+            var manager = GetTurnManager();
+            manager?.NotifyPlayerUnitActed(actingUnit);
+            BattleUI.Instance?.NotifyTutorialPlayerActionCompleted();
+            if (manager != null && manager.CanEndPlayerTurn)
+            {
+                BattleUI.Instance?.NotifyTutorialEndTurnAvailable();
+            }
             ClearSelection();
         }
 
@@ -494,6 +503,7 @@ namespace SRPG.Battle
             BattleUI.Instance?.SetSelectedUnit(null);
             BattleUI.Instance?.ClearAttackPreview();
             BattleUI.Instance?.SetTurnInfo(manager.TurnNumber, manager.CurrentPhase.ToString());
+            BattleUI.Instance?.NotifyTutorialResetTurnSucceeded();
             RestoreEnemyThreatStateAfterUndo(restoredEnemyThreatVisible);
             AudioManager.Instance?.PlayUndoSe();
             Debug.Log($"Turn {manager.TurnNumber} restored to player turn start.");
@@ -518,6 +528,10 @@ namespace SRPG.Battle
             RefreshEnemyThreatHighlights();
             BattleUI.Instance?.SetEnemyThreatVisible(showEnemyThreats);
             AudioManager.Instance?.PlayCursorSe();
+            if (showEnemyThreats)
+            {
+                BattleUI.Instance?.NotifyTutorialEnemyThreatEnabled();
+            }
             DevLogger.Log(showEnemyThreats ? "Enemy threat range ON" : "Enemy threat range OFF");
         }
 
