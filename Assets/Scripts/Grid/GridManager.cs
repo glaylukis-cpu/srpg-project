@@ -13,19 +13,19 @@ namespace SRPG.Grid
         [SerializeField] private int width = 8;
         [SerializeField] private int height = 8;
         [SerializeField] private float cellSize = 1f;
-        [SerializeField] private Color lightTileColor = new Color(0.42f, 0.5f, 0.58f, 1f);
-        [SerializeField] private Color darkTileColor = new Color(0.35f, 0.43f, 0.51f, 1f);
-        [SerializeField] private Color boardFrameColor = new Color(0.68f, 0.46f, 0.18f, 0.48f);
-        [SerializeField] private Color boardBaseColor = new Color(0.018f, 0.04f, 0.065f, 1f);
-        [SerializeField] private Color boardBackdropColor = new Color(0.005f, 0.012f, 0.026f, 1f);
-        [SerializeField] private Color boardShadowColor = new Color(0f, 0f, 0f, 0.45f);
-        [SerializeField] private Color battleMistColor = new Color(0.16f, 0.22f, 0.3f, 0.18f);
-        [SerializeField] private Color battleLightColor = new Color(0.72f, 0.55f, 0.28f, 0.16f);
+        [SerializeField] private Color lightTileColor = new Color(0.36f, 0.43f, 0.49f, 1f);
+        [SerializeField] private Color darkTileColor = new Color(0.29f, 0.36f, 0.42f, 1f);
+        [SerializeField] private Color boardSideColor = new Color(0.046f, 0.06f, 0.072f, 1f);
+        [SerializeField] private Color boardEdgeHighlightColor = new Color(0.68f, 0.78f, 0.84f, 0.42f);
 
         [Header("Prototype")]
         [SerializeField] private bool generateOnStart = true;
 
         private const int GuardianReactionRange = 3;
+        private const float IsoHorizontalStep = 0.6f;
+        private const float IsoVerticalStep = 0.32f;
+        private const float IsoTileWidth = 1.2f;
+        private const float IsoTileHeight = 0.64f;
         private readonly Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
         private readonly List<Unit> units = new List<Unit>();
         private Sprite squareSprite;
@@ -617,11 +617,11 @@ namespace SRPG.Grid
                 switch (variant)
                 {
                     case 0:
-                        return new Color(0.44f, 0.52f, 0.6f, 1f);
+                        return new Color(0.37f, 0.44f, 0.5f, 1f);
                     case 1:
-                        return new Color(0.4f, 0.48f, 0.56f, 1f);
+                        return new Color(0.34f, 0.41f, 0.47f, 1f);
                     case 2:
-                        return new Color(0.43f, 0.5f, 0.59f, 1f);
+                        return new Color(0.36f, 0.42f, 0.49f, 1f);
                     default:
                         return lightTileColor;
                 }
@@ -630,11 +630,11 @@ namespace SRPG.Grid
             switch (variant)
             {
                 case 0:
-                    return new Color(0.34f, 0.42f, 0.5f, 1f);
+                    return new Color(0.28f, 0.35f, 0.41f, 1f);
                 case 1:
-                    return new Color(0.37f, 0.45f, 0.53f, 1f);
+                    return new Color(0.31f, 0.38f, 0.44f, 1f);
                 case 2:
-                    return new Color(0.35f, 0.43f, 0.51f, 1f);
+                    return new Color(0.3f, 0.36f, 0.43f, 1f);
                 default:
                     return darkTileColor;
             }
@@ -657,52 +657,80 @@ namespace SRPG.Grid
 
         private void CreateBoardFrame()
         {
-            var center = BoardProjection.GetBoardCenter(width, height, cellSize) + new Vector3(0f, 0f, 0.18f);
-            var projectedWidth = BoardProjection.GetBoardWidth(width, height, cellSize);
-            var projectedHeight = BoardProjection.GetBoardHeight(width, height, cellSize);
+            var tileHalfWidth = IsoTileWidth * cellSize * 0.5f;
+            var tileHalfHeight = IsoTileHeight * cellSize * 0.5f;
+            var frontX = 0f;
+            var frontY = -tileHalfHeight;
+            var rightX = (width - 1) * IsoHorizontalStep * cellSize + tileHalfWidth;
+            var rightY = (width - 1) * IsoVerticalStep * cellSize;
+            var backX = 0f;
+            var backY = (width + height - 2) * IsoVerticalStep * cellSize + tileHalfHeight;
+            var leftX = -(height - 1) * IsoHorizontalStep * cellSize - tileHalfWidth;
+            var leftY = (height - 1) * IsoVerticalStep * cellSize;
 
-            CreateWorldPanel("BattleWorldBackdrop", center + new Vector3(0f, 0f, 0.08f), new Vector3(projectedWidth + 8.4f, projectedHeight + 4.2f, 1f), boardBackdropColor, -1000);
-            CreateWorldPanel("BattleDistantWall", center + new Vector3(0f, projectedHeight * 0.22f, 0.07f), new Vector3(projectedWidth + 6.8f, 1.8f, 1f), new Color(0.02f, 0.055f, 0.08f, 0.72f), -999);
-            CreateWorldPanel("BattleLowerFog", center + new Vector3(0f, -projectedHeight * 0.44f, 0.06f), new Vector3(projectedWidth + 8f, 1.45f, 1f), battleMistColor, -998);
-            CreateWorldPanel("BattleUpperLight", center + new Vector3(-1.2f, projectedHeight * 0.43f, 0.05f), new Vector3(projectedWidth + 3f, 0.72f, 1f), battleLightColor, -997);
-            CreateWorldPanel("BattleLeftPillar", center + new Vector3(-projectedWidth * 0.5f - 1.2f, 0.45f, 0.04f), new Vector3(0.44f, projectedHeight + 2.4f, 1f), new Color(0f, 0f, 0f, 0.28f), -996);
-            CreateWorldPanel("BattleRightPillar", center + new Vector3(projectedWidth * 0.5f + 1.2f, 0.05f, 0.04f), new Vector3(0.52f, projectedHeight + 2.1f, 1f), new Color(0f, 0f, 0f, 0.24f), -996);
-            CreateWorldPanel("BoardShadow", center + new Vector3(0.18f, -0.22f, 0.08f), new Vector3(projectedWidth + 1.18f, projectedHeight + 1.12f, 1f), boardShadowColor, -995);
-            CreateWorldPanel("BoardFrontLip", center + new Vector3(0f, -projectedHeight * 0.5f - 0.14f, 0.05f), new Vector3(projectedWidth + 0.36f, 0.16f, 1f), new Color(0.33f, 0.22f, 0.09f, 0.42f), -994);
+            var leftVertex = new Vector3(leftX, leftY, 0.05f);
+            var frontVertex = new Vector3(frontX, frontY, 0.05f);
+            var rightVertex = new Vector3(rightX, rightY, 0.05f);
+            var leftSideDrop = 0.86f;
+            var rightSideDrop = 0.82f;
 
-            var frameObject = new GameObject("BoardFrame");
-            frameObject.transform.SetParent(transform);
-            frameObject.transform.position = center;
-            frameObject.transform.localScale = new Vector3(projectedWidth + 0.56f, projectedHeight + 0.56f, 1f);
-            var frameRenderer = frameObject.AddComponent<SpriteRenderer>();
-            frameRenderer.sprite = squareSprite;
-            frameRenderer.color = boardFrameColor;
-            frameRenderer.sortingOrder = -994;
+            CreateBoardFace("BoardFrontLeftDropShadow", leftVertex + new Vector3(0.16f, -leftSideDrop - 0.08f, 0.03f), frontVertex + new Vector3(0.16f, -leftSideDrop - 0.08f, 0.03f), 0.16f, new Color(0f, 0.004f, 0.01f, 0.24f), -995);
+            CreateBoardFace("BoardFrontRightDropShadow", frontVertex + new Vector3(0.16f, -rightSideDrop - 0.08f, 0.03f), rightVertex + new Vector3(0.16f, -rightSideDrop - 0.08f, 0.03f), 0.15f, new Color(0f, 0.004f, 0.01f, 0.22f), -995);
 
-            var baseObject = new GameObject("BoardBase");
-            baseObject.transform.SetParent(transform);
-            baseObject.transform.position = center + new Vector3(0f, 0f, -0.01f);
-            baseObject.transform.localScale = new Vector3(projectedWidth + 0.42f, projectedHeight + 0.42f, 1f);
-            var baseRenderer = baseObject.AddComponent<SpriteRenderer>();
-            baseRenderer.sprite = squareSprite;
-            baseRenderer.color = boardBaseColor;
-            baseRenderer.sortingOrder = -993;
+            CreateBoardFace("BoardFrontLeftSide", leftVertex, frontVertex, leftSideDrop, boardSideColor, -994);
+            CreateBoardFace("BoardFrontRightSide", frontVertex, rightVertex, rightSideDrop, new Color(0.058f, 0.078f, 0.092f, 1f), -994);
+            CreateBoardStrip("BoardFrontLeftTopSeam", leftX, leftY - 0.035f, frontX, frontY - 0.035f, 0.045f, 0.075f, new Color(0.006f, 0.01f, 0.014f, 0.92f), -993);
+            CreateBoardStrip("BoardFrontRightTopSeam", frontX, frontY - 0.035f, rightX, rightY - 0.035f, 0.045f, 0.075f, new Color(0.006f, 0.01f, 0.014f, 0.88f), -993);
+            CreateBoardStrip("BoardFrontLeftBottomEdge", leftX, leftY - leftSideDrop, frontX, frontY - leftSideDrop, 0.045f, 0.14f, new Color(0.004f, 0.006f, 0.008f, 1f), -993);
+            CreateBoardStrip("BoardFrontRightBottomEdge", frontX, frontY - rightSideDrop, rightX, rightY - rightSideDrop, 0.045f, 0.13f, new Color(0.004f, 0.006f, 0.008f, 0.98f), -993);
 
-            CreateWorldPanel("BoardInnerLight", center + new Vector3(-0.7f, 0.8f, -0.02f), new Vector3(projectedWidth - 0.6f, projectedHeight - 0.6f, 1f), new Color(0.55f, 0.62f, 0.72f, 0.08f), -992);
-            CreateWorldPanel("BoardStageLight", center + new Vector3(-0.28f, 0.36f, -0.08f), new Vector3(projectedWidth - 1.2f, projectedHeight - 1.35f, 1f), new Color(0.9f, 0.72f, 0.38f, 0.08f), -991);
+            CreateBoardStrip("BoardFrontLeftEdgeHighlight", leftX, leftY + 0.015f, frontX, frontY + 0.015f, 0.03f, 0.055f, boardEdgeHighlightColor, -993);
+            CreateBoardStrip("BoardFrontRightEdgeHighlight", frontX, frontY + 0.015f, rightX, rightY + 0.015f, 0.03f, 0.055f, boardEdgeHighlightColor, -993);
         }
 
-        private void CreateWorldPanel(string objectName, Vector3 position, Vector3 scale, Color color, int sortingOrder)
+        private void CreateBoardFace(string objectName, Vector3 topStart, Vector3 topEnd, float dropY, Color color, int sortingOrder)
         {
-            var panelObject = new GameObject(objectName);
-            panelObject.transform.SetParent(transform);
-            panelObject.transform.position = position;
-            panelObject.transform.localScale = scale;
+            var faceObject = new GameObject(objectName);
+            faceObject.transform.SetParent(transform);
 
-            var renderer = panelObject.AddComponent<SpriteRenderer>();
+            var mesh = new Mesh();
+            mesh.vertices = new[]
+            {
+                topStart,
+                topEnd,
+                topEnd + new Vector3(0f, -dropY, 0f),
+                topStart + new Vector3(0f, -dropY, 0f)
+            };
+            mesh.triangles = new[] { 0, 1, 2, 0, 2, 3 };
+            mesh.RecalculateBounds();
+
+            var filter = faceObject.AddComponent<MeshFilter>();
+            filter.mesh = mesh;
+
+            var renderer = faceObject.AddComponent<MeshRenderer>();
+            renderer.material = new Material(Shader.Find("Sprites/Default"));
+            renderer.material.color = color;
+            renderer.sortingOrder = sortingOrder;
+        }
+
+        private void CreateBoardStrip(string objectName, float startX, float startY, float endX, float endY, float z, float thickness, Color color, int sortingOrder)
+        {
+            var deltaX = endX - startX;
+            var deltaY = endY - startY;
+            var length = (float)Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+            var angle = (float)(Math.Atan2(deltaY, deltaX) * 180.0 / Math.PI);
+
+            var stripObject = new GameObject(objectName);
+            stripObject.transform.SetParent(transform);
+            stripObject.transform.position = new Vector3((startX + endX) * 0.5f, (startY + endY) * 0.5f, z);
+            stripObject.transform.localScale = new Vector3(length, thickness, 1f);
+            stripObject.transform.localEulerAngles = new Vector3(0f, 0f, angle);
+
+            var renderer = stripObject.AddComponent<SpriteRenderer>();
             renderer.sprite = squareSprite;
             renderer.color = color;
             renderer.sortingOrder = sortingOrder;
         }
+
     }
 }

@@ -24,9 +24,9 @@ namespace SRPG.Grid
             new Vector2(-0.5f, 0f)
         };
 
-        [SerializeField] private Color baseColor = new Color(0.42f, 0.5f, 0.58f, 1f);
-        [SerializeField] private Color normalTerrainColor = new Color(0.42f, 0.5f, 0.58f, 1f);
-        [SerializeField] private Color obstacleTerrainColor = new Color(0.28f, 0.27f, 0.27f, 1f);
+        [SerializeField] private Color baseColor = new Color(0.36f, 0.43f, 0.49f, 1f);
+        [SerializeField] private Color normalTerrainColor = new Color(0.36f, 0.43f, 0.49f, 1f);
+        [SerializeField] private Color obstacleTerrainColor = new Color(0.27f, 0.25f, 0.21f, 1f);
         [SerializeField] private Color goalTerrainColor = new Color(0.04f, 0.74f, 0.6f, 1f);
         [SerializeField] private Color moveHighlightedColor = new Color(0.16f, 0.62f, 1f, 0.42f);
         [SerializeField] private Color attackHighlightedColor = new Color(1f, 0.18f, 0.12f, 0.42f);
@@ -295,19 +295,30 @@ namespace SRPG.Grid
         {
             tileSideRenderer.color = GetTerrainSideColor(terrainType);
             tileSideRenderer.transform.localPosition = terrainType == TileTerrainType.Obstacle
-                ? new Vector3(0f, -0.1f, 0.02f)
+                ? new Vector3(0f, -0.13f, 0.02f)
                 : new Vector3(0f, -0.06f, 0.02f);
+            tileSideRenderer.transform.localScale = terrainType == TileTerrainType.Obstacle
+                ? new Vector3(1.04f, 1.18f, 1f)
+                : Vector3.one;
             terrainDetailRenderer.transform.localPosition = terrainType == TileTerrainType.Obstacle
-                ? new Vector3(0f, 0.1f, -0.03f)
+                ? new Vector3(0f, 0.11f, -0.03f)
                 : new Vector3(0f, 0.06f, -0.03f);
+            terrainDetailRenderer.transform.localScale = terrainType == TileTerrainType.Obstacle
+                ? new Vector3(0.86f, 0.92f, 1f)
+                : Vector3.one * 0.9f;
             terrainDetailRenderer.color = new Color(0f, 0f, 0f, 0f);
             goalRuneRenderer.color = new Color(0f, 0f, 0f, 0f);
             goalHaloRenderer.color = new Color(0f, 0f, 0f, 0f);
 
             if (terrainType == TileTerrainType.Obstacle)
             {
-                terrainDetailRenderer.sprite = TileVisualFactory.GetObstacleDetailSprite();
-                terrainDetailRenderer.color = new Color(0.86f, 0.77f, 0.58f, 0.98f);
+                terrainDetailRenderer.sprite = TileVisualFactory.GetObstacleDetailSprite(GetObstacleDetailVariant());
+                terrainDetailRenderer.color = new Color(1f, 1f, 1f, 0.98f);
+            }
+            else if (terrainType == TileTerrainType.Normal)
+            {
+                terrainDetailRenderer.sprite = TileVisualFactory.GetGroundDetailSprite();
+                terrainDetailRenderer.color = new Color(0.48f, 0.56f, 0.62f, 0.08f);
             }
 
             if (terrainType == TileTerrainType.Goal)
@@ -322,12 +333,17 @@ namespace SRPG.Grid
             switch (value)
             {
                 case TileTerrainType.Obstacle:
-                    return new Color(0.12f, 0.09f, 0.07f, 0.98f);
+                    return new Color(0.075f, 0.058f, 0.04f, 1f);
                 case TileTerrainType.Goal:
-                    return new Color(0.02f, 0.28f, 0.25f, 0.98f);
+                    return new Color(0.015f, 0.18f, 0.16f, 0.98f);
                 default:
-                    return new Color(0.12f, 0.18f, 0.24f, 0.96f);
+                    return new Color(0.038f, 0.052f, 0.064f, 1f);
             }
+        }
+
+        private int GetObstacleDetailVariant()
+        {
+            return Math.Abs(Coordinates.x * 17 + Coordinates.y * 31) % TileVisualFactory.ObstacleDetailVariantCount;
         }
 
         private void SetHighlight(Color color, Sprite sprite = null)
