@@ -178,6 +178,42 @@ This document is a verification checklist and record. It does not change gamepla
 - Final floor and obstacle color art pass can be handled later.
 - Steam screenshot composition check is a separate task.
 
+## Threat / Intent Visual Check After 81d04bd
+
+Target commit:
+
+- `81d04bd Improve enemy threat and intent readability`
+
+Manual check summary:
+
+- Enemy Threat display now separates enemy movement and attack threat information more clearly.
+- Enemy move-reachable tiles use an olive/khaki style.
+- Enemy attack threat tiles use a muted red-brown style.
+- Attack-only threat tiles use a desaturated red-gray / red-brown style.
+- MoveToward intent uses cyan dashed direction, arrow, and destination ring.
+- AttackNow intent keeps the orange / yellow-orange attack emphasis.
+- Guardian reaction display remains visually separated from Threat and MoveToward displays.
+- Rock/rubble obstacles, HP labels, enemy bases, and player bases remain readable with the updated overlays.
+
+Confirmed items:
+
+- Enemy Threat / MoveToward / AttackNow / Guardian displays are visually more separated than before.
+- MoveToward destination is easier to read because of the cyan destination ring.
+- AttackNow remains the highest-priority visual warning.
+- Enemy Threat floor no longer reads as one flat red area only.
+- The updated overlays do not visually break the current board/rubble presentation.
+
+Verification notes:
+
+- Unity batchmode compile passed for `81d04bd`.
+- `git diff --check` had no whitespace errors before the commit.
+- Full Stage1-6 manual regression after `81d04bd` should be kept as a separate pass if not already completed after this commit.
+
+Overall result:
+
+- Threat / Intent readability pass: OK.
+- Full Stage1-6 post-81d04bd regression: Pending unless manually confirmed after this commit.
+
 ## Conclusion
 
 - Fatal visual regression across Stage1-6: Pending manual Unity Editor check.
