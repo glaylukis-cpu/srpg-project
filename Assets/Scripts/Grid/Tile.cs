@@ -30,9 +30,11 @@ namespace SRPG.Grid
         [SerializeField] private Color goalTerrainColor = new Color(0.04f, 0.74f, 0.6f, 1f);
         [SerializeField] private Color moveHighlightedColor = new Color(0.16f, 0.62f, 1f, 0.42f);
         [SerializeField] private Color attackHighlightedColor = new Color(1f, 0.18f, 0.12f, 0.42f);
-        [SerializeField] private Color enemyMoveThreatHighlightedColor = new Color(0.36f, 0.13f, 0.72f, 0.48f);
-        [SerializeField] private Color enemyAttackThreatHighlightedColor = new Color(1f, 0.28f, 0.12f, 0.72f);
-        [SerializeField] private Color guardianReactionHighlightedColor = new Color(1f, 0.72f, 0.18f, 0.36f);
+        [SerializeField] private Color enemyMoveThreatHighlightedColor = new Color(0.42f, 0.38f, 0.22f, 0.68f);
+        [SerializeField] private Color enemyAttackThreatHighlightedColor = new Color(0.78f, 0.18f, 0.12f, 0.62f);
+        [SerializeField] private Color enemyAttackOnlyThreatHighlightedColor = new Color(0.56f, 0.26f, 0.2f, 0.58f);
+        [SerializeField] private Color guardianReactionReachableHighlightedColor = new Color(0.9f, 0.68f, 0.24f, 0.74f);
+        [SerializeField] private Color guardianReactionBlockedHighlightedColor = new Color(0.48f, 0.54f, 0.36f, 0.7f);
 
         private SpriteRenderer spriteRenderer;
         private SpriteRenderer tileSideRenderer;
@@ -46,6 +48,7 @@ namespace SRPG.Grid
         private bool isEnemyMoveThreatHighlighted;
         private bool isEnemyAttackThreatHighlighted;
         private bool isGuardianReactionHighlighted;
+        private bool isGuardianReactionReachable;
         private float goalPulseTimer;
 
         public event Action<Tile> Clicked;
@@ -133,9 +136,10 @@ namespace SRPG.Grid
             RefreshColor();
         }
 
-        public void SetGuardianReactionHighlight(bool value)
+        public void SetGuardianReactionHighlight(bool value, bool moveReachable = false)
         {
             isGuardianReactionHighlighted = value;
+            isGuardianReactionReachable = value && moveReachable;
             RefreshColor();
         }
 
@@ -153,6 +157,7 @@ namespace SRPG.Grid
             isEnemyMoveThreatHighlighted = false;
             isEnemyAttackThreatHighlighted = false;
             isGuardianReactionHighlighted = false;
+            isGuardianReactionReachable = false;
             RefreshColor();
         }
 
@@ -211,21 +216,37 @@ namespace SRPG.Grid
                 return;
             }
 
-            if (isEnemyAttackThreatHighlighted)
+            if (isEnemyAttackThreatHighlighted && isEnemyMoveThreatHighlighted)
             {
                 SetHighlight(enemyAttackThreatHighlightedColor, TileVisualFactory.GetEnemyAttackThreatSprite());
                 return;
             }
 
+            if (isGuardianReactionHighlighted && isEnemyMoveThreatHighlighted)
+            {
+                SetHighlight(guardianReactionReachableHighlightedColor, TileVisualFactory.GetGuardianReactionReachableHighlightSprite());
+                return;
+            }
+
             if (isEnemyMoveThreatHighlighted)
             {
-                SetHighlight(enemyMoveThreatHighlightedColor);
+                SetHighlight(enemyMoveThreatHighlightedColor, TileVisualFactory.GetEnemyMoveThreatSprite());
+                return;
+            }
+
+            if (isEnemyAttackThreatHighlighted)
+            {
+                SetHighlight(enemyAttackOnlyThreatHighlightedColor, TileVisualFactory.GetEnemyAttackOnlyThreatSprite());
                 return;
             }
 
             if (isGuardianReactionHighlighted)
             {
-                SetHighlight(guardianReactionHighlightedColor);
+                SetHighlight(
+                    isGuardianReactionReachable ? guardianReactionReachableHighlightedColor : guardianReactionBlockedHighlightedColor,
+                    isGuardianReactionReachable
+                        ? TileVisualFactory.GetGuardianReactionReachableHighlightSprite()
+                        : TileVisualFactory.GetGuardianReactionBlockedHighlightSprite());
                 return;
             }
 

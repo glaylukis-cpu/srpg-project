@@ -17,11 +17,13 @@ namespace SRPG.Visual
         private static readonly Color TargetOutlineColor = new Color(0.08f, 0.025f, 0.008f, 0.9f);
         private static readonly Color TargetMarkerColor = new Color(1f, 0.76f, 0.16f, 0.98f);
         private static readonly Color OriginMarkerColor = new Color(1f, 0.5f, 0.1f, 0.92f);
-        private static readonly Color MoveOutlineColor = new Color(0.08f, 0.04f, 0.015f, 0.78f);
-        private static readonly Color MoveMarkerColor = new Color(1f, 0.72f, 0.3f, 0.78f);
-        private static readonly Color MoveArrowColor = new Color(1f, 0.82f, 0.48f, 0.86f);
-        private static readonly Color GuardOutlineColor = new Color(0.08f, 0.055f, 0.01f, 0.78f);
-        private static readonly Color GuardMarkerColor = new Color(1f, 0.82f, 0.3f, 0.72f);
+        private static readonly Color MoveOutlineColor = new Color(0.015f, 0.08f, 0.09f, 0.84f);
+        private static readonly Color MoveMarkerColor = new Color(0.22f, 0.92f, 0.98f, 0.82f);
+        private static readonly Color MoveArrowColor = new Color(0.46f, 1f, 0.92f, 0.9f);
+        private static readonly Color MoveDestinationOutlineColor = new Color(0.01f, 0.09f, 0.1f, 0.86f);
+        private static readonly Color MoveDestinationMarkerColor = new Color(0.26f, 1f, 0.9f, 0.78f);
+        private static readonly Color GuardOutlineColor = new Color(0.055f, 0.06f, 0.025f, 0.78f);
+        private static readonly Color GuardMarkerColor = new Color(0.82f, 0.78f, 0.36f, 0.66f);
 
         private readonly List<GameObject> visualObjects = new List<GameObject>();
         private static Sprite lineSprite;
@@ -202,6 +204,15 @@ namespace SRPG.Visual
             var markerCenter = destination - direction * 0.24f * cellSize + new Vector3(0f, 0.035f, -0.18f);
             var firstStep = markerCenter - direction * 0.065f * cellSize + perpendicular * 0.055f * cellSize;
             var secondStep = markerCenter + direction * 0.065f * cellSize - perpendicular * 0.055f * cellSize;
+
+            var ringPosition = destination + new Vector3(0f, 0.03f, -0.19f);
+            var ringOutline = CreateVisualObject("EnemyMoveIntentDestinationOutline", GetTargetMarkerSprite(), MoveDestinationOutlineColor, IntentSortingOrder + 2);
+            ringOutline.transform.position = ringPosition;
+            ringOutline.transform.localScale = new Vector3(0.78f * cellSize, 0.78f * cellSize, 1f);
+
+            var ring = CreateVisualObject("EnemyMoveIntentDestination", GetTargetMarkerSprite(), MoveDestinationMarkerColor, IntentSortingOrder + 3);
+            ring.transform.position = ringPosition;
+            ring.transform.localScale = new Vector3(0.64f * cellSize, 0.64f * cellSize, 1f);
 
             CreateDirectionalVisual("EnemyMoveIntentFootprintOutline", GetLineSprite(), MoveOutlineColor, IntentSortingOrder + 2, firstStep, new Vector3(0.13f, 0.075f, 1f), angle);
             CreateDirectionalVisual("EnemyMoveIntentFootprint", GetLineSprite(), MoveMarkerColor, IntentSortingOrder + 3, firstStep, new Vector3(0.085f, 0.042f, 1f), angle);

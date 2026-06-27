@@ -17,6 +17,10 @@ namespace SRPG.Visual
         private static Sprite highlightSprite;
         private static Sprite moveHighlightSprite;
         private static Sprite enemyAttackThreatSprite;
+        private static Sprite enemyMoveThreatSprite;
+        private static Sprite enemyAttackOnlyThreatSprite;
+        private static Sprite guardianReactionReachableHighlightSprite;
+        private static Sprite guardianReactionBlockedHighlightSprite;
         private static Sprite moveThreatOverlapSprite;
         private static Sprite groundDetailSprite;
         private static Sprite[] obstacleDetailSprites;
@@ -174,10 +178,44 @@ namespace SRPG.Visual
                 return enemyAttackThreatSprite;
             }
 
+            enemyAttackThreatSprite = CreateThreatDiamondSprite(
+                new Color(1f, 1f, 1f, 0.1f),
+                new Color(1f, 1f, 1f, 0.38f),
+                new Color(1f, 1f, 1f, 0.76f));
+            return enemyAttackThreatSprite;
+        }
+
+        public static Sprite GetEnemyMoveThreatSprite()
+        {
+            if (enemyMoveThreatSprite != null)
+            {
+                return enemyMoveThreatSprite;
+            }
+
+            enemyMoveThreatSprite = CreateThreatDiamondSprite(
+                new Color(1f, 1f, 1f, 0.18f),
+                new Color(1f, 1f, 1f, 0.4f),
+                new Color(1f, 1f, 1f, 0.64f));
+            return enemyMoveThreatSprite;
+        }
+
+        public static Sprite GetEnemyAttackOnlyThreatSprite()
+        {
+            if (enemyAttackOnlyThreatSprite != null)
+            {
+                return enemyAttackOnlyThreatSprite;
+            }
+
+            enemyAttackOnlyThreatSprite = CreateThreatDiamondSprite(
+                new Color(1f, 1f, 1f, 0.14f),
+                new Color(1f, 1f, 1f, 0.34f),
+                new Color(1f, 1f, 1f, 0.58f));
+            return enemyAttackOnlyThreatSprite;
+        }
+
+        private static Sprite CreateThreatDiamondSprite(Color fill, Color innerEdge, Color outerEdge)
+        {
             var texture = CreateTexture();
-            var fill = new Color(1f, 1f, 1f, 0.12f);
-            var innerEdge = new Color(1f, 1f, 1f, 0.46f);
-            var outerEdge = new Color(1f, 1f, 1f, 1f);
             for (var y = 0; y < TextureHeight; y++)
             {
                 for (var x = 0; x < TextureWidth; x++)
@@ -194,8 +232,69 @@ namespace SRPG.Visual
             }
 
             texture.Apply();
-            enemyAttackThreatSprite = CreateSprite(texture);
-            return enemyAttackThreatSprite;
+            return CreateSprite(texture);
+        }
+
+        public static Sprite GetGuardianReactionReachableHighlightSprite()
+        {
+            if (guardianReactionReachableHighlightSprite != null)
+            {
+                return guardianReactionReachableHighlightSprite;
+            }
+
+            guardianReactionReachableHighlightSprite = CreateGuardianReactionSprite(
+                new Color(1f, 1f, 1f, 0.22f),
+                new Color(1f, 1f, 1f, 0.42f),
+                new Color(1f, 1f, 1f, 0.82f),
+                new Color(1f, 1f, 1f, 0.95f));
+            return guardianReactionReachableHighlightSprite;
+        }
+
+        public static Sprite GetGuardianReactionBlockedHighlightSprite()
+        {
+            if (guardianReactionBlockedHighlightSprite != null)
+            {
+                return guardianReactionBlockedHighlightSprite;
+            }
+
+            guardianReactionBlockedHighlightSprite = CreateGuardianReactionSprite(
+                new Color(1f, 1f, 1f, 0.22f),
+                new Color(1f, 1f, 1f, 0.44f),
+                new Color(1f, 1f, 1f, 0.7f),
+                new Color(1f, 1f, 1f, 0.84f));
+            return guardianReactionBlockedHighlightSprite;
+        }
+
+        private static Sprite CreateGuardianReactionSprite(Color centerWash, Color innerEdge, Color outerEdge, Color cornerTick)
+        {
+            var texture = CreateTexture();
+            for (var y = 0; y < TextureHeight; y++)
+            {
+                for (var x = 0; x < TextureWidth; x++)
+                {
+                    var distance = GetDiamondDistance(x, y);
+                    if (distance > 1f)
+                    {
+                        continue;
+                    }
+
+                    var color = distance > 0.88f
+                        ? outerEdge
+                        : distance > 0.76f ? innerEdge : centerWash;
+
+                    var nearHorizontalCorner = x <= 2 || x >= TextureWidth - 3;
+                    var nearVerticalCorner = y <= 1 || y >= TextureHeight - 2;
+                    if (distance > 0.78f && (nearHorizontalCorner || nearVerticalCorner))
+                    {
+                        color = cornerTick;
+                    }
+
+                    texture.SetPixel(x, y, color);
+                }
+            }
+
+            texture.Apply();
+            return CreateSprite(texture);
         }
 
         public static Sprite GetMoveThreatOverlapSprite()
@@ -208,7 +307,7 @@ namespace SRPG.Visual
             var texture = CreateTexture();
             var moveFill = new Color(0.16f, 0.62f, 1f, 0.14f);
             var moveEdge = new Color(0.42f, 0.78f, 1f, 0.44f);
-            var dangerEdge = new Color(1f, 0.22f, 0.1f, 0.94f);
+            var dangerEdge = new Color(0.95f, 0.18f, 0.08f, 0.72f);
             for (var y = 0; y < TextureHeight; y++)
             {
                 for (var x = 0; x < TextureWidth; x++)

@@ -553,14 +553,7 @@ namespace SRPG.Battle
                 ? selectedUnit
                 : null;
 
-            var guardianReactionTiles = selectedEnemy != null
-                ? gridManager.GetGuardianReactionTiles(selectedEnemy)
-                : gridManager.GetGuardianReactionTiles();
-
-            foreach (var tile in guardianReactionTiles)
-            {
-                tile.SetGuardianReactionHighlight(true);
-            }
+            HighlightGuardianReactionTiles(selectedEnemy);
 
             var enemyAttackThreatTiles = selectedEnemy != null
                 ? gridManager.GetEnemyThreatTiles(selectedEnemy)
@@ -581,6 +574,57 @@ namespace SRPG.Battle
             }
 
             enemyIntentPreview?.Refresh(gridManager, selectedEnemy);
+        }
+
+        private void HighlightGuardianReactionTiles(Unit selectedEnemy)
+        {
+            var reachableGuardianTiles = new HashSet<Tile>();
+            var blockedGuardianTiles = new HashSet<Tile>();
+
+            if (selectedEnemy != null)
+            {
+                AddGuardianReactionDisplayTiles(selectedEnemy, reachableGuardianTiles, blockedGuardianTiles);
+            }
+            else
+            {
+                foreach (var enemy in gridManager.GetUnitsByFaction(Faction.Enemy))
+                {
+                    AddGuardianReactionDisplayTiles(enemy, reachableGuardianTiles, blockedGuardianTiles);
+                }
+            }
+
+            blockedGuardianTiles.ExceptWith(reachableGuardianTiles);
+
+            foreach (var tile in blockedGuardianTiles)
+            {
+                tile.SetGuardianReactionHighlight(true, false);
+            }
+
+            foreach (var tile in reachableGuardianTiles)
+            {
+                tile.SetGuardianReactionHighlight(true, true);
+            }
+        }
+
+        private void AddGuardianReactionDisplayTiles(Unit enemy, HashSet<Tile> reachableGuardianTiles, HashSet<Tile> blockedGuardianTiles)
+        {
+            if (enemy == null || enemy.IsDead || enemy.Faction != Faction.Enemy || enemy.EnemyAIType != EnemyAIType.Guardian)
+            {
+                return;
+            }
+
+            var reachableTiles = new HashSet<Tile>(gridManager.GetReachableTiles(enemy.GridPosition, enemy.MovePower));
+            foreach (var tile in gridManager.GetGuardianReactionTiles(enemy))
+            {
+                if (reachableTiles.Contains(tile))
+                {
+                    reachableGuardianTiles.Add(tile);
+                }
+                else
+                {
+                    blockedGuardianTiles.Add(tile);
+                }
+            }
         }
 
         private void HandleUnitRegistered(Unit unit)
