@@ -24,8 +24,8 @@ namespace SRPG.Grid
             new Vector2(-0.5f, 0f)
         };
 
-        [SerializeField] private Color baseColor = new Color(0.36f, 0.43f, 0.49f, 1f);
-        [SerializeField] private Color normalTerrainColor = new Color(0.36f, 0.43f, 0.49f, 1f);
+        [SerializeField] private Color baseColor = new Color(0.4f, 0.47f, 0.52f, 1f);
+        [SerializeField] private Color normalTerrainColor = new Color(0.4f, 0.47f, 0.52f, 1f);
         [SerializeField] private Color obstacleTerrainColor = new Color(0.27f, 0.25f, 0.21f, 1f);
         [SerializeField] private Color goalTerrainColor = new Color(0.04f, 0.74f, 0.6f, 1f);
         [SerializeField] private Color moveHighlightedColor = new Color(0.16f, 0.62f, 1f, 0.42f);
@@ -339,7 +339,7 @@ namespace SRPG.Grid
             else if (terrainType == TileTerrainType.Normal)
             {
                 terrainDetailRenderer.sprite = TileVisualFactory.GetGroundDetailSprite();
-                terrainDetailRenderer.color = new Color(0.48f, 0.56f, 0.62f, 0.08f);
+                terrainDetailRenderer.color = new Color(0.56f, 0.63f, 0.68f, 0.055f);
             }
 
             if (terrainType == TileTerrainType.Goal)
@@ -358,7 +358,7 @@ namespace SRPG.Grid
                 case TileTerrainType.Goal:
                     return new Color(0.015f, 0.18f, 0.16f, 0.98f);
                 default:
-                    return new Color(0.038f, 0.052f, 0.064f, 1f);
+                    return new Color(0.055f, 0.072f, 0.086f, 1f);
             }
         }
 

@@ -45,14 +45,14 @@ namespace SRPG.Visual
                         continue;
                     }
 
-                    var shade = 0.78f + y * 0.006f;
+                    var shade = 0.82f + y * 0.004f;
                     if (distance > 0.82f)
                     {
-                        shade = y >= TextureHeight * 0.5f ? 0.52f : 0.38f;
+                        shade = y >= TextureHeight * 0.5f ? 0.62f : 0.5f;
                     }
                     else if (distance > 0.7f)
                     {
-                        shade = y >= TextureHeight * 0.5f ? 0.7f : 0.54f;
+                        shade = y >= TextureHeight * 0.5f ? 0.74f : 0.62f;
                     }
                     else if ((x * 11 + y * 19) % 73 == 0)
                     {
@@ -97,10 +97,10 @@ namespace SRPG.Visual
                     {
                         var lowerSide = y < TextureHeight * 0.44f;
                         var edgeBand = distance > 0.7f;
-                        var shade = lowerSide ? 0.16f : 0.3f;
+                        var shade = lowerSide ? 0.24f : 0.38f;
                         if (edgeBand)
                         {
-                            shade -= 0.04f;
+                            shade -= 0.025f;
                         }
 
                         texture.SetPixel(x, y, new Color(shade, shade, shade, 1f));

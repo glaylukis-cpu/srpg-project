@@ -13,10 +13,10 @@ namespace SRPG.Grid
         [SerializeField] private int width = 8;
         [SerializeField] private int height = 8;
         [SerializeField] private float cellSize = 1f;
-        [SerializeField] private Color lightTileColor = new Color(0.36f, 0.43f, 0.49f, 1f);
-        [SerializeField] private Color darkTileColor = new Color(0.29f, 0.36f, 0.42f, 1f);
-        [SerializeField] private Color boardSideColor = new Color(0.046f, 0.06f, 0.072f, 1f);
-        [SerializeField] private Color boardEdgeHighlightColor = new Color(0.68f, 0.78f, 0.84f, 0.42f);
+        [SerializeField] private Color lightTileColor = new Color(0.4f, 0.47f, 0.52f, 1f);
+        [SerializeField] private Color darkTileColor = new Color(0.33f, 0.4f, 0.46f, 1f);
+        [SerializeField] private Color boardSideColor = new Color(0.062f, 0.082f, 0.096f, 1f);
+        [SerializeField] private Color boardEdgeHighlightColor = new Color(0.58f, 0.69f, 0.76f, 0.36f);
 
         [Header("Prototype")]
         [SerializeField] private bool generateOnStart = true;
@@ -617,11 +617,11 @@ namespace SRPG.Grid
                 switch (variant)
                 {
                     case 0:
-                        return new Color(0.37f, 0.44f, 0.5f, 1f);
+                        return new Color(0.41f, 0.48f, 0.53f, 1f);
                     case 1:
-                        return new Color(0.34f, 0.41f, 0.47f, 1f);
+                        return new Color(0.38f, 0.45f, 0.51f, 1f);
                     case 2:
-                        return new Color(0.36f, 0.42f, 0.49f, 1f);
+                        return new Color(0.39f, 0.46f, 0.52f, 1f);
                     default:
                         return lightTileColor;
                 }
@@ -630,11 +630,11 @@ namespace SRPG.Grid
             switch (variant)
             {
                 case 0:
-                    return new Color(0.28f, 0.35f, 0.41f, 1f);
+                    return new Color(0.32f, 0.39f, 0.45f, 1f);
                 case 1:
-                    return new Color(0.31f, 0.38f, 0.44f, 1f);
+                    return new Color(0.35f, 0.42f, 0.48f, 1f);
                 case 2:
-                    return new Color(0.3f, 0.36f, 0.43f, 1f);
+                    return new Color(0.34f, 0.4f, 0.47f, 1f);
                 default:
                     return darkTileColor;
             }
@@ -674,15 +674,15 @@ namespace SRPG.Grid
             var leftSideDrop = 0.86f;
             var rightSideDrop = 0.82f;
 
-            CreateBoardFace("BoardFrontLeftDropShadow", leftVertex + new Vector3(0.16f, -leftSideDrop - 0.08f, 0.03f), frontVertex + new Vector3(0.16f, -leftSideDrop - 0.08f, 0.03f), 0.16f, new Color(0f, 0.004f, 0.01f, 0.24f), -995);
-            CreateBoardFace("BoardFrontRightDropShadow", frontVertex + new Vector3(0.16f, -rightSideDrop - 0.08f, 0.03f), rightVertex + new Vector3(0.16f, -rightSideDrop - 0.08f, 0.03f), 0.15f, new Color(0f, 0.004f, 0.01f, 0.22f), -995);
+            CreateBoardFace("BoardFrontLeftDropShadow", leftVertex + new Vector3(0.16f, -leftSideDrop - 0.08f, 0.03f), frontVertex + new Vector3(0.16f, -leftSideDrop - 0.08f, 0.03f), 0.16f, new Color(0f, 0.006f, 0.012f, 0.2f), -995);
+            CreateBoardFace("BoardFrontRightDropShadow", frontVertex + new Vector3(0.16f, -rightSideDrop - 0.08f, 0.03f), rightVertex + new Vector3(0.16f, -rightSideDrop - 0.08f, 0.03f), 0.15f, new Color(0f, 0.006f, 0.012f, 0.18f), -995);
 
             CreateBoardFace("BoardFrontLeftSide", leftVertex, frontVertex, leftSideDrop, boardSideColor, -994);
-            CreateBoardFace("BoardFrontRightSide", frontVertex, rightVertex, rightSideDrop, new Color(0.058f, 0.078f, 0.092f, 1f), -994);
-            CreateBoardStrip("BoardFrontLeftTopSeam", leftX, leftY - 0.035f, frontX, frontY - 0.035f, 0.045f, 0.075f, new Color(0.006f, 0.01f, 0.014f, 0.92f), -993);
-            CreateBoardStrip("BoardFrontRightTopSeam", frontX, frontY - 0.035f, rightX, rightY - 0.035f, 0.045f, 0.075f, new Color(0.006f, 0.01f, 0.014f, 0.88f), -993);
-            CreateBoardStrip("BoardFrontLeftBottomEdge", leftX, leftY - leftSideDrop, frontX, frontY - leftSideDrop, 0.045f, 0.14f, new Color(0.004f, 0.006f, 0.008f, 1f), -993);
-            CreateBoardStrip("BoardFrontRightBottomEdge", frontX, frontY - rightSideDrop, rightX, rightY - rightSideDrop, 0.045f, 0.13f, new Color(0.004f, 0.006f, 0.008f, 0.98f), -993);
+            CreateBoardFace("BoardFrontRightSide", frontVertex, rightVertex, rightSideDrop, new Color(0.074f, 0.096f, 0.112f, 1f), -994);
+            CreateBoardStrip("BoardFrontLeftTopSeam", leftX, leftY - 0.035f, frontX, frontY - 0.035f, 0.045f, 0.075f, new Color(0.018f, 0.026f, 0.032f, 0.82f), -993);
+            CreateBoardStrip("BoardFrontRightTopSeam", frontX, frontY - 0.035f, rightX, rightY - 0.035f, 0.045f, 0.075f, new Color(0.02f, 0.028f, 0.034f, 0.78f), -993);
+            CreateBoardStrip("BoardFrontLeftBottomEdge", leftX, leftY - leftSideDrop, frontX, frontY - leftSideDrop, 0.045f, 0.14f, new Color(0.01f, 0.014f, 0.018f, 0.96f), -993);
+            CreateBoardStrip("BoardFrontRightBottomEdge", frontX, frontY - rightSideDrop, rightX, rightY - rightSideDrop, 0.045f, 0.13f, new Color(0.012f, 0.016f, 0.02f, 0.92f), -993);
 
             CreateBoardStrip("BoardFrontLeftEdgeHighlight", leftX, leftY + 0.015f, frontX, frontY + 0.015f, 0.03f, 0.055f, boardEdgeHighlightColor, -993);
             CreateBoardStrip("BoardFrontRightEdgeHighlight", frontX, frontY + 0.015f, rightX, rightY + 0.015f, 0.03f, 0.055f, boardEdgeHighlightColor, -993);
