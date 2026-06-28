@@ -44,6 +44,7 @@ namespace SRPG.UI
         [SerializeField] private Image battleControlsPanel;
         [SerializeField] private Image battleAttackPreviewFrame;
         [SerializeField] private Image battleAttackPreviewPanel;
+        [SerializeField] private Image battleResultBackdrop;
         [SerializeField] private Image battleResultFrame;
         [SerializeField] private Image battleResultPanel;
         [SerializeField] private Text stageSelectText;
@@ -118,6 +119,7 @@ namespace SRPG.UI
         private bool optionsOverlayInitialized;
         private bool stageSelectObjectsInitialized;
         private bool tutorialHintActive;
+        private bool resultVisible;
         private int tutorialHintStep = -1;
         private StageData currentStageData;
         private int currentStageNumber;
@@ -329,8 +331,10 @@ namespace SRPG.UI
             HideTitleScreen();
             HideStageIntro();
             HideTutorialHint();
+            resultVisible = true;
+            ApplyResultPanelStyle(result);
             SetResultPanelVisible(true);
-            resultText.fontSize = result != null && result.StartsWith("ALL CLEAR") ? 46 : 32;
+            resultText.fontSize = 16;
             resultText.text = BuildResultText(result);
             resultText.enabled = true;
         }
@@ -350,8 +354,10 @@ namespace SRPG.UI
             HideStageIntro();
             HideTutorialHint();
             UpdateSessionBestResult(result, rating, turnNumber, playersAlive, playerHpTotal);
+            resultVisible = true;
+            ApplyResultPanelStyle(result);
             SetResultPanelVisible(true);
-            resultText.fontSize = 30;
+            resultText.fontSize = 15;
             resultText.text = BuildResultText(result, rating, turnNumber, turnLimit, playersAlive, playerHpTotal, enemiesAlive, enemyHpTotal);
             resultText.enabled = true;
         }
@@ -744,6 +750,7 @@ namespace SRPG.UI
         public void ClearResult()
         {
             EnsureTextObjects();
+            resultVisible = false;
             resultText.text = string.Empty;
             resultText.enabled = false;
             SetResultPanelVisible(false);
@@ -978,8 +985,11 @@ namespace SRPG.UI
                 resultText = CreateText("ResultText", Vector2.zero, new Vector2(0.5f, 0.5f), TextAnchor.MiddleCenter, 34, new Vector2(980f, 430f));
                 resultText.enabled = false;
             }
-            resultText.color = ThemeTextPrimary();
-            ConfigureRect(resultText.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(700f, 320f));
+            EnsureResultTextParent();
+            resultText.alignment = TextAnchor.MiddleCenter;
+            resultText.lineSpacing = 1.08f;
+            resultText.color = BattleHudPrimaryTextColor();
+            ConfigureRect(resultText.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(700f, 300f));
 
             if (stageIntroText == null)
             {
@@ -1019,12 +1029,22 @@ namespace SRPG.UI
             EnsurePanelPair(ref battleLogFrame, ref battleLogPanel, "BattleLog", new Vector2(-124f, -30f), new Vector2(-124f, -30f), new Vector2(1f, 0.5f), 228f, 132f, BattleHudInset);
             EnsurePanelPair(ref battleControlsFrame, ref battleControlsPanel, "BattleControls", new Vector2(-124f, 88f), new Vector2(-124f, 88f), new Vector2(1f, 0f), 228f, 148f, BattleHudInset);
             EnsurePanelPair(ref battleAttackPreviewFrame, ref battleAttackPreviewPanel, "BattleAttackPreview", new Vector2(0f, 58f), new Vector2(0f, 58f), new Vector2(0.5f, 0f), 396f, 72f, BattleHudInset);
-            EnsurePanelPair(ref battleResultFrame, ref battleResultPanel, "BattleResult", Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), 820f, 400f, 7f);
-            battleResultFrame.color = new Color(0.64f, 0.47f, 0.2f, 0.76f);
-            battleResultPanel.color = new Color(0.025f, 0.022f, 0.018f, 0.88f);
+            if (battleResultBackdrop == null)
+            {
+                battleResultBackdrop = CreatePanel("BattleResultBackdrop", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(1280f, 720f), new Color(0f, 0.006f, 0.012f, 0f));
+            }
+            battleResultBackdrop.color = new Color(0f, 0.006f, 0.012f, 0f);
+            EnsurePanelPair(ref battleResultFrame, ref battleResultPanel, "BattleResult", Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), 820f, 400f, 10f);
+            if (!resultVisible)
+            {
+                ApplyResultPanelStyle(string.Empty);
+            }
 
             SetAttackPreviewPanelVisible(false);
-            SetResultPanelVisible(false);
+            if (!resultVisible)
+            {
+                SetResultPanelVisible(false);
+            }
         }
 
         private void EnsureTutorialHintObjects()
@@ -1163,23 +1183,152 @@ namespace SRPG.UI
 
         private string BuildResultText(string result)
         {
-            if (string.IsNullOrEmpty(result) || currentStageData == null || result.StartsWith("ALL CLEAR"))
+            if (string.IsNullOrEmpty(result))
             {
                 return result;
             }
 
+            if (currentStageData == null || result.StartsWith("ALL CLEAR"))
+            {
+                return BuildSimpleResultText(result);
+            }
+
             var builder = new StringBuilder();
-            builder.AppendLine($"<color=#FFD98F>{result}</color>");
+            AppendResultHeader(builder, result);
             builder.AppendLine();
-            builder.AppendLine("<color=#FFD98F>Result Summary</color>");
-            builder.AppendLine($"Stage: {currentStageNumber} / {currentTotalStages} - {currentStageData.DisplayName}");
-            builder.AppendLine($"Theme: {currentStageData.ThemeName}");
-            builder.AppendLine($"Difficulty: {currentStageData.DifficultyLabel}");
+            builder.AppendLine("<size=17><color=#EBC77A>Result Summary</color></size>");
+            builder.AppendLine($"<color=#BFC6C2>Stage</color>      {currentStageNumber} / {currentTotalStages} - {currentStageData.DisplayName}");
+            builder.AppendLine($"<color=#BFC6C2>Theme</color>      {currentStageData.ThemeName}");
             builder.AppendLine(currentStageData.VictoryCondition == VictoryConditionType.ReachGoal
-                ? "Objective: Reach a goal tile"
-                : "Objective: Defeat all enemies");
-            builder.Append($"Limit: {BuildLimitText(currentStageData)}");
+                ? "<color=#BFC6C2>Objective</color>  Reach a goal tile"
+                : "<color=#BFC6C2>Objective</color>  Defeat all enemies");
+            builder.Append($"<color=#BFC6C2>Limit</color>      {BuildLimitText(currentStageData)}");
             return builder.ToString();
+        }
+
+        private string BuildSimpleResultText(string result)
+        {
+            var builder = new StringBuilder();
+            AppendResultHeader(builder, result);
+            return builder.ToString().TrimEnd();
+        }
+
+        private void AppendResultHeader(StringBuilder builder, string result)
+        {
+            var lines = result.Split('\n');
+            var title = lines.Length > 0 ? lines[0].Trim() : result.Trim();
+            builder.AppendLine($"<size={GetResultTitleSize(result)}><color={GetResultTitleColor(result)}>{title}</color></size>");
+
+            for (var i = 1; i < lines.Length; i++)
+            {
+                var line = lines[i].Trim();
+                if (line.Length == 0)
+                {
+                    continue;
+                }
+
+                builder.AppendLine($"<size=16><color=#D8D2C4>{line}</color></size>");
+            }
+        }
+
+        private int GetResultTitleSize(string result)
+        {
+            return result != null && result.StartsWith("ALL CLEAR") ? 44 : 38;
+        }
+
+        private string GetResultTitleColor(string result)
+        {
+            if (result != null && result.StartsWith("DEFEAT"))
+            {
+                return "#D47A68";
+            }
+
+            if (result != null && result.StartsWith("ALL CLEAR"))
+            {
+                return "#F4E4A5";
+            }
+
+            return "#F0C66B";
+        }
+
+        private void ApplyResultPanelStyle(string result)
+        {
+            EnsureResultTextParent();
+
+            if (battleResultFrame != null)
+            {
+                battleResultFrame.color = GetResultFrameColor(result);
+                ConfigurePanelRect(battleResultFrame.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), GetResultFrameSize(result));
+            }
+
+            if (battleResultPanel != null)
+            {
+                battleResultPanel.color = new Color(0.055f, 0.043f, 0.032f, 0.98f);
+                ConfigurePanelRect(battleResultPanel.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), GetResultPanelSize(result));
+            }
+
+            if (battleResultBackdrop != null)
+            {
+                battleResultBackdrop.color = new Color(0f, 0.006f, 0.012f, 0.42f);
+                ConfigurePanelRect(battleResultBackdrop.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(1280f, 720f));
+            }
+
+            if (resultText != null)
+            {
+                resultText.alignment = TextAnchor.MiddleCenter;
+                resultText.lineSpacing = 1f;
+                resultText.color = BattleHudPrimaryTextColor();
+                ConfigureRect(resultText.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), GetResultTextSize(result));
+            }
+        }
+
+        private void EnsureResultTextParent()
+        {
+            if (resultText == null || battleResultPanel == null)
+            {
+                return;
+            }
+
+            if (resultText.transform.parent != battleResultPanel.transform)
+            {
+                resultText.transform.SetParent(battleResultPanel.transform, false);
+            }
+        }
+
+        private Color GetResultFrameColor(string result)
+        {
+            if (result != null && result.StartsWith("DEFEAT"))
+            {
+                return new Color(0.58f, 0.25f, 0.18f, 0.96f);
+            }
+
+            if (result != null && result.StartsWith("ALL CLEAR"))
+            {
+                return new Color(0.82f, 0.68f, 0.34f, 0.98f);
+            }
+
+            return new Color(0.72f, 0.54f, 0.24f, 0.98f);
+        }
+
+        private Vector2 GetResultFrameSize(string result)
+        {
+            return result != null && result.StartsWith("ALL CLEAR")
+                ? new Vector2(680f, 260f)
+                : new Vector2(860f, 420f);
+        }
+
+        private Vector2 GetResultPanelSize(string result)
+        {
+            return result != null && result.StartsWith("ALL CLEAR")
+                ? new Vector2(652f, 232f)
+                : new Vector2(832f, 392f);
+        }
+
+        private Vector2 GetResultTextSize(string result)
+        {
+            return result != null && result.StartsWith("ALL CLEAR")
+                ? new Vector2(590f, 180f)
+                : new Vector2(740f, 320f);
         }
 
         private string CleanPredictionText(string prediction)
@@ -1254,12 +1403,10 @@ namespace SRPG.UI
             var builder = new StringBuilder();
             builder.AppendLine(BuildResultText(result));
             builder.AppendLine();
-            builder.AppendLine($"Rating     {rating}");
-            builder.AppendLine($"Turn       {turnNumber} / {turnLimit}");
-            builder.AppendLine($"Survivors  {playersAlive}");
-            builder.AppendLine($"HP Total   {playerHpTotal}");
-            builder.AppendLine($"Enemies    {enemiesAlive}");
-            builder.Append($"Enemy HP   {enemyHpTotal}");
+            builder.AppendLine($"<color=#EBC77A>Rating</color>     {rating}");
+            builder.AppendLine($"<color=#BFC6C2>Turn</color>       {turnNumber} / {turnLimit}");
+            builder.AppendLine($"<color=#BFC6C2>Survivors</color>  {playersAlive}    <color=#BFC6C2>HP Total</color> {playerHpTotal}");
+            builder.Append($"<color=#BFC6C2>Enemies</color>    {enemiesAlive}    <color=#BFC6C2>Enemy HP</color> {enemyHpTotal}");
             return builder.ToString();
         }
 
@@ -2138,7 +2285,7 @@ namespace SRPG.UI
             {
                 SetTextEnabled(attackPreviewText, false);
                 SetAttackPreviewPanelVisible(false);
-                SetResultPanelVisible(false);
+                SetResultPanelVisible(resultVisible);
             }
         }
 
@@ -2157,8 +2304,17 @@ namespace SRPG.UI
 
         private void SetResultPanelVisible(bool visible)
         {
+            SetImageEnabled(battleResultBackdrop, visible);
             SetImageEnabled(battleResultFrame, visible);
             SetImageEnabled(battleResultPanel, visible);
+            SetTextEnabled(resultText, visible && resultVisible);
+            if (visible)
+            {
+                BringToFront(battleResultBackdrop);
+                BringToFront(battleResultFrame);
+                BringToFront(battleResultPanel);
+                BringToFront(resultText);
+            }
         }
 
         private void EnsureTitleOverlayObjects()
