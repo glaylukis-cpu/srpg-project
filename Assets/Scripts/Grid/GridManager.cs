@@ -663,7 +663,6 @@ namespace SRPG.Grid
             var frontY = -tileHalfHeight;
             var rightX = (width - 1) * IsoHorizontalStep * cellSize + tileHalfWidth;
             var rightY = (width - 1) * IsoVerticalStep * cellSize;
-            var backX = 0f;
             var backY = (width + height - 2) * IsoVerticalStep * cellSize + tileHalfHeight;
             var leftX = -(height - 1) * IsoHorizontalStep * cellSize - tileHalfWidth;
             var leftY = (height - 1) * IsoVerticalStep * cellSize;
