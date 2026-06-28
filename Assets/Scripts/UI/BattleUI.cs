@@ -26,6 +26,8 @@ namespace SRPG.UI
         [SerializeField] private Text attackPreviewText;
         [SerializeField] private Text resultText;
         [SerializeField] private Text stageIntroText;
+        [SerializeField] private Image stageIntroFrame;
+        [SerializeField] private Image stageIntroPanel;
         [SerializeField] private Image tutorialHintFrame;
         [SerializeField] private Image tutorialHintPanel;
         [SerializeField] private Text tutorialHintText;
@@ -370,17 +372,18 @@ namespace SRPG.UI
             HideStageSelect();
 
             var builder = new StringBuilder();
-            builder.AppendLine($"Stage {currentStage} / {totalStages}");
+            builder.AppendLine($"<size=16><color=#EBC77A>Stage {currentStage} / {totalStages}</color></size>");
             if (data != null)
             {
-                builder.AppendLine(data.DisplayName);
-                builder.AppendLine($"Theme: {data.ThemeName}");
-                builder.AppendLine($"Difficulty: {data.DifficultyLabel}");
+                builder.AppendLine($"<size=24><color=#F0C66B>{data.DisplayName}</color></size>");
+                builder.AppendLine($"<color=#BFC6C2>Theme</color>  {data.ThemeName}");
+                builder.AppendLine($"<color=#BFC6C2>Difficulty</color>  {data.DifficultyLabel}");
                 AppendDescriptionLine(builder, data.Description);
             }
 
+            builder.AppendLine();
             builder.AppendLine(BuildObjectiveText(data, false));
-            builder.Append($"Limit: {BuildLimitText(data)}");
+            builder.Append($"<color=#BFC6C2>Limit</color>  {BuildLimitText(data)}");
 
             if (stageIntroCoroutine != null)
             {
@@ -389,6 +392,7 @@ namespace SRPG.UI
             }
 
             stageIntroText.text = builder.ToString();
+            SetStageIntroPanelVisible(true);
             stageIntroText.enabled = true;
             stageIntroCoroutine = StartCoroutine(HideStageIntroAfterDelay());
         }
@@ -768,6 +772,7 @@ namespace SRPG.UI
 
             stageIntroText.text = string.Empty;
             stageIntroText.enabled = false;
+            SetStageIntroPanelVisible(false);
         }
 
         private void BeginTutorialHintForStage(int stageNumber)
@@ -993,10 +998,15 @@ namespace SRPG.UI
 
             if (stageIntroText == null)
             {
-                stageIntroText = CreateText("StageIntroText", Vector2.zero, new Vector2(0.5f, 0.5f), TextAnchor.MiddleCenter, 30, new Vector2(940f, 330f));
+                stageIntroText = CreateText("StageIntroText", Vector2.zero, new Vector2(0.5f, 0.5f), TextAnchor.MiddleCenter, 17, new Vector2(610f, 230f));
                 stageIntroText.enabled = false;
             }
-            stageIntroText.color = ThemeTextPrimary();
+            EnsureStageIntroPanelObjects();
+            stageIntroText.fontSize = 17;
+            stageIntroText.alignment = TextAnchor.MiddleCenter;
+            stageIntroText.lineSpacing = 1.05f;
+            stageIntroText.color = BattleHudPrimaryTextColor();
+            ConfigureRect(stageIntroText.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(610f, 230f));
 
             EnsureTutorialHintObjects();
 
@@ -1073,6 +1083,30 @@ namespace SRPG.UI
             ConfigureRect(tutorialHintText.rectTransform, new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(462f, 44f));
 
             SetTutorialHintVisible(tutorialHintActive);
+        }
+
+        private void EnsureStageIntroPanelObjects()
+        {
+            if (stageIntroFrame == null)
+            {
+                stageIntroFrame = CreatePanel("StageIntroFrame", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(680f, 304f), new Color(0.64f, 0.46f, 0.18f, 0.72f));
+            }
+            stageIntroFrame.color = new Color(0.64f, 0.46f, 0.18f, 0.72f);
+            ConfigurePanelRect(stageIntroFrame.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(680f, 304f));
+
+            if (stageIntroPanel == null)
+            {
+                stageIntroPanel = CreatePanel("StageIntroPanel", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(656f, 280f), new Color(0.045f, 0.037f, 0.028f, 0.9f));
+            }
+            stageIntroPanel.color = new Color(0.045f, 0.037f, 0.028f, 0.9f);
+            ConfigurePanelRect(stageIntroPanel.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(656f, 280f));
+
+            if (stageIntroText != null && stageIntroText.transform.parent != stageIntroPanel.transform)
+            {
+                stageIntroText.transform.SetParent(stageIntroPanel.transform, false);
+            }
+
+            SetStageIntroPanelVisible(stageIntroText != null && stageIntroText.enabled);
         }
 
         private void EnsurePanelPair(ref Image frame, ref Image panel, string baseName, Vector2 framePosition, Vector2 panelPosition, Vector2 anchor, float width, float height, float inset)
@@ -1514,6 +1548,7 @@ namespace SRPG.UI
             yield return new WaitForSeconds(StageIntroDuration);
             stageIntroText.text = string.Empty;
             stageIntroText.enabled = false;
+            SetStageIntroPanelVisible(false);
             stageIntroCoroutine = null;
         }
 
@@ -2294,6 +2329,19 @@ namespace SRPG.UI
             SetImageEnabled(tutorialHintFrame, visible);
             SetImageEnabled(tutorialHintPanel, visible);
             SetTextEnabled(tutorialHintText, visible);
+        }
+
+        private void SetStageIntroPanelVisible(bool visible)
+        {
+            SetImageEnabled(stageIntroFrame, visible);
+            SetImageEnabled(stageIntroPanel, visible);
+            SetTextEnabled(stageIntroText, visible);
+            if (visible)
+            {
+                BringToFront(stageIntroFrame);
+                BringToFront(stageIntroPanel);
+                BringToFront(stageIntroText);
+            }
         }
 
         private void SetAttackPreviewPanelVisible(bool visible)
