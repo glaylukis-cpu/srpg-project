@@ -95,7 +95,7 @@ namespace SRPG.UI
         private const int MaxStageSelectRows = 6;
         private const int StagePreviewSize = 8;
         private const float StageIntroDuration = 1.8f;
-        private const float BattleHudInset = 4f;
+        private const float BattleHudInset = 3f;
         private const int BattleHudTitleFontSize = 12;
         private const int BattleHudBodyFontSize = 11;
         private const int BattleHudSmallFontSize = 9;
@@ -160,6 +160,41 @@ namespace SRPG.UI
         private Color ThemeTextMutedGold()
         {
             return new Color(1f, 0.88f, 0.64f, 1f);
+        }
+
+        private Color BattleHudBackdropColor()
+        {
+            return new Color(0.003f, 0.007f, 0.014f, 0.14f);
+        }
+
+        private Color BattleHudPanelColor()
+        {
+            return new Color(0.025f, 0.022f, 0.018f, 0.82f);
+        }
+
+        private Color BattleHudFrameColor()
+        {
+            return new Color(0.58f, 0.42f, 0.18f, 0.62f);
+        }
+
+        private Color BattleHudPrimaryTextColor()
+        {
+            return new Color(0.93f, 0.94f, 0.92f, 1f);
+        }
+
+        private Color BattleHudSecondaryTextColor()
+        {
+            return new Color(0.77f, 0.8f, 0.78f, 1f);
+        }
+
+        private Color BattleHudAccentTextColor()
+        {
+            return new Color(0.94f, 0.74f, 0.38f, 1f);
+        }
+
+        private Color BattleHudMutedAccentTextColor()
+        {
+            return new Color(0.84f, 0.68f, 0.42f, 1f);
         }
 
         private Color ThemeSelectionBlue()
@@ -851,7 +886,7 @@ namespace SRPG.UI
                 turnText = CreateText("TurnText", new Vector2(24f, -72f), new Vector2(0f, 1f), TextAnchor.UpperLeft, 15, new Vector2(196f, 42f));
             }
             turnText.fontSize = 15;
-            turnText.color = ThemeTextPrimary();
+            turnText.color = BattleHudPrimaryTextColor();
             ConfigureRect(turnText.rectTransform, new Vector2(24f, -72f), new Vector2(0f, 1f), new Vector2(196f, 42f));
 
             if (stageText == null)
@@ -859,7 +894,7 @@ namespace SRPG.UI
                 stageText = CreateText("StageText", new Vector2(24f, -20f), new Vector2(0f, 1f), TextAnchor.UpperLeft, 15, new Vector2(196f, 50f));
             }
             stageText.fontSize = 15;
-            stageText.color = ThemeTextAccentGold();
+            stageText.color = BattleHudAccentTextColor();
             ConfigureRect(stageText.rectTransform, new Vector2(24f, -20f), new Vector2(0f, 1f), new Vector2(196f, 50f));
 
             if (objectiveText == null)
@@ -867,7 +902,7 @@ namespace SRPG.UI
                 objectiveText = CreateText("ObjectiveText", new Vector2(26f, -146f), new Vector2(0f, 1f), TextAnchor.UpperLeft, BattleHudBodyFontSize, new Vector2(196f, 132f));
             }
             objectiveText.fontSize = BattleHudBodyFontSize;
-            objectiveText.color = ThemeTextPrimary();
+            objectiveText.color = BattleHudSecondaryTextColor();
             ConfigureRect(objectiveText.rectTransform, new Vector2(26f, -146f), new Vector2(0f, 1f), new Vector2(196f, 132f));
 
             if (selectedUnitText == null)
@@ -876,7 +911,7 @@ namespace SRPG.UI
             }
             selectedUnitText.fontSize = 13;
             selectedUnitText.alignment = TextAnchor.LowerLeft;
-            selectedUnitText.color = ThemeTextPrimary();
+            selectedUnitText.color = BattleHudPrimaryTextColor();
             ConfigureRect(selectedUnitText.rectTransform, new Vector2(28f, 32f), new Vector2(0f, 0f), new Vector2(194f, 112f));
 
             if (enemyThreatText == null)
@@ -885,7 +920,7 @@ namespace SRPG.UI
             }
             enemyThreatText.fontSize = 14;
             enemyThreatText.alignment = TextAnchor.UpperRight;
-            enemyThreatText.color = ThemeTextMutedGold();
+            enemyThreatText.color = BattleHudAccentTextColor();
             ConfigureRect(enemyThreatText.rectTransform, new Vector2(-22f, -24f), new Vector2(1f, 1f), new Vector2(180f, 20f));
 
             if (controlsText == null)
@@ -894,7 +929,7 @@ namespace SRPG.UI
             }
             controlsText.fontSize = BattleHudTitleFontSize;
             controlsText.alignment = TextAnchor.UpperLeft;
-            controlsText.color = ThemeTextAccentGold();
+            controlsText.color = BattleHudAccentTextColor();
             ConfigureRect(controlsText.rectTransform, new Vector2(-22f, 128f), new Vector2(1f, 0f), new Vector2(192f, 18f));
 
             if (controlsInputText == null)
@@ -903,7 +938,7 @@ namespace SRPG.UI
             }
             controlsInputText.fontSize = BattleHudSmallFontSize;
             controlsInputText.alignment = TextAnchor.UpperLeft;
-            controlsInputText.color = ThemeTextAccentGold();
+            controlsInputText.color = BattleHudMutedAccentTextColor();
             ConfigureRect(controlsInputText.rectTransform, new Vector2(-124f, 26f), new Vector2(1f, 0f), new Vector2(94f, 92f));
 
             if (controlsActionText == null)
@@ -912,7 +947,7 @@ namespace SRPG.UI
             }
             controlsActionText.fontSize = BattleHudSmallFontSize;
             controlsActionText.alignment = TextAnchor.UpperLeft;
-            controlsActionText.color = ThemeTextPrimary();
+            controlsActionText.color = BattleHudPrimaryTextColor();
             ConfigureRect(controlsActionText.rectTransform, new Vector2(-22f, 26f), new Vector2(1f, 0f), new Vector2(92f, 92f));
 
             if (battleLogText == null)
@@ -922,7 +957,7 @@ namespace SRPG.UI
             }
             battleLogText.fontSize = BattleHudBodyFontSize;
             battleLogText.alignment = TextAnchor.UpperLeft;
-            battleLogText.color = ThemeTextPrimary();
+            battleLogText.color = BattleHudPrimaryTextColor();
             ConfigureRect(battleLogText.rectTransform, new Vector2(-22f, -30f), new Vector2(1f, 0.5f), new Vector2(194f, 106f));
 
             if (attackPreviewText == null)
@@ -931,7 +966,7 @@ namespace SRPG.UI
                 attackPreviewText.enabled = false;
             }
             attackPreviewText.fontSize = 14;
-            attackPreviewText.color = ThemeTextPrimary();
+            attackPreviewText.color = BattleHudPrimaryTextColor();
             ConfigureRect(attackPreviewText.rectTransform, new Vector2(0f, 26f), new Vector2(0.5f, 0f), new Vector2(360f, 56f));
 
             if (resultText == null)
@@ -968,10 +1003,10 @@ namespace SRPG.UI
         {
             if (battleBackdropImage == null)
             {
-                battleBackdropImage = CreatePanel("BattleBackdrop", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(1280f, 720f), new Color(0.005f, 0.012f, 0.028f, 0.22f));
+                battleBackdropImage = CreatePanel("BattleBackdrop", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(1280f, 720f), BattleHudBackdropColor());
                 battleBackdropImage.transform.SetAsFirstSibling();
             }
-            battleBackdropImage.color = new Color(0.005f, 0.012f, 0.028f, 0.22f);
+            battleBackdropImage.color = BattleHudBackdropColor();
 
             EnsurePanelPair(ref battleStageFrame, ref battleStagePanel, "BattleStage", new Vector2(126f, -70f), new Vector2(126f, -70f), new Vector2(0f, 1f), 228f, 116f, BattleHudInset);
             EnsurePanelPair(ref battleObjectiveFrame, ref battleObjectivePanel, "BattleObjective", new Vector2(126f, -216f), new Vector2(126f, -216f), new Vector2(0f, 1f), 228f, 164f, BattleHudInset);
@@ -981,8 +1016,8 @@ namespace SRPG.UI
             EnsurePanelPair(ref battleControlsFrame, ref battleControlsPanel, "BattleControls", new Vector2(-124f, 88f), new Vector2(-124f, 88f), new Vector2(1f, 0f), 228f, 148f, BattleHudInset);
             EnsurePanelPair(ref battleAttackPreviewFrame, ref battleAttackPreviewPanel, "BattleAttackPreview", new Vector2(0f, 58f), new Vector2(0f, 58f), new Vector2(0.5f, 0f), 396f, 72f, BattleHudInset);
             EnsurePanelPair(ref battleResultFrame, ref battleResultPanel, "BattleResult", Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), 820f, 400f, 7f);
-            battleResultFrame.color = new Color(0.74f, 0.52f, 0.22f, 0.82f);
-            battleResultPanel.color = new Color(0.024f, 0.04f, 0.064f, 0.86f);
+            battleResultFrame.color = new Color(0.64f, 0.47f, 0.2f, 0.76f);
+            battleResultPanel.color = new Color(0.025f, 0.022f, 0.018f, 0.88f);
 
             SetAttackPreviewPanelVisible(false);
             SetResultPanelVisible(false);
@@ -992,16 +1027,16 @@ namespace SRPG.UI
         {
             if (tutorialHintFrame == null)
             {
-                tutorialHintFrame = CreatePanel("TutorialHintFrame", new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(500f, 60f), new Color(0.74f, 0.52f, 0.22f, 0.72f));
+                tutorialHintFrame = CreatePanel("TutorialHintFrame", new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(500f, 60f), BattleHudFrameColor());
             }
-            tutorialHintFrame.color = new Color(0.74f, 0.52f, 0.22f, 0.72f);
+            tutorialHintFrame.color = BattleHudFrameColor();
             ConfigureRect(tutorialHintFrame.rectTransform, new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(500f, 60f));
 
             if (tutorialHintPanel == null)
             {
-                tutorialHintPanel = CreatePanel("TutorialHintPanel", new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(490f, 50f), new Color(0.024f, 0.04f, 0.064f, 0.82f));
+                tutorialHintPanel = CreatePanel("TutorialHintPanel", new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(490f, 50f), BattleHudPanelColor());
             }
-            tutorialHintPanel.color = new Color(0.024f, 0.04f, 0.064f, 0.82f);
+            tutorialHintPanel.color = BattleHudPanelColor();
             ConfigureRect(tutorialHintPanel.rectTransform, new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(490f, 50f));
 
             if (tutorialHintText == null)
@@ -1010,7 +1045,7 @@ namespace SRPG.UI
             }
             tutorialHintText.fontSize = 14;
             tutorialHintText.alignment = TextAnchor.MiddleCenter;
-            tutorialHintText.color = ThemeTextPrimary();
+            tutorialHintText.color = BattleHudPrimaryTextColor();
             ConfigureRect(tutorialHintText.rectTransform, new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(462f, 44f));
 
             SetTutorialHintVisible(tutorialHintActive);
@@ -1022,9 +1057,9 @@ namespace SRPG.UI
             var panelSize = new Vector2(width - inset * 2f, height - inset * 2f);
             if (frame == null)
             {
-                frame = CreatePanel($"{baseName}Frame", framePosition, anchor, frameSize, ThemePanelBorderGold());
+                frame = CreatePanel($"{baseName}Frame", framePosition, anchor, frameSize, BattleHudFrameColor());
             }
-            frame.color = new Color(0.74f, 0.52f, 0.22f, 0.72f);
+            frame.color = BattleHudFrameColor();
             ConfigurePanelRect(frame.rectTransform, framePosition, anchor, frameSize);
 
             if (panel == null)
@@ -1034,9 +1069,9 @@ namespace SRPG.UI
                     panelPosition,
                     anchor,
                     panelSize,
-                    ThemePanelDark());
+                    BattleHudPanelColor());
             }
-            panel.color = new Color(0.024f, 0.04f, 0.064f, 0.74f);
+            panel.color = BattleHudPanelColor();
             ConfigurePanelRect(panel.rectTransform, panelPosition, anchor, panelSize);
         }
 
@@ -1532,10 +1567,10 @@ namespace SRPG.UI
             }
 
             var builder = new StringBuilder();
-            builder.AppendLine("<color=#FFD98F>Battle Log</color>");
+            builder.AppendLine("<color=#EBC77A>Battle Log</color>");
             if (battleLogEntries.Count == 0)
             {
-                builder.Append("<color=#AEB7C2>No recent actions.</color>");
+                builder.Append("<color=#B8BDB8>No recent actions.</color>");
             }
             else
             {
