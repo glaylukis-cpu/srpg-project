@@ -4,6 +4,7 @@
 
 - Visual update commit: `fc8729b Improve board visuals and rubble obstacles`
 - Latest local commit at document creation: `fc8729b Improve board visuals and rubble obstacles`
+- Latest post-UI visual pass commit: `4e41db5 Polish stage intro panel`
 
 ## Purpose
 
@@ -40,120 +41,126 @@ This document is a verification checklist and record. It does not change gamepla
 ## Stage1: Opening Formation
 
 - Visual:
-  - Board: Pending
-  - Obstacles: Pending
-  - Units: Pending
-  - UI: Pending
+  - Board: OK
+  - Obstacles: OK
+  - Units: OK
+  - UI: OK
 - Interaction:
-  - Click / Move: Pending
-  - Attack: Pending
-  - U Undo Move: Pending
-  - Shift+U Reset Turn: Pending
-  - Space Enemy Threat: Pending
-  - Enter End Turn: Pending
+  - Click / Move: OK
+  - Attack: OK
+  - U Undo Move: OK
+  - Shift+U Reset Turn: OK
+  - Space Enemy Threat: OK
+  - Enter End Turn: OK
 - Result:
-  - Pending
+  - OK
 - Notes:
   - Confirm Guided Tutorial Hint does not block board interaction.
   - Confirm the three center obstacles read as three blocked tiles.
+  - Post UI pass confirmed Stage Intro, result screens, Threat / Intent, Controls, and stage transition readability.
 
 ## Stage2: Crossfire Lanes
 
 - Visual:
-  - Board: Pending
-  - Obstacles: Pending
-  - Units: Pending
-  - UI: Pending
+  - Board: OK
+  - Obstacles: OK
+  - Units: OK
+  - UI: OK
 - Interaction:
-  - Click / Move: Pending
-  - Attack: Pending
-  - U Undo Move: Pending
-  - Shift+U Reset Turn: Pending
-  - Space Enemy Threat: Pending
-  - Enter End Turn: Pending
+  - Click / Move: OK
+  - Attack: OK
+  - U Undo Move: OK
+  - Shift+U Reset Turn: OK
+  - Space Enemy Threat: OK
+  - Enter End Turn: OK
 - Result:
-  - Pending
+  - OK
 - Notes:
   - Confirm obstacle-heavy lanes still read clearly.
   - Confirm Enemy Threat display is not buried by rubble visuals.
+  - Post UI pass confirmed Stage Intro, result screens, Threat / Intent, Controls, and stage transition readability.
 
 ## Stage3
 
 - Visual:
-  - Board: Pending
-  - Obstacles: Pending
-  - Units: Pending
-  - UI: Pending
+  - Board: OK
+  - Obstacles: OK
+  - Units: OK
+  - UI: OK
 - Interaction:
-  - Click / Move: Pending
-  - Attack: Pending
-  - U Undo Move: Pending
-  - Shift+U Reset Turn: Pending
-  - Space Enemy Threat: Pending
-  - Enter End Turn: Pending
+  - Click / Move: OK
+  - Attack: OK
+  - U Undo Move: OK
+  - Shift+U Reset Turn: OK
+  - Space Enemy Threat: OK
+  - Enter End Turn: OK
 - Result:
-  - Pending
+  - OK
 - Notes:
   - Confirm goal-related readability if the stage objective depends on reaching a goal.
+  - Post UI pass confirmed Stage Intro, result screens, Threat / Intent, Controls, and stage transition readability.
 
 ## Stage4
 
 - Visual:
-  - Board: Pending
-  - Obstacles: Pending
-  - Units: Pending
-  - UI: Pending
+  - Board: OK
+  - Obstacles: OK
+  - Units: OK
+  - UI: OK
 - Interaction:
-  - Click / Move: Pending
-  - Attack: Pending
-  - U Undo Move: Pending
-  - Shift+U Reset Turn: Pending
-  - Space Enemy Threat: Pending
-  - Enter End Turn: Pending
+  - Click / Move: OK
+  - Attack: OK
+  - U Undo Move: OK
+  - Shift+U Reset Turn: OK
+  - Space Enemy Threat: OK
+  - Enter End Turn: OK
 - Result:
-  - Pending
+  - OK
 - Notes:
   - Confirm Archer / Stationary-style intent display does not conflict with rubble visuals.
   - Confirm Guardian / Threat information remains readable if present.
+  - Post UI pass confirmed Stage Intro, result screens, Threat / Intent, Controls, and stage transition readability.
 
 ## Stage5
 
 - Visual:
-  - Board: Pending
-  - Obstacles: Pending
-  - Units: Pending
-  - UI: Pending
+  - Board: OK
+  - Obstacles: OK
+  - Units: OK
+  - UI: OK
 - Interaction:
-  - Click / Move: Pending
-  - Attack: Pending
-  - U Undo Move: Pending
-  - Shift+U Reset Turn: Pending
-  - Space Enemy Threat: Pending
-  - Enter End Turn: Pending
+  - Click / Move: OK
+  - Attack: OK
+  - U Undo Move: OK
+  - Shift+U Reset Turn: OK
+  - Space Enemy Threat: OK
+  - Enter End Turn: OK
 - Result:
-  - Pending
+  - OK
 - Notes:
   - Confirm dense enemy and obstacle situations still preserve tile readability.
+  - Post UI pass confirmed Stage Intro, result screens, Threat / Intent, Controls, and stage transition readability.
 
 ## Stage6
 
 - Visual:
-  - Board: Pending
-  - Obstacles: Pending
-  - Units: Pending
-  - UI: Pending
+  - Board: OK
+  - Obstacles: OK
+  - Units: OK
+  - UI: OK
 - Interaction:
-  - Click / Move: Pending
-  - Attack: Pending
-  - U Undo Move: Pending
-  - Shift+U Reset Turn: Pending
-  - Space Enemy Threat: Pending
-  - Enter End Turn: Pending
+  - Click / Move: OK
+  - Attack: OK
+  - U Undo Move: OK
+  - Shift+U Reset Turn: OK
+  - Space Enemy Threat: OK
+  - Enter End Turn: OK
 - Result:
-  - Pending
+  - OK
 - Notes:
   - Confirm Goal / Obstacle / Move display remains readable.
   - Confirm final-stage Result display still appears correctly.
+  - Post UI pass confirmed Stage Intro, Victory / Defeat / All Clear, Threat / Intent, Controls, and stage transition readability.
 
 ## Focus Areas
 
@@ -212,10 +219,43 @@ Verification notes:
 Overall result:
 
 - Threat / Intent readability pass: OK.
-- Full Stage1-6 post-81d04bd regression: Pending unless manually confirmed after this commit.
+- Full Stage1-6 post-81d04bd regression: OK in the later post UI manual pass recorded below.
+
+## Post UI Visual Regression Pass
+
+Target commit:
+
+- `4e41db5 Polish stage intro panel`
+
+Manual check summary:
+
+- Stage Intro displays correctly across Stage1-6.
+- Victory / Defeat / All Clear result screens remain readable.
+- Enemy Threat / Intent displays remain readable.
+- UI panels do not block or interfere with board readability.
+- `U`, `Shift+U`, `Enter`, `Space`, and `R` controls work as expected.
+- Stage transitions remain intact.
+
+Overall result:
+
+- Post UI / Visual regression pass: OK.
+
+Stage results:
+
+- Stage1: OK
+- Stage2: OK
+- Stage3: OK
+- Stage4: OK
+- Stage5: OK
+- Stage6: OK
+
+Notes:
+
+- This pass covers visual/UI readability and core control regression after the Stage Intro and battle result UI polish.
+- This pass does not change gameplay logic, stage data, AI, movement, attack, damage, undo, or victory/defeat conditions.
 
 ## Conclusion
 
-- Fatal visual regression across Stage1-6: Pending manual Unity Editor check.
-- Next visual issues to fix: Pending manual Unity Editor check.
-- Keep the committed board visual update as-is: Pending manual Unity Editor check.
+- Fatal visual regression across Stage1-6: None found in the post UI manual pass.
+- Next visual issues to fix: None identified in the confirmed scope of this pass.
+- Keep the committed board and UI visual updates as-is: OK for the confirmed scope of this pass.
