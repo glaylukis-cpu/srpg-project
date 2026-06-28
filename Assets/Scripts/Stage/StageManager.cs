@@ -21,6 +21,8 @@ namespace SRPG.Stage
         private int selectedStageIndex;
         private int selectedResolutionIndex = 1;
         private bool hasLoadedStage;
+        private bool wasBattleEnded;
+        private bool waitForResultConfirmRelease;
 
         private static readonly Vector2Int[] ResolutionOptions =
         {
@@ -60,6 +62,8 @@ namespace SRPG.Stage
             stageSelectOpen = false;
             optionsOpen = false;
             hasLoadedStage = true;
+            wasBattleEnded = false;
+            waitForResultConfirmRelease = false;
             DamagePopup.ClearAll();
             PlayerController.Instance?.ResetControllerState();
             TurnManager.Instance?.SetStageData(stageData);
@@ -184,8 +188,30 @@ namespace SRPG.Stage
                 return;
             }
 
-            if (allClear || TurnManager.Instance == null || !TurnManager.Instance.IsBattleEnded)
+            var battleEnded = TurnManager.Instance != null && TurnManager.Instance.IsBattleEnded;
+            if (battleEnded && !wasBattleEnded)
             {
+                waitForResultConfirmRelease = Input.GetKey(KeyCode.Return);
+            }
+            else if (!battleEnded)
+            {
+                waitForResultConfirmRelease = false;
+            }
+
+            wasBattleEnded = battleEnded;
+
+            if (allClear || TurnManager.Instance == null || !battleEnded)
+            {
+                return;
+            }
+
+            if (waitForResultConfirmRelease)
+            {
+                if (!Input.GetKey(KeyCode.Return))
+                {
+                    waitForResultConfirmRelease = false;
+                }
+
                 return;
             }
 

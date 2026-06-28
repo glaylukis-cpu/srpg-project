@@ -1263,13 +1263,13 @@ namespace SRPG.UI
 
             if (battleResultPanel != null)
             {
-                battleResultPanel.color = new Color(0.055f, 0.043f, 0.032f, 0.98f);
+                battleResultPanel.color = new Color(0.055f, 0.043f, 0.032f, 0.92f);
                 ConfigurePanelRect(battleResultPanel.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), GetResultPanelSize(result));
             }
 
             if (battleResultBackdrop != null)
             {
-                battleResultBackdrop.color = new Color(0f, 0.006f, 0.012f, 0.42f);
+                battleResultBackdrop.color = new Color(0f, 0.006f, 0.012f, 0.32f);
                 ConfigurePanelRect(battleResultBackdrop.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(1280f, 720f));
             }
 
@@ -1313,22 +1313,22 @@ namespace SRPG.UI
         private Vector2 GetResultFrameSize(string result)
         {
             return result != null && result.StartsWith("ALL CLEAR")
-                ? new Vector2(680f, 260f)
-                : new Vector2(860f, 420f);
+                ? new Vector2(560f, 220f)
+                : new Vector2(760f, 360f);
         }
 
         private Vector2 GetResultPanelSize(string result)
         {
             return result != null && result.StartsWith("ALL CLEAR")
-                ? new Vector2(652f, 232f)
-                : new Vector2(832f, 392f);
+                ? new Vector2(534f, 194f)
+                : new Vector2(734f, 334f);
         }
 
         private Vector2 GetResultTextSize(string result)
         {
             return result != null && result.StartsWith("ALL CLEAR")
-                ? new Vector2(590f, 180f)
-                : new Vector2(740f, 320f);
+                ? new Vector2(500f, 150f)
+                : new Vector2(670f, 292f);
         }
 
         private string CleanPredictionText(string prediction)
