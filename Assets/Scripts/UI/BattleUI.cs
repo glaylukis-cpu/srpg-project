@@ -98,7 +98,7 @@ namespace SRPG.UI
         private const float BattleHudInset = 3f;
         private const int BattleHudTitleFontSize = 12;
         private const int BattleHudBodyFontSize = 11;
-        private const int BattleHudSmallFontSize = 9;
+        private const int BattleHudSmallFontSize = 10;
         private const int TutorialStageNumber = 1;
         private readonly List<string> battleLogEntries = new List<string>();
         private readonly Dictionary<int, StageBestResult> sessionBestResults = new Dictionary<int, StageBestResult>();
@@ -252,30 +252,30 @@ namespace SRPG.UI
             if (unit == null || unit.IsDead)
             {
                 selectedUnitText.text =
-                    "<color=#FFD98F>Selected</color>\n" +
+                    "<color=#EBC77A>Selected</color>\n" +
                     "No Unit Selected";
                 return;
             }
 
             var builder = new StringBuilder();
-            builder.AppendLine("<color=#FFD98F>Selected</color>");
+            builder.AppendLine("<color=#EBC77A>Selected</color>");
             builder.AppendLine(unit.name);
-            builder.AppendLine($"<color=#FFD98F>Type</color>    {unit.UnitType}");
+            builder.AppendLine($"<color=#EBC77A>Type</color>    {unit.UnitType}");
 
             if (unit.Faction == Faction.Enemy)
             {
                 var prediction = TurnManager.Instance != null ? TurnManager.Instance.GetEnemyActionPrediction(unit) : "Prediction:\nNone";
-                builder.AppendLine($"<color=#FFD98F>HP</color>      {unit.CurrentHp} / {unit.MaxHp}");
-                builder.AppendLine($"<color=#FFD98F>AI</color>      {unit.EnemyAIType}");
-                builder.AppendLine("<color=#FFD98F>Prediction</color>");
+                builder.AppendLine($"<color=#EBC77A>HP</color>      {unit.CurrentHp} / {unit.MaxHp}");
+                builder.AppendLine($"<color=#EBC77A>AI</color>      {unit.EnemyAIType}");
+                builder.AppendLine("<color=#EBC77A>Prediction</color>");
                 builder.Append(WrapText(CleanPredictionText(prediction), 26));
             }
             else
             {
-                builder.AppendLine($"<color=#FFD98F>HP</color>      {unit.CurrentHp} / {unit.MaxHp}");
-                builder.AppendLine($"<color=#FFD98F>ATK</color>     {unit.AttackPower}");
-                builder.AppendLine($"<color=#FFD98F>MOVE</color>    {unit.MovePower}");
-                builder.Append($"<color=#FFD98F>RANGE</color>   {unit.AttackRange}");
+                builder.AppendLine($"<color=#EBC77A>HP</color>      {unit.CurrentHp} / {unit.MaxHp}");
+                builder.AppendLine($"<color=#EBC77A>ATK</color>     {unit.AttackPower}");
+                builder.AppendLine($"<color=#EBC77A>MOVE</color>    {unit.MovePower}");
+                builder.Append($"<color=#EBC77A>RANGE</color>   {unit.AttackRange}");
             }
 
             selectedUnitText.text = builder.ToString();
@@ -907,12 +907,13 @@ namespace SRPG.UI
 
             if (selectedUnitText == null)
             {
-                selectedUnitText = CreateText("SelectedUnitText", new Vector2(28f, 32f), new Vector2(0f, 0f), TextAnchor.LowerLeft, 13, new Vector2(194f, 112f));
+                selectedUnitText = CreateText("SelectedUnitText", new Vector2(28f, 28f), new Vector2(0f, 0f), TextAnchor.UpperLeft, 13, new Vector2(194f, 112f));
             }
             selectedUnitText.fontSize = 13;
-            selectedUnitText.alignment = TextAnchor.LowerLeft;
+            selectedUnitText.alignment = TextAnchor.UpperLeft;
+            selectedUnitText.lineSpacing = 1.08f;
             selectedUnitText.color = BattleHudPrimaryTextColor();
-            ConfigureRect(selectedUnitText.rectTransform, new Vector2(28f, 32f), new Vector2(0f, 0f), new Vector2(194f, 112f));
+            ConfigureRect(selectedUnitText.rectTransform, new Vector2(28f, 28f), new Vector2(0f, 0f), new Vector2(194f, 112f));
 
             if (enemyThreatText == null)
             {
@@ -938,8 +939,9 @@ namespace SRPG.UI
             }
             controlsInputText.fontSize = BattleHudSmallFontSize;
             controlsInputText.alignment = TextAnchor.UpperLeft;
+            controlsInputText.lineSpacing = 1.08f;
             controlsInputText.color = BattleHudMutedAccentTextColor();
-            ConfigureRect(controlsInputText.rectTransform, new Vector2(-124f, 26f), new Vector2(1f, 0f), new Vector2(94f, 92f));
+            ConfigureRect(controlsInputText.rectTransform, new Vector2(-124f, 24f), new Vector2(1f, 0f), new Vector2(94f, 104f));
 
             if (controlsActionText == null)
             {
@@ -947,8 +949,9 @@ namespace SRPG.UI
             }
             controlsActionText.fontSize = BattleHudSmallFontSize;
             controlsActionText.alignment = TextAnchor.UpperLeft;
+            controlsActionText.lineSpacing = 1.08f;
             controlsActionText.color = BattleHudPrimaryTextColor();
-            ConfigureRect(controlsActionText.rectTransform, new Vector2(-22f, 26f), new Vector2(1f, 0f), new Vector2(92f, 92f));
+            ConfigureRect(controlsActionText.rectTransform, new Vector2(-22f, 24f), new Vector2(1f, 0f), new Vector2(92f, 104f));
 
             if (battleLogText == null)
             {
@@ -957,8 +960,9 @@ namespace SRPG.UI
             }
             battleLogText.fontSize = BattleHudBodyFontSize;
             battleLogText.alignment = TextAnchor.UpperLeft;
+            battleLogText.lineSpacing = 1.08f;
             battleLogText.color = BattleHudPrimaryTextColor();
-            ConfigureRect(battleLogText.rectTransform, new Vector2(-22f, -30f), new Vector2(1f, 0.5f), new Vector2(194f, 106f));
+            ConfigureRect(battleLogText.rectTransform, new Vector2(-22f, -26f), new Vector2(1f, 0.5f), new Vector2(194f, 98f));
 
             if (attackPreviewText == null)
             {
