@@ -103,6 +103,9 @@ namespace SRPG.UI
         private const int BattleHudBodyFontSize = 11;
         private const int BattleHudSmallFontSize = 10;
         private const int TutorialStageNumber = 1;
+        private const float UiFadeDuration = 0.16f;
+        private const float UiPopScale = 0.97f;
+        private const float UiPulseDuration = 0.14f;
         private readonly List<string> battleLogEntries = new List<string>();
         private readonly Dictionary<int, StageBestResult> sessionBestResults = new Dictionary<int, StageBestResult>();
         private readonly Image[] stageSelectRowPanels = new Image[MaxStageSelectRows];
@@ -112,6 +115,11 @@ namespace SRPG.UI
         private readonly Image[] stageSelectPreviewCells = new Image[StagePreviewSize * StagePreviewSize];
         private Font defaultFont;
         private Coroutine stageIntroCoroutine;
+        private Coroutine stageIntroAnimationCoroutine;
+        private Coroutine resultAnimationCoroutine;
+        private Coroutine tutorialHintAnimationCoroutine;
+        private Coroutine battleLogAnimationCoroutine;
+        private Coroutine enemyThreatAnimationCoroutine;
         private int selectedStageSelectRow = -1;
         private int selectedTitleMenuRow;
         private int selectedOptionsRow;
@@ -122,6 +130,7 @@ namespace SRPG.UI
         private bool stageSelectObjectsInitialized;
         private bool tutorialHintActive;
         private bool resultVisible;
+        private string currentResultStyleKey = string.Empty;
         private int tutorialHintStep = -1;
         private StageData currentStageData;
         private int currentStageNumber;
@@ -289,6 +298,7 @@ namespace SRPG.UI
         {
             EnsureTextObjects();
             enemyThreatText.text = visible ? "Enemy Threat: ON" : "Enemy Threat: OFF";
+            PlayEnemyThreatToggleAnimation(visible);
         }
 
         public void NotifyTutorialPlayerSelectionOrMove()
@@ -339,6 +349,7 @@ namespace SRPG.UI
             resultText.fontSize = 16;
             resultText.text = BuildResultText(result);
             resultText.enabled = true;
+            PlayResultPanelAnimation(result);
         }
 
         public void ShowResult(
@@ -362,6 +373,7 @@ namespace SRPG.UI
             resultText.fontSize = 15;
             resultText.text = BuildResultText(result, rating, turnNumber, turnLimit, playersAlive, playerHpTotal, enemiesAlive, enemyHpTotal);
             resultText.enabled = true;
+            PlayResultPanelAnimation(result);
         }
 
         public void ShowStageIntro(int currentStage, int totalStages, StageData data)
@@ -394,6 +406,7 @@ namespace SRPG.UI
             stageIntroText.text = builder.ToString();
             SetStageIntroPanelVisible(true);
             stageIntroText.enabled = true;
+            PlayStageIntroAnimation();
             stageIntroCoroutine = StartCoroutine(HideStageIntroAfterDelay());
         }
 
@@ -606,6 +619,7 @@ namespace SRPG.UI
             }
 
             RefreshBattleLogText();
+            PlayBattleLogAnimation();
         }
 
         private static string FormatBattleLogMessage(string message)
@@ -754,6 +768,7 @@ namespace SRPG.UI
         public void ClearResult()
         {
             EnsureTextObjects();
+            StopResultPanelAnimation();
             resultVisible = false;
             resultText.text = string.Empty;
             resultText.enabled = false;
@@ -770,6 +785,7 @@ namespace SRPG.UI
                 stageIntroCoroutine = null;
             }
 
+            StopStageIntroAnimation();
             stageIntroText.text = string.Empty;
             stageIntroText.enabled = false;
             SetStageIntroPanelVisible(false);
@@ -805,11 +821,13 @@ namespace SRPG.UI
             EnsureTutorialHintObjects();
             tutorialHintText.text = text;
             SetTutorialHintVisible(true);
+            PlayTutorialHintAnimation();
         }
 
         private void HideTutorialHint()
         {
             tutorialHintActive = false;
+            StopTutorialHintAnimation();
             SetTutorialHintVisible(false);
         }
 
@@ -1288,22 +1306,23 @@ namespace SRPG.UI
         private void ApplyResultPanelStyle(string result)
         {
             EnsureResultTextParent();
+            currentResultStyleKey = result ?? string.Empty;
 
             if (battleResultFrame != null)
             {
-                battleResultFrame.color = GetResultFrameColor(result);
+                battleResultFrame.color = GetResultFrameColor(result, 1f);
                 ConfigurePanelRect(battleResultFrame.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), GetResultFrameSize(result));
             }
 
             if (battleResultPanel != null)
             {
-                battleResultPanel.color = new Color(0.055f, 0.043f, 0.032f, 0.92f);
+                battleResultPanel.color = GetResultPanelColor(1f);
                 ConfigurePanelRect(battleResultPanel.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), GetResultPanelSize(result));
             }
 
             if (battleResultBackdrop != null)
             {
-                battleResultBackdrop.color = new Color(0f, 0.006f, 0.012f, 0.32f);
+                battleResultBackdrop.color = GetResultBackdropColor(1f);
                 ConfigurePanelRect(battleResultBackdrop.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(1280f, 720f));
             }
 
@@ -1329,19 +1348,29 @@ namespace SRPG.UI
             }
         }
 
-        private Color GetResultFrameColor(string result)
+        private Color GetResultFrameColor(string result, float alphaScale)
         {
             if (result != null && result.StartsWith("DEFEAT"))
             {
-                return new Color(0.58f, 0.25f, 0.18f, 0.96f);
+                return new Color(0.58f, 0.25f, 0.18f, 0.96f * alphaScale);
             }
 
             if (result != null && result.StartsWith("ALL CLEAR"))
             {
-                return new Color(0.82f, 0.68f, 0.34f, 0.98f);
+                return new Color(0.82f, 0.68f, 0.34f, 0.98f * alphaScale);
             }
 
-            return new Color(0.72f, 0.54f, 0.24f, 0.98f);
+            return new Color(0.72f, 0.54f, 0.24f, 0.98f * alphaScale);
+        }
+
+        private Color GetResultPanelColor(float alphaScale)
+        {
+            return new Color(0.055f, 0.043f, 0.032f, 0.92f * alphaScale);
+        }
+
+        private Color GetResultBackdropColor(float alphaScale)
+        {
+            return new Color(0f, 0.006f, 0.012f, 0.32f * alphaScale);
         }
 
         private Vector2 GetResultFrameSize(string result)
@@ -1363,6 +1392,296 @@ namespace SRPG.UI
             return result != null && result.StartsWith("ALL CLEAR")
                 ? new Vector2(500f, 150f)
                 : new Vector2(670f, 292f);
+        }
+
+        private void PlayStageIntroAnimation()
+        {
+            StopUiAnimation(ref stageIntroAnimationCoroutine);
+            stageIntroAnimationCoroutine = StartCoroutine(AnimateStageIntroPanel());
+        }
+
+        private IEnumerator AnimateStageIntroPanel()
+        {
+            var elapsed = 0f;
+            while (elapsed < UiFadeDuration)
+            {
+                var t = EaseOut(elapsed / UiFadeDuration);
+                SetStageIntroVisualState(t, UiPopScale + (1f - UiPopScale) * t);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            SetStageIntroVisualState(1f, 1f);
+            stageIntroAnimationCoroutine = null;
+        }
+
+        private void StopStageIntroAnimation()
+        {
+            StopUiAnimation(ref stageIntroAnimationCoroutine);
+            SetStageIntroVisualState(1f, 1f);
+        }
+
+        private void SetStageIntroVisualState(float alphaScale, float scale)
+        {
+            alphaScale = Mathf.Clamp01(alphaScale);
+            SetLocalScale(stageIntroFrame, scale);
+            SetLocalScale(stageIntroPanel, scale);
+            if (stageIntroFrame != null)
+            {
+                stageIntroFrame.color = new Color(0.64f, 0.46f, 0.18f, 0.72f * alphaScale);
+            }
+
+            if (stageIntroPanel != null)
+            {
+                stageIntroPanel.color = new Color(0.045f, 0.037f, 0.028f, 0.9f * alphaScale);
+            }
+
+            if (stageIntroText != null)
+            {
+                stageIntroText.color = BattleHudPrimaryTextColor(alphaScale);
+            }
+        }
+
+        private void PlayResultPanelAnimation(string result)
+        {
+            StopUiAnimation(ref resultAnimationCoroutine);
+            resultAnimationCoroutine = StartCoroutine(AnimateResultPanel(result));
+        }
+
+        private IEnumerator AnimateResultPanel(string result)
+        {
+            var elapsed = 0f;
+            while (elapsed < UiFadeDuration)
+            {
+                var t = EaseOut(elapsed / UiFadeDuration);
+                SetResultVisualState(result, t, UiPopScale + (1f - UiPopScale) * t);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            SetResultVisualState(result, 1f, 1f);
+            resultAnimationCoroutine = null;
+        }
+
+        private void StopResultPanelAnimation()
+        {
+            StopUiAnimation(ref resultAnimationCoroutine);
+            SetResultVisualState(currentResultStyleKey, 1f, 1f);
+        }
+
+        private void SetResultVisualState(string result, float alphaScale, float scale)
+        {
+            alphaScale = Mathf.Clamp01(alphaScale);
+            SetLocalScale(battleResultFrame, scale);
+            SetLocalScale(battleResultPanel, scale);
+            if (battleResultBackdrop != null)
+            {
+                battleResultBackdrop.color = GetResultBackdropColor(alphaScale);
+            }
+
+            if (battleResultFrame != null)
+            {
+                battleResultFrame.color = GetResultFrameColor(result, alphaScale);
+            }
+
+            if (battleResultPanel != null)
+            {
+                battleResultPanel.color = GetResultPanelColor(alphaScale);
+            }
+
+            if (resultText != null)
+            {
+                resultText.color = BattleHudPrimaryTextColor(alphaScale);
+            }
+        }
+
+        private void PlayTutorialHintAnimation()
+        {
+            StopUiAnimation(ref tutorialHintAnimationCoroutine);
+            tutorialHintAnimationCoroutine = StartCoroutine(AnimateTutorialHint());
+        }
+
+        private IEnumerator AnimateTutorialHint()
+        {
+            var elapsed = 0f;
+            while (elapsed < UiPulseDuration)
+            {
+                var t = EaseOut(elapsed / UiPulseDuration);
+                SetTutorialHintVisualState(t, 0.985f + 0.015f * t);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            SetTutorialHintVisualState(1f, 1f);
+            tutorialHintAnimationCoroutine = null;
+        }
+
+        private void StopTutorialHintAnimation()
+        {
+            StopUiAnimation(ref tutorialHintAnimationCoroutine);
+            SetTutorialHintVisualState(1f, 1f);
+        }
+
+        private void SetTutorialHintVisualState(float alphaScale, float scale)
+        {
+            alphaScale = Mathf.Clamp01(alphaScale);
+            SetLocalScale(tutorialHintFrame, scale);
+            SetLocalScale(tutorialHintPanel, scale);
+            SetLocalScale(tutorialHintText, scale);
+            if (tutorialHintFrame != null)
+            {
+                tutorialHintFrame.color = new Color(0.58f, 0.42f, 0.18f, 0.62f * alphaScale);
+            }
+
+            if (tutorialHintPanel != null)
+            {
+                tutorialHintPanel.color = new Color(0.025f, 0.022f, 0.018f, 0.82f * alphaScale);
+            }
+
+            if (tutorialHintText != null)
+            {
+                tutorialHintText.color = BattleHudPrimaryTextColor(alphaScale);
+            }
+        }
+
+        private void PlayBattleLogAnimation()
+        {
+            StopUiAnimation(ref battleLogAnimationCoroutine);
+            battleLogAnimationCoroutine = StartCoroutine(AnimateBattleLogPulse());
+        }
+
+        private IEnumerator AnimateBattleLogPulse()
+        {
+            var elapsed = 0f;
+            while (elapsed < UiPulseDuration)
+            {
+                var t = EaseOut(elapsed / UiPulseDuration);
+                var lift = 1f - t;
+                SetLocalScale(battleLogFrame, 0.99f + 0.01f * t);
+                SetLocalScale(battleLogPanel, 0.99f + 0.01f * t);
+                SetLocalScale(battleLogText, 0.99f + 0.01f * t);
+                if (battleLogFrame != null)
+                {
+                    battleLogFrame.color = new Color(0.62f + 0.12f * lift, 0.46f + 0.08f * lift, 0.2f + 0.04f * lift, 0.62f + 0.16f * lift);
+                }
+
+                if (battleLogPanel != null)
+                {
+                    battleLogPanel.color = new Color(0.025f + 0.018f * lift, 0.022f + 0.012f * lift, 0.018f + 0.006f * lift, 0.82f + 0.06f * lift);
+                }
+
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            SetBattleLogVisualFinal();
+            battleLogAnimationCoroutine = null;
+        }
+
+        private void SetBattleLogVisualFinal()
+        {
+            SetLocalScale(battleLogFrame, 1f);
+            SetLocalScale(battleLogPanel, 1f);
+            SetLocalScale(battleLogText, 1f);
+            if (battleLogFrame != null)
+            {
+                battleLogFrame.color = BattleHudFrameColor();
+            }
+
+            if (battleLogPanel != null)
+            {
+                battleLogPanel.color = BattleHudPanelColor();
+            }
+        }
+
+        private void PlayEnemyThreatToggleAnimation(bool visible)
+        {
+            StopUiAnimation(ref enemyThreatAnimationCoroutine);
+            enemyThreatAnimationCoroutine = StartCoroutine(AnimateEnemyThreatToggle(visible));
+        }
+
+        private IEnumerator AnimateEnemyThreatToggle(bool visible)
+        {
+            var elapsed = 0f;
+            while (elapsed < UiPulseDuration)
+            {
+                var t = EaseOut(elapsed / UiPulseDuration);
+                var lift = 1f - t;
+                var scale = 0.985f + 0.015f * t;
+                SetLocalScale(battleThreatFrame, scale);
+                SetLocalScale(battleThreatPanel, scale);
+                SetLocalScale(enemyThreatText, scale);
+                if (battleThreatFrame != null)
+                {
+                    battleThreatFrame.color = visible
+                        ? new Color(0.58f + 0.12f * lift, 0.42f + 0.12f * lift, 0.18f + 0.03f * lift, 0.62f + 0.18f * lift)
+                        : new Color(0.58f, 0.42f, 0.18f, 0.62f + 0.1f * lift);
+                }
+
+                if (battleThreatPanel != null)
+                {
+                    battleThreatPanel.color = visible
+                        ? new Color(0.038f, 0.034f + 0.018f * lift, 0.028f, 0.82f + 0.08f * lift)
+                        : BattleHudPanelColor();
+                }
+
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            SetEnemyThreatVisualFinal();
+            enemyThreatAnimationCoroutine = null;
+        }
+
+        private void SetEnemyThreatVisualFinal()
+        {
+            SetLocalScale(battleThreatFrame, 1f);
+            SetLocalScale(battleThreatPanel, 1f);
+            SetLocalScale(enemyThreatText, 1f);
+            if (battleThreatFrame != null)
+            {
+                battleThreatFrame.color = BattleHudFrameColor();
+            }
+
+            if (battleThreatPanel != null)
+            {
+                battleThreatPanel.color = BattleHudPanelColor();
+            }
+
+            if (enemyThreatText != null)
+            {
+                enemyThreatText.color = BattleHudAccentTextColor();
+            }
+        }
+
+        private void StopUiAnimation(ref Coroutine routine)
+        {
+            if (routine == null)
+            {
+                return;
+            }
+
+            StopCoroutine(routine);
+            routine = null;
+        }
+
+        private float EaseOut(float value)
+        {
+            value = Mathf.Clamp01(value);
+            return value * (2f - value);
+        }
+
+        private void SetLocalScale(Component component, float scale)
+        {
+            if (component != null)
+            {
+                component.transform.localScale = Vector3.one * scale;
+            }
+        }
+
+        private Color BattleHudPrimaryTextColor(float alpha)
+        {
+            return new Color(0.93f, 0.94f, 0.92f, alpha);
         }
 
         private string CleanPredictionText(string prediction)
@@ -1546,6 +1865,7 @@ namespace SRPG.UI
         private IEnumerator HideStageIntroAfterDelay()
         {
             yield return new WaitForSeconds(StageIntroDuration);
+            StopStageIntroAnimation();
             stageIntroText.text = string.Empty;
             stageIntroText.enabled = false;
             SetStageIntroPanelVisible(false);
