@@ -33,13 +33,20 @@ namespace SRPG.Audio
         [SerializeField] private AudioClip cursorSeClip;
         [SerializeField] private AudioClip confirmSeClip;
         [SerializeField] private AudioClip cancelSeClip;
+        [SerializeField] private AudioClip selectSeClip;
+        [SerializeField] private AudioClip moveSeClip;
         [SerializeField] private AudioClip attackSeClip;
         [SerializeField] private AudioClip hitSeClip;
         [SerializeField] private AudioClip koSeClip;
+        [SerializeField] private AudioClip waitSeClip;
         [SerializeField] private AudioClip victorySeClip;
         [SerializeField] private AudioClip defeatSeClip;
+        [SerializeField] private AudioClip allClearSeClip;
         [SerializeField] private AudioClip restartSeClip;
         [SerializeField] private AudioClip undoSeClip;
+        [SerializeField] private AudioClip resetTurnSeClip;
+        [SerializeField] private AudioClip threatToggleSeClip;
+        [SerializeField] private AudioClip endTurnSeClip;
 
         private AudioSource bgmSource;
         private AudioSource seSource;
@@ -51,13 +58,20 @@ namespace SRPG.Audio
         private AudioClip generatedCursorSe;
         private AudioClip generatedConfirmSe;
         private AudioClip generatedCancelSe;
+        private AudioClip generatedSelectSe;
+        private AudioClip generatedMoveSe;
         private AudioClip generatedAttackSe;
         private AudioClip generatedHitSe;
         private AudioClip generatedKoSe;
+        private AudioClip generatedWaitSe;
         private AudioClip generatedVictorySe;
         private AudioClip generatedDefeatSe;
+        private AudioClip generatedAllClearSe;
         private AudioClip generatedRestartSe;
         private AudioClip generatedUndoSe;
+        private AudioClip generatedResetTurnSe;
+        private AudioClip generatedThreatToggleSe;
+        private AudioClip generatedEndTurnSe;
 
         public static AudioManager Instance { get; private set; }
 
@@ -136,13 +150,20 @@ namespace SRPG.Audio
         public void PlayCursorSe() => PlaySe(cursorSeClip != null ? cursorSeClip : GetGeneratedCursorSe());
         public void PlayConfirmSe() => PlaySe(confirmSeClip != null ? confirmSeClip : GetGeneratedConfirmSe());
         public void PlayCancelSe() => PlaySe(cancelSeClip != null ? cancelSeClip : GetGeneratedCancelSe());
+        public void PlaySelectSe() => PlaySe(selectSeClip != null ? selectSeClip : GetGeneratedSelectSe());
+        public void PlayMoveSe() => PlaySe(moveSeClip != null ? moveSeClip : GetGeneratedMoveSe());
         public void PlayAttackSe() => PlaySe(attackSeClip != null ? attackSeClip : GetGeneratedAttackSe());
         public void PlayHitSe() => PlaySe(hitSeClip != null ? hitSeClip : GetGeneratedHitSe());
         public void PlayKoSe() => PlaySe(koSeClip != null ? koSeClip : GetGeneratedKoSe());
+        public void PlayWaitSe() => PlaySe(waitSeClip != null ? waitSeClip : GetGeneratedWaitSe());
         public void PlayVictorySe() => PlaySe(victorySeClip != null ? victorySeClip : GetGeneratedVictorySe());
         public void PlayDefeatSe() => PlaySe(defeatSeClip != null ? defeatSeClip : GetGeneratedDefeatSe());
+        public void PlayAllClearSe() => PlaySe(allClearSeClip != null ? allClearSeClip : GetGeneratedAllClearSe());
         public void PlayRestartSe() => PlaySe(restartSeClip != null ? restartSeClip : GetGeneratedRestartSe());
         public void PlayUndoSe() => PlaySe(undoSeClip != null ? undoSeClip : GetGeneratedUndoSe());
+        public void PlayResetTurnSe() => PlaySe(resetTurnSeClip != null ? resetTurnSeClip : GetGeneratedResetTurnSe());
+        public void PlayThreatToggleSe() => PlaySe(threatToggleSeClip != null ? threatToggleSeClip : GetGeneratedThreatToggleSe());
+        public void PlayEndTurnSe() => PlaySe(endTurnSeClip != null ? endTurnSeClip : GetGeneratedEndTurnSe());
 
         private void Awake()
         {
@@ -281,6 +302,16 @@ namespace SRPG.Audio
             return generatedCancelSe ?? (generatedCancelSe = CreateTwoToneClip("Generated_Cancel_SE", 420f, 260f, 0.12f, 0.3f));
         }
 
+        private AudioClip GetGeneratedSelectSe()
+        {
+            return generatedSelectSe ?? (generatedSelectSe = CreateTwoToneClip("Generated_Select_SE", 620f, 760f, 0.075f, 0.22f));
+        }
+
+        private AudioClip GetGeneratedMoveSe()
+        {
+            return generatedMoveSe ?? (generatedMoveSe = CreateTwoToneClip("Generated_Move_SE", 260f, 330f, 0.105f, 0.2f));
+        }
+
         private AudioClip GetGeneratedAttackSe()
         {
             return generatedAttackSe ?? (generatedAttackSe = CreateNoiseClip("Generated_Attack_SE", 0.09f, 0.25f, 420f));
@@ -296,6 +327,11 @@ namespace SRPG.Audio
             return generatedKoSe ?? (generatedKoSe = CreateTwoToneClip("Generated_KO_SE", 180f, 90f, 0.28f, 0.42f));
         }
 
+        private AudioClip GetGeneratedWaitSe()
+        {
+            return generatedWaitSe ?? (generatedWaitSe = CreateToneClip("Generated_Wait_SE", 500f, 0.07f, 0.2f, 0.003f, 0.035f));
+        }
+
         private AudioClip GetGeneratedVictorySe()
         {
             return generatedVictorySe ?? (generatedVictorySe = CreateFanfareClip("Generated_Victory_SE", new[] { 523.25f, 659.25f, 783.99f, 1046.5f }, 0.5f));
@@ -306,6 +342,11 @@ namespace SRPG.Audio
             return generatedDefeatSe ?? (generatedDefeatSe = CreateFanfareClip("Generated_Defeat_SE", new[] { 392f, 293.66f, 246.94f, 196f }, 0.45f));
         }
 
+        private AudioClip GetGeneratedAllClearSe()
+        {
+            return generatedAllClearSe ?? (generatedAllClearSe = CreateFanfareClip("Generated_AllClear_SE", new[] { 523.25f, 659.25f, 783.99f, 987.77f, 1318.51f }, 0.58f));
+        }
+
         private AudioClip GetGeneratedRestartSe()
         {
             return generatedRestartSe ?? (generatedRestartSe = CreateTwoToneClip("Generated_Restart_SE", 520f, 390f, 0.14f, 0.32f));
@@ -314,6 +355,21 @@ namespace SRPG.Audio
         private AudioClip GetGeneratedUndoSe()
         {
             return generatedUndoSe ?? (generatedUndoSe = CreateTwoToneClip("Generated_Undo_SE", 760f, 520f, 0.11f, 0.28f));
+        }
+
+        private AudioClip GetGeneratedResetTurnSe()
+        {
+            return generatedResetTurnSe ?? (generatedResetTurnSe = CreateTwoToneClip("Generated_ResetTurn_SE", 440f, 220f, 0.17f, 0.26f));
+        }
+
+        private AudioClip GetGeneratedThreatToggleSe()
+        {
+            return generatedThreatToggleSe ?? (generatedThreatToggleSe = CreateTwoToneClip("Generated_ThreatToggle_SE", 720f, 540f, 0.08f, 0.18f));
+        }
+
+        private AudioClip GetGeneratedEndTurnSe()
+        {
+            return generatedEndTurnSe ?? (generatedEndTurnSe = CreateTwoToneClip("Generated_EndTurn_SE", 520f, 700f, 0.12f, 0.24f));
         }
 
         private static AudioClip CreateLoopClip(string clipName, float duration, float[] melody, float amplitude)

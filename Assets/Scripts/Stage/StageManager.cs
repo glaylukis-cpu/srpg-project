@@ -108,7 +108,7 @@ namespace SRPG.Stage
             {
                 allClear = true;
                 AudioManager.Instance?.StopBgm();
-                AudioManager.Instance?.PlayVictorySe();
+                AudioManager.Instance?.PlayAllClearSe();
                 BattleUI.Instance?.ShowResult("ALL CLEAR\nThanks for playing prototype");
                 BattleUI.Instance?.AddBattleLog("ALL CLEAR");
                 Debug.Log("ALL CLEAR");
