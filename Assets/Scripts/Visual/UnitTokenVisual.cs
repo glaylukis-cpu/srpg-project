@@ -19,7 +19,7 @@ namespace SRPG.Visual
         public static readonly Vector3 SelectionRingScale = new Vector3(1f, 0.5f, 1f);
         public static readonly Vector3 UnitTopLightScale = new Vector3(0.72f, 0.18f, 1f);
         public static readonly Vector3 HpBackgroundScale = new Vector3(0.54f, 0.17f, 1f);
-        public static readonly Color HpBackgroundColor = new Color(0f, 0f, 0f, 0.54f);
+        public static readonly Color HpBackgroundColor = new Color(0f, 0f, 0f, 0.62f);
         public static readonly Vector3 HpShadowOffset = new Vector3(0.014f, -0.014f, 0.01f);
         public static readonly Color HpShadowColor = new Color(0f, 0f, 0f, 0.82f);
 
