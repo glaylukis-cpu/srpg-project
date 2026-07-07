@@ -98,7 +98,7 @@ namespace SRPG.UI
         private const int MaxStageSelectRows = 6;
         private const int StagePreviewSize = 8;
         private const float StageIntroDuration = 1.8f;
-        private const float BattleHudInset = 3f;
+        private const float BattleHudInset = 6f;
         private const int BattleHudTitleFontSize = 12;
         private const int BattleHudBodyFontSize = 11;
         private const int BattleHudSmallFontSize = 10;
@@ -414,6 +414,7 @@ namespace SRPG.UI
         {
             EnsureTextObjects();
             HideTitleScreen();
+            HideTutorialHint();
             HideStageIntro();
             ClearResult();
 
@@ -472,6 +473,7 @@ namespace SRPG.UI
         public void ShowTitleScreen(int selectedMenuIndex = 0)
         {
             EnsureTextObjects();
+            HideTutorialHint();
             HideStageIntro();
             HideStageSelect();
             HideOptionsScreen();
@@ -534,9 +536,10 @@ namespace SRPG.UI
             SetBattleHudVisible(true);
         }
 
-        public void ShowOptionsScreen(AudioManager audioManager, int selectedOptionIndex)
+        public void ShowOptionsScreen(AudioManager audioManager, int selectedOptionIndex, string resolutionOverride = null, string displayModeOverride = null)
         {
             EnsureTextObjects();
+            HideTutorialHint();
             HideStageIntro();
             HideStageSelect();
             ClearResult();
@@ -549,7 +552,7 @@ namespace SRPG.UI
                 titleBackgroundImage.enabled = true;
             }
 
-            RefreshOptionsText(audioManager);
+            RefreshOptionsText(audioManager, resolutionOverride, displayModeOverride);
             SetOptionsOverlayVisible(true);
             BringOptionsObjectsToFront();
         }
@@ -1086,10 +1089,11 @@ namespace SRPG.UI
 
             if (tutorialHintPanel == null)
             {
-                tutorialHintPanel = CreatePanel("TutorialHintPanel", new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(490f, 50f), BattleHudPanelColor());
+                tutorialHintPanel = CreatePanel("TutorialHintPanel", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(484f, 44f), BattleHudPanelColor());
             }
+            ParentPanelInsideFrame(tutorialHintPanel, tutorialHintFrame);
             tutorialHintPanel.color = BattleHudPanelColor();
-            ConfigureRect(tutorialHintPanel.rectTransform, new Vector2(0f, -32f), new Vector2(0.5f, 1f), new Vector2(490f, 50f));
+            ConfigurePanelRect(tutorialHintPanel.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(484f, 44f));
 
             if (tutorialHintText == null)
             {
@@ -1114,10 +1118,11 @@ namespace SRPG.UI
 
             if (stageIntroPanel == null)
             {
-                stageIntroPanel = CreatePanel("StageIntroPanel", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(656f, 280f), new Color(0.045f, 0.037f, 0.028f, 0.9f));
+                stageIntroPanel = CreatePanel("StageIntroPanel", Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(650f, 274f), new Color(0.045f, 0.037f, 0.028f, 0.9f));
             }
+            ParentPanelInsideFrame(stageIntroPanel, stageIntroFrame);
             stageIntroPanel.color = new Color(0.045f, 0.037f, 0.028f, 0.9f);
-            ConfigurePanelRect(stageIntroPanel.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(656f, 280f));
+            ConfigurePanelRect(stageIntroPanel.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(650f, 274f));
 
             if (stageIntroText != null && stageIntroText.transform.parent != stageIntroPanel.transform)
             {
@@ -1142,13 +1147,24 @@ namespace SRPG.UI
             {
                 panel = CreatePanel(
                     $"{baseName}Panel",
-                    panelPosition,
-                    anchor,
+                    Vector2.zero,
+                    new Vector2(0.5f, 0.5f),
                     panelSize,
                     BattleHudPanelColor());
             }
+            ParentPanelInsideFrame(panel, frame);
             panel.color = BattleHudPanelColor();
-            ConfigurePanelRect(panel.rectTransform, panelPosition, anchor, panelSize);
+            ConfigurePanelRect(panel.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), panelSize);
+        }
+
+        private void ParentPanelInsideFrame(Image panel, Image frame)
+        {
+            if (panel == null || frame == null || panel.transform.parent == frame.transform)
+            {
+                return;
+            }
+
+            panel.transform.SetParent(frame.transform, false);
         }
 
         private void RefreshStageText()
@@ -1424,8 +1440,7 @@ namespace SRPG.UI
         private void SetStageIntroVisualState(float alphaScale, float scale)
         {
             alphaScale = Mathf.Clamp01(alphaScale);
-            SetLocalScale(stageIntroFrame, scale);
-            SetLocalScale(stageIntroPanel, scale);
+            SetPanelPairScale(stageIntroFrame, stageIntroPanel, scale);
             if (stageIntroFrame != null)
             {
                 stageIntroFrame.color = new Color(0.64f, 0.46f, 0.18f, 0.72f * alphaScale);
@@ -1472,8 +1487,7 @@ namespace SRPG.UI
         private void SetResultVisualState(string result, float alphaScale, float scale)
         {
             alphaScale = Mathf.Clamp01(alphaScale);
-            SetLocalScale(battleResultFrame, scale);
-            SetLocalScale(battleResultPanel, scale);
+            SetPanelPairScale(battleResultFrame, battleResultPanel, scale);
             if (battleResultBackdrop != null)
             {
                 battleResultBackdrop.color = GetResultBackdropColor(alphaScale);
@@ -1525,8 +1539,7 @@ namespace SRPG.UI
         private void SetTutorialHintVisualState(float alphaScale, float scale)
         {
             alphaScale = Mathf.Clamp01(alphaScale);
-            SetLocalScale(tutorialHintFrame, scale);
-            SetLocalScale(tutorialHintPanel, scale);
+            SetPanelPairScale(tutorialHintFrame, tutorialHintPanel, scale);
             SetLocalScale(tutorialHintText, scale);
             if (tutorialHintFrame != null)
             {
@@ -1557,8 +1570,7 @@ namespace SRPG.UI
             {
                 var t = EaseOut(elapsed / UiPulseDuration);
                 var lift = 1f - t;
-                SetLocalScale(battleLogFrame, 0.99f + 0.01f * t);
-                SetLocalScale(battleLogPanel, 0.99f + 0.01f * t);
+                SetPanelPairScale(battleLogFrame, battleLogPanel, 0.99f + 0.01f * t);
                 SetLocalScale(battleLogText, 0.99f + 0.01f * t);
                 if (battleLogFrame != null)
                 {
@@ -1580,8 +1592,7 @@ namespace SRPG.UI
 
         private void SetBattleLogVisualFinal()
         {
-            SetLocalScale(battleLogFrame, 1f);
-            SetLocalScale(battleLogPanel, 1f);
+            SetPanelPairScale(battleLogFrame, battleLogPanel, 1f);
             SetLocalScale(battleLogText, 1f);
             if (battleLogFrame != null)
             {
@@ -1608,8 +1619,7 @@ namespace SRPG.UI
                 var t = EaseOut(elapsed / UiPulseDuration);
                 var lift = 1f - t;
                 var scale = 0.985f + 0.015f * t;
-                SetLocalScale(battleThreatFrame, scale);
-                SetLocalScale(battleThreatPanel, scale);
+                SetPanelPairScale(battleThreatFrame, battleThreatPanel, scale);
                 SetLocalScale(enemyThreatText, scale);
                 if (battleThreatFrame != null)
                 {
@@ -1635,8 +1645,7 @@ namespace SRPG.UI
 
         private void SetEnemyThreatVisualFinal()
         {
-            SetLocalScale(battleThreatFrame, 1f);
-            SetLocalScale(battleThreatPanel, 1f);
+            SetPanelPairScale(battleThreatFrame, battleThreatPanel, 1f);
             SetLocalScale(enemyThreatText, 1f);
             if (battleThreatFrame != null)
             {
@@ -1677,6 +1686,12 @@ namespace SRPG.UI
             {
                 component.transform.localScale = Vector3.one * scale;
             }
+        }
+
+        private void SetPanelPairScale(Image frame, Image panel, float scale)
+        {
+            SetLocalScale(frame, scale);
+            SetLocalScale(panel, 1f);
         }
 
         private Color BattleHudPrimaryTextColor(float alpha)
@@ -2775,7 +2790,7 @@ namespace SRPG.UI
             titleExitText = EnsureTitleMenuChildText(titleExitText, "ExitText", new Vector2(0f, -36f), TextAnchor.MiddleCenter, 21, new Vector2(260f, 28f));
         }
 
-        private void RefreshOptionsText(AudioManager audioManager)
+        private void RefreshOptionsText(AudioManager audioManager, string resolutionOverride = null, string displayModeOverride = null)
         {
             if (optionsBodyText == null)
             {
@@ -2786,8 +2801,8 @@ namespace SRPG.UI
             var bgm = audioManager != null ? audioManager.BgmVolume : 0f;
             var se = audioManager != null ? audioManager.SeVolume : 0f;
             var mute = audioManager != null && audioManager.MuteAll;
-            var resolution = $"{Screen.width} x {Screen.height}";
-            var displayMode = Screen.fullScreen ? "Full Screen" : "Window";
+            var resolution = string.IsNullOrEmpty(resolutionOverride) ? $"{Screen.width} x {Screen.height}" : resolutionOverride;
+            var displayMode = string.IsNullOrEmpty(displayModeOverride) ? (Screen.fullScreen ? "Full Screen" : "Window") : displayModeOverride;
 
             var lines = new[]
             {

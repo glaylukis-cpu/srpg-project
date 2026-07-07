@@ -474,7 +474,7 @@ namespace SRPG.Stage
             var resolution = ResolutionOptions[selectedResolutionIndex];
             Screen.SetResolution(resolution.x, resolution.y, GetCurrentFullScreenMode());
             AudioManager.Instance?.PlayCursorSe();
-            BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex);
+            BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex, FormatResolution(resolution), FormatDisplayMode(GetCurrentFullScreenMode()));
             Debug.Log($"Resolution changed: {resolution.x}x{resolution.y}, Display: {(Screen.fullScreen ? "Full Screen" : "Window")}");
         }
 
@@ -484,8 +484,18 @@ namespace SRPG.Stage
             var targetMode = Screen.fullScreen ? FullScreenMode.Windowed : FullScreenMode.ExclusiveFullScreen;
             Screen.SetResolution(resolution.x, resolution.y, targetMode);
             AudioManager.Instance?.PlayConfirmSe();
-            BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex);
+            BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex, FormatResolution(resolution), FormatDisplayMode(targetMode));
             Debug.Log($"Display mode changed: {(Screen.fullScreen ? "Full Screen" : "Window")} {resolution.x}x{resolution.y}");
+        }
+
+        private string FormatResolution(Vector2Int resolution)
+        {
+            return $"{resolution.x} x {resolution.y}";
+        }
+
+        private string FormatDisplayMode(FullScreenMode mode)
+        {
+            return mode == FullScreenMode.Windowed ? "Window" : "Full Screen";
         }
 
         private FullScreenMode GetCurrentFullScreenMode()
@@ -626,7 +636,7 @@ namespace SRPG.Stage
         {
             if (optionIndex < 0)
             {
-                return 4;
+                return 6;
             }
 
             if (optionIndex > 6)
