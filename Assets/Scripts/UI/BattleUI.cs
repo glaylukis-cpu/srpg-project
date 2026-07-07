@@ -106,6 +106,7 @@ namespace SRPG.UI
         private const float UiFadeDuration = 0.16f;
         private const float UiPopScale = 0.97f;
         private const float UiPulseDuration = 0.14f;
+        private static readonly Vector2 UiReferenceResolution = new Vector2(1280f, 720f);
         private readonly List<string> battleLogEntries = new List<string>();
         private readonly Dictionary<int, StageBestResult> sessionBestResults = new Dictionary<int, StageBestResult>();
         private readonly Image[] stageSelectRowPanels = new Image[MaxStageSelectRows];
@@ -897,7 +898,10 @@ namespace SRPG.UI
             }
 
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1280f, 720f);
+            scaler.referenceResolution = UiReferenceResolution;
+            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+            scaler.matchWidthOrHeight = 0.5f;
+            scaler.referencePixelsPerUnit = 100f;
 
             if (GetComponent<GraphicRaycaster>() == null)
             {
@@ -2122,6 +2126,7 @@ namespace SRPG.UI
             rectTransform.pivot = anchor;
             rectTransform.anchoredPosition = anchoredPosition;
             rectTransform.sizeDelta = size;
+            SnapRectTransformToPixels(rectTransform);
 
             return text;
         }
@@ -2138,6 +2143,7 @@ namespace SRPG.UI
             rectTransform.pivot = anchor;
             rectTransform.anchoredPosition = anchoredPosition;
             rectTransform.sizeDelta = size;
+            SnapRectTransformToPixels(rectTransform);
         }
 
         private void ConfigurePanelRect(RectTransform rectTransform, Vector2 anchoredPosition, Vector2 anchor, Vector2 size)
@@ -2152,6 +2158,7 @@ namespace SRPG.UI
             rectTransform.pivot = new Vector2(0.5f, 0.5f);
             rectTransform.anchoredPosition = anchoredPosition;
             rectTransform.sizeDelta = size;
+            SnapRectTransformToPixels(rectTransform);
         }
 
         private Image CreatePanel(string objectName, Vector2 anchoredPosition, Vector2 anchor, Vector2 size, Color color)
@@ -2169,8 +2176,32 @@ namespace SRPG.UI
             rectTransform.pivot = anchor;
             rectTransform.anchoredPosition = anchoredPosition;
             rectTransform.sizeDelta = size;
+            SnapRectTransformToPixels(rectTransform);
 
             return image;
+        }
+
+        private void SnapRectTransformToPixels(RectTransform rectTransform)
+        {
+            if (rectTransform == null)
+            {
+                return;
+            }
+
+            if (rectTransform.anchorMin == rectTransform.anchorMax)
+            {
+                rectTransform.anchoredPosition = SnapVector2(rectTransform.anchoredPosition);
+                rectTransform.sizeDelta = SnapVector2(rectTransform.sizeDelta);
+                return;
+            }
+
+            rectTransform.offsetMin = SnapVector2(rectTransform.offsetMin);
+            rectTransform.offsetMax = SnapVector2(rectTransform.offsetMax);
+        }
+
+        private Vector2 SnapVector2(Vector2 value)
+        {
+            return new Vector2(Mathf.Round(value.x), Mathf.Round(value.y));
         }
 
         private void EnsureStageSelectObjects()
@@ -3110,6 +3141,7 @@ namespace SRPG.UI
             rectTransform.pivot = new Vector2(0.5f, 0.5f);
             rectTransform.anchoredPosition = Vector2.zero;
             rectTransform.sizeDelta = Vector2.zero;
+            SnapRectTransformToPixels(rectTransform);
 
             var texture = Resources.Load<Texture2D>("Title/TitleBackground");
             if (texture != null)

@@ -7,7 +7,11 @@ namespace SRPG.Visual
     {
         private const int TextureWidth = 32;
         private const int TextureHeight = 16;
+        private const int SmoothTextureScale = 3;
+        private const int SmoothTextureWidth = TextureWidth * SmoothTextureScale;
+        private const int SmoothTextureHeight = TextureHeight * SmoothTextureScale;
         private const float PixelsPerUnit = TextureWidth;
+        private const float SmoothPixelsPerUnit = SmoothTextureWidth;
         private const float ObstaclePixelsPerUnit = 78f;
         private const string ObstacleResourcePathPrefix = "Terrain/RockRubble_";
         public const int ObstacleDetailVariantCount = 4;
@@ -34,49 +38,52 @@ namespace SRPG.Visual
                 return stoneTileSprite;
             }
 
-            var texture = CreateTexture();
-            for (var y = 0; y < TextureHeight; y++)
+            var texture = CreateSmoothTexture();
+            for (var y = 0; y < SmoothTextureHeight; y++)
             {
-                for (var x = 0; x < TextureWidth; x++)
+                for (var x = 0; x < SmoothTextureWidth; x++)
                 {
-                    var distance = GetDiamondDistance(x, y);
-                    if (distance > 1f)
+                    var distance = GetSmoothDiamondDistance(x, y);
+                    var edgeAlpha = GetDiamondEdgeAlpha(distance);
+                    if (edgeAlpha <= 0f)
                     {
                         continue;
                     }
 
-                    var shade = 0.82f + y * 0.004f;
+                    var sampleX = x / SmoothTextureScale;
+                    var sampleY = y / SmoothTextureScale;
+                    var shade = 0.82f + sampleY * 0.004f;
                     if (distance > 0.82f)
                     {
-                        shade = y >= TextureHeight * 0.5f ? 0.62f : 0.5f;
+                        shade = y >= SmoothTextureHeight * 0.5f ? 0.62f : 0.5f;
                     }
                     else if (distance > 0.7f)
                     {
-                        shade = y >= TextureHeight * 0.5f ? 0.74f : 0.62f;
+                        shade = y >= SmoothTextureHeight * 0.5f ? 0.74f : 0.62f;
                     }
-                    else if ((x * 11 + y * 19) % 73 == 0)
+                    else if ((sampleX * 11 + sampleY * 19) % 73 == 0)
                     {
                         shade -= 0.045f;
                     }
-                    else if ((x * 7 + y * 3) % 59 == 0)
+                    else if ((sampleX * 7 + sampleY * 3) % 59 == 0)
                     {
                         shade -= 0.025f;
                     }
-                    else if ((x * 3 + y * 5) % 31 == 0)
+                    else if ((sampleX * 3 + sampleY * 5) % 31 == 0)
                     {
                         shade -= 0.018f;
                     }
-                    else if ((x + y * 2) % 43 == 0)
+                    else if ((sampleX + sampleY * 2) % 43 == 0)
                     {
                         shade += 0.018f;
                     }
 
-                    texture.SetPixel(x, y, new Color(shade, shade, shade, 1f));
+                    texture.SetPixel(x, y, new Color(shade, shade, shade, edgeAlpha));
                 }
             }
 
             texture.Apply();
-            stoneTileSprite = CreateSprite(texture);
+            stoneTileSprite = CreateSmoothSprite(texture);
             return stoneTileSprite;
         }
 
@@ -87,15 +94,16 @@ namespace SRPG.Visual
                 return tileSideSprite;
             }
 
-            var texture = CreateTexture();
-            for (var y = 0; y < TextureHeight; y++)
+            var texture = CreateSmoothTexture();
+            for (var y = 0; y < SmoothTextureHeight; y++)
             {
-                for (var x = 0; x < TextureWidth; x++)
+                for (var x = 0; x < SmoothTextureWidth; x++)
                 {
-                    var distance = GetDiamondDistance(x, y);
-                    if (distance <= 1f)
+                    var distance = GetSmoothDiamondDistance(x, y);
+                    var edgeAlpha = GetDiamondEdgeAlpha(distance);
+                    if (edgeAlpha > 0f)
                     {
-                        var lowerSide = y < TextureHeight * 0.44f;
+                        var lowerSide = y < SmoothTextureHeight * 0.44f;
                         var edgeBand = distance > 0.7f;
                         var shade = lowerSide ? 0.24f : 0.38f;
                         if (edgeBand)
@@ -103,13 +111,13 @@ namespace SRPG.Visual
                             shade -= 0.025f;
                         }
 
-                        texture.SetPixel(x, y, new Color(shade, shade, shade, 1f));
+                        texture.SetPixel(x, y, new Color(shade, shade, shade, edgeAlpha));
                     }
                 }
             }
 
             texture.Apply();
-            tileSideSprite = CreateSprite(texture);
+            tileSideSprite = CreateSmoothSprite(texture);
             return tileSideSprite;
         }
 
@@ -120,23 +128,24 @@ namespace SRPG.Visual
                 return highlightSprite;
             }
 
-            var texture = CreateTexture();
+            var texture = CreateSmoothTexture();
             var fill = new Color(1f, 1f, 1f, 0.26f);
             var edge = new Color(1f, 1f, 1f, 0.9f);
-            for (var y = 0; y < TextureHeight; y++)
+            for (var y = 0; y < SmoothTextureHeight; y++)
             {
-                for (var x = 0; x < TextureWidth; x++)
+                for (var x = 0; x < SmoothTextureWidth; x++)
                 {
-                    var distance = GetDiamondDistance(x, y);
-                    if (distance <= 1f)
+                    var distance = GetSmoothDiamondDistance(x, y);
+                    var edgeAlpha = GetDiamondEdgeAlpha(distance);
+                    if (edgeAlpha > 0f)
                     {
-                        texture.SetPixel(x, y, distance > 0.76f ? edge : fill);
+                        texture.SetPixel(x, y, WithAlphaScale(distance > 0.76f ? edge : fill, edgeAlpha));
                     }
                 }
             }
 
             texture.Apply();
-            highlightSprite = CreateSprite(texture);
+            highlightSprite = CreateSmoothSprite(texture);
             return highlightSprite;
         }
 
@@ -147,27 +156,28 @@ namespace SRPG.Visual
                 return moveHighlightSprite;
             }
 
-            var texture = CreateTexture();
+            var texture = CreateSmoothTexture();
             var fill = new Color(1f, 1f, 1f, 0.12f);
             var innerEdge = new Color(1f, 1f, 1f, 0.48f);
             var outerEdge = new Color(1f, 1f, 1f, 1f);
-            for (var y = 0; y < TextureHeight; y++)
+            for (var y = 0; y < SmoothTextureHeight; y++)
             {
-                for (var x = 0; x < TextureWidth; x++)
+                for (var x = 0; x < SmoothTextureWidth; x++)
                 {
-                    var distance = GetDiamondDistance(x, y);
-                    if (distance <= 1f)
+                    var distance = GetSmoothDiamondDistance(x, y);
+                    var edgeAlpha = GetDiamondEdgeAlpha(distance);
+                    if (edgeAlpha > 0f)
                     {
                         var color = distance > 0.82f
                             ? outerEdge
                             : distance > 0.68f ? innerEdge : fill;
-                        texture.SetPixel(x, y, color);
+                        texture.SetPixel(x, y, WithAlphaScale(color, edgeAlpha));
                     }
                 }
             }
 
             texture.Apply();
-            moveHighlightSprite = CreateSprite(texture);
+            moveHighlightSprite = CreateSmoothSprite(texture);
             return moveHighlightSprite;
         }
 
@@ -215,24 +225,25 @@ namespace SRPG.Visual
 
         private static Sprite CreateThreatDiamondSprite(Color fill, Color innerEdge, Color outerEdge)
         {
-            var texture = CreateTexture();
-            for (var y = 0; y < TextureHeight; y++)
+            var texture = CreateSmoothTexture();
+            for (var y = 0; y < SmoothTextureHeight; y++)
             {
-                for (var x = 0; x < TextureWidth; x++)
+                for (var x = 0; x < SmoothTextureWidth; x++)
                 {
-                    var distance = GetDiamondDistance(x, y);
-                    if (distance <= 1f)
+                    var distance = GetSmoothDiamondDistance(x, y);
+                    var edgeAlpha = GetDiamondEdgeAlpha(distance);
+                    if (edgeAlpha > 0f)
                     {
                         var color = distance > 0.82f
                             ? outerEdge
                             : distance > 0.68f ? innerEdge : fill;
-                        texture.SetPixel(x, y, color);
+                        texture.SetPixel(x, y, WithAlphaScale(color, edgeAlpha));
                     }
                 }
             }
 
             texture.Apply();
-            return CreateSprite(texture);
+            return CreateSmoothSprite(texture);
         }
 
         public static Sprite GetGuardianReactionReachableHighlightSprite()
@@ -267,13 +278,14 @@ namespace SRPG.Visual
 
         private static Sprite CreateGuardianReactionSprite(Color centerWash, Color innerEdge, Color outerEdge, Color cornerTick)
         {
-            var texture = CreateTexture();
-            for (var y = 0; y < TextureHeight; y++)
+            var texture = CreateSmoothTexture();
+            for (var y = 0; y < SmoothTextureHeight; y++)
             {
-                for (var x = 0; x < TextureWidth; x++)
+                for (var x = 0; x < SmoothTextureWidth; x++)
                 {
-                    var distance = GetDiamondDistance(x, y);
-                    if (distance > 1f)
+                    var distance = GetSmoothDiamondDistance(x, y);
+                    var edgeAlpha = GetDiamondEdgeAlpha(distance);
+                    if (edgeAlpha <= 0f)
                     {
                         continue;
                     }
@@ -282,19 +294,19 @@ namespace SRPG.Visual
                         ? outerEdge
                         : distance > 0.76f ? innerEdge : centerWash;
 
-                    var nearHorizontalCorner = x <= 2 || x >= TextureWidth - 3;
-                    var nearVerticalCorner = y <= 1 || y >= TextureHeight - 2;
+                    var nearHorizontalCorner = x <= 2 * SmoothTextureScale || x >= SmoothTextureWidth - 3 * SmoothTextureScale;
+                    var nearVerticalCorner = y <= SmoothTextureScale || y >= SmoothTextureHeight - 2 * SmoothTextureScale;
                     if (distance > 0.78f && (nearHorizontalCorner || nearVerticalCorner))
                     {
                         color = cornerTick;
                     }
 
-                    texture.SetPixel(x, y, color);
+                    texture.SetPixel(x, y, WithAlphaScale(color, edgeAlpha));
                 }
             }
 
             texture.Apply();
-            return CreateSprite(texture);
+            return CreateSmoothSprite(texture);
         }
 
         public static Sprite GetMoveThreatOverlapSprite()
@@ -304,27 +316,28 @@ namespace SRPG.Visual
                 return moveThreatOverlapSprite;
             }
 
-            var texture = CreateTexture();
+            var texture = CreateSmoothTexture();
             var moveFill = new Color(0.16f, 0.62f, 1f, 0.14f);
             var moveEdge = new Color(0.42f, 0.78f, 1f, 0.44f);
             var dangerEdge = new Color(0.95f, 0.18f, 0.08f, 0.72f);
-            for (var y = 0; y < TextureHeight; y++)
+            for (var y = 0; y < SmoothTextureHeight; y++)
             {
-                for (var x = 0; x < TextureWidth; x++)
+                for (var x = 0; x < SmoothTextureWidth; x++)
                 {
-                    var distance = GetDiamondDistance(x, y);
-                    if (distance <= 1f)
+                    var distance = GetSmoothDiamondDistance(x, y);
+                    var edgeAlpha = GetDiamondEdgeAlpha(distance);
+                    if (edgeAlpha > 0f)
                     {
                         var color = distance > 0.82f
                             ? dangerEdge
                             : distance > 0.68f ? moveEdge : moveFill;
-                        texture.SetPixel(x, y, color);
+                        texture.SetPixel(x, y, WithAlphaScale(color, edgeAlpha));
                     }
                 }
             }
 
             texture.Apply();
-            moveThreatOverlapSprite = CreateSprite(texture);
+            moveThreatOverlapSprite = CreateSmoothSprite(texture);
             return moveThreatOverlapSprite;
         }
 
@@ -582,13 +595,24 @@ namespace SRPG.Visual
 
         private static Texture2D CreateTexture()
         {
-            var texture = new Texture2D(TextureWidth, TextureHeight);
-            texture.filterMode = FilterMode.Point;
+            return CreateTexture(TextureWidth, TextureHeight, FilterMode.Point);
+        }
+
+        private static Texture2D CreateSmoothTexture()
+        {
+            return CreateTexture(SmoothTextureWidth, SmoothTextureHeight, FilterMode.Bilinear);
+        }
+
+        private static Texture2D CreateTexture(int width, int height, FilterMode filterMode)
+        {
+            var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            texture.filterMode = filterMode;
+            texture.wrapMode = TextureWrapMode.Clamp;
             var transparent = new Color(0f, 0f, 0f, 0f);
 
-            for (var y = 0; y < TextureHeight; y++)
+            for (var y = 0; y < height; y++)
             {
-                for (var x = 0; x < TextureWidth; x++)
+                for (var x = 0; x < width; x++)
                 {
                     texture.SetPixel(x, y, transparent);
                 }
@@ -599,20 +623,51 @@ namespace SRPG.Visual
 
         private static Sprite CreateSprite(Texture2D texture)
         {
+            return CreateSprite(texture, PixelsPerUnit);
+        }
+
+        private static Sprite CreateSmoothSprite(Texture2D texture)
+        {
+            return CreateSprite(texture, SmoothPixelsPerUnit);
+        }
+
+        private static Sprite CreateSprite(Texture2D texture, float pixelsPerUnit)
+        {
             return Sprite.Create(
                 texture,
-                new Rect(0, 0, TextureWidth, TextureHeight),
+                new Rect(0, 0, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f),
-                PixelsPerUnit);
+                pixelsPerUnit);
         }
 
         private static float GetDiamondDistance(int x, int y)
         {
-            var centerX = (TextureWidth - 1) * 0.5f;
-            var centerY = (TextureHeight - 1) * 0.5f;
-            var normalizedX = (float)Math.Abs(x - centerX) / (TextureWidth * 0.5f);
-            var normalizedY = (float)Math.Abs(y - centerY) / (TextureHeight * 0.5f);
+            return GetDiamondDistance(x, y, TextureWidth, TextureHeight);
+        }
+
+        private static float GetSmoothDiamondDistance(int x, int y)
+        {
+            return GetDiamondDistance(x, y, SmoothTextureWidth, SmoothTextureHeight);
+        }
+
+        private static float GetDiamondDistance(int x, int y, int width, int height)
+        {
+            var centerX = (width - 1) * 0.5f;
+            var centerY = (height - 1) * 0.5f;
+            var normalizedX = (float)Math.Abs(x - centerX) / (width * 0.5f);
+            var normalizedY = (float)Math.Abs(y - centerY) / (height * 0.5f);
             return normalizedX + normalizedY;
+        }
+
+        private static float GetDiamondEdgeAlpha(float distance)
+        {
+            return Mathf.Clamp01((1.035f - distance) / 0.055f);
+        }
+
+        private static Color WithAlphaScale(Color color, float alphaScale)
+        {
+            color.a *= alphaScale;
+            return color;
         }
 
         private static void FillRect(Texture2D texture, int minX, int minY, int maxX, int maxY, Color color)
