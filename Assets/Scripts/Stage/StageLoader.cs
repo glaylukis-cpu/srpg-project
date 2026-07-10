@@ -1,3 +1,4 @@
+using SRPG.Debugging;
 using SRPG.Grid;
 using UnityEngine;
 
@@ -13,13 +14,13 @@ namespace SRPG.Stage
         {
             if (data == null)
             {
-                Debug.Log("Stage load failed: StageData is null.");
+                Debug.LogWarning("Stage load failed: StageData is null.");
                 return;
             }
 
             if (!EnsureGridManager())
             {
-                Debug.Log("Stage load failed: GridManager not found.");
+                Debug.LogWarning("Stage load failed: GridManager not found.");
                 return;
             }
 
@@ -36,7 +37,7 @@ namespace SRPG.Stage
                 gridManager.SpawnUnit(unitData);
             }
 
-            Debug.Log($"Stage loaded: {data.Width}x{data.Height}, Units: {data.Units.Count}, Terrains: {data.Terrains.Count}");
+            DevLogger.Log($"Stage loaded: {data.Width}x{data.Height}, Units: {data.Units.Count}, Terrains: {data.Terrains.Count}");
         }
 
         private void Awake()

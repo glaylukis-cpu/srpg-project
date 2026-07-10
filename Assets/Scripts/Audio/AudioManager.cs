@@ -1,4 +1,6 @@
 using System;
+using SRPG.Debugging;
+using SRPG.Persistence;
 using UnityEngine;
 
 #pragma warning disable 0649
@@ -82,6 +84,7 @@ namespace SRPG.Audio
             {
                 masterVolume = Clamp01(value);
                 RefreshVolumes();
+                SaveSettings();
             }
         }
 
@@ -92,13 +95,18 @@ namespace SRPG.Audio
             {
                 bgmVolume = Clamp01(value);
                 RefreshVolumes();
+                SaveSettings();
             }
         }
 
         public float SeVolume
         {
             get => seVolume;
-            set => seVolume = Clamp01(value);
+            set
+            {
+                seVolume = Clamp01(value);
+                SaveSettings();
+            }
         }
 
         public bool MuteAll
@@ -121,6 +129,8 @@ namespace SRPG.Audio
                 {
                     ResumeCurrentBgm();
                 }
+
+                SaveSettings();
             }
         }
 
@@ -174,7 +184,16 @@ namespace SRPG.Audio
             }
 
             Instance = this;
+            masterVolume = GameSaveData.GetMasterVolume(masterVolume);
+            bgmVolume = GameSaveData.GetBgmVolume(bgmVolume);
+            seVolume = GameSaveData.GetSeVolume(seVolume);
+            muteAll = GameSaveData.GetMute(muteAll);
             EnsureSources();
+        }
+
+        private void SaveSettings()
+        {
+            GameSaveData.SaveAudioSettings(masterVolume, bgmVolume, seVolume, muteAll);
         }
 
         private void Update()
@@ -182,7 +201,7 @@ namespace SRPG.Audio
             if (Input.GetKeyDown(KeyCode.M))
             {
                 MuteAll = !MuteAll;
-                Debug.Log(MuteAll ? "Audio muted." : "Audio unmuted.");
+                DevLogger.Log(MuteAll ? "Audio muted." : "Audio unmuted.");
             }
         }
 

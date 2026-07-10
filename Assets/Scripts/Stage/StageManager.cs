@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using SRPG.Audio;
 using SRPG.Battle;
 using SRPG.Debugging;
+using SRPG.Persistence;
 using SRPG.UI;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ namespace SRPG.Stage
         private bool hasLoadedStage;
         private bool wasBattleEnded;
         private bool waitForResultConfirmRelease;
+        private bool quitConfirmationPending;
 
         private static readonly Vector2Int[] ResolutionOptions =
         {
@@ -97,9 +99,23 @@ namespace SRPG.Stage
                 return;
             }
 
-            currentStageIndex = ClampStageIndex(stageIndex);
+            var targetStageIndex = ClampStageIndex(stageIndex);
+            if (!GameSaveData.IsStageUnlocked(targetStageIndex, stages.Count))
+            {
+                AudioManager.Instance?.PlayCancelSe();
+                BattleUI.Instance?.ShowStageSelect(stages, selectedStageIndex);
+                return;
+            }
+
+            currentStageIndex = targetStageIndex;
             selectedStageIndex = currentStageIndex;
             LoadCurrentStage();
+        }
+
+        public void RecordStageClear(string rating, int turnNumber, int survivors, int hpTotal)
+        {
+            EnsureStages();
+            GameSaveData.RecordStageClear(CurrentStageNumber, TotalStages, rating, turnNumber, survivors, hpTotal);
         }
 
         public void LoadNextStage()
@@ -109,7 +125,7 @@ namespace SRPG.Stage
                 allClear = true;
                 AudioManager.Instance?.StopBgm();
                 AudioManager.Instance?.PlayAllClearSe();
-                BattleUI.Instance?.ShowResult("ALL CLEAR\nThanks for playing prototype");
+                BattleUI.Instance?.ShowResult("ALL CLEAR\nThanks for playing");
                 BattleUI.Instance?.AddBattleLog("ALL CLEAR");
                 Debug.Log("ALL CLEAR");
                 return;
@@ -142,7 +158,9 @@ namespace SRPG.Stage
             }
 
             Instance = this;
+            GameSaveData.EnsureInitialized();
             EnsureStages();
+            ApplySavedDisplaySettings();
         }
 
         private void Start()
@@ -258,7 +276,9 @@ namespace SRPG.Stage
             titleScreenOpen = false;
             stageSelectOpen = true;
             optionsOpen = false;
+            quitConfirmationPending = false;
             selectedStageIndex = ClampStageIndex(hasLoadedStage ? currentStageIndex : selectedStageIndex);
+            selectedStageIndex = ClampUnlockedStageIndex(selectedStageIndex);
             TurnManager.Instance?.StopActiveEnemyTurn();
             PlayerController.Instance?.ResetControllerState();
             BattleUI.Instance?.ClearAttackPreview();
@@ -275,6 +295,7 @@ namespace SRPG.Stage
             titleScreenOpen = true;
             stageSelectOpen = false;
             optionsOpen = false;
+            quitConfirmationPending = false;
             selectedTitleMenuIndex = ClampTitleMenuIndex(selectedMenuIndex);
             PlayerController.Instance?.ResetControllerState();
             BattleUI.Instance?.SetSelectedUnit(null);
@@ -287,8 +308,18 @@ namespace SRPG.Stage
 
         private void HandleTitleScreenInput()
         {
+            if (quitConfirmationPending && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace)))
+            {
+                quitConfirmationPending = false;
+                BattleUI.Instance?.SetTitleExitConfirmation(false);
+                AudioManager.Instance?.PlayCancelSe();
+                return;
+            }
+
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                quitConfirmationPending = false;
+                BattleUI.Instance?.SetTitleExitConfirmation(false);
                 selectedTitleMenuIndex = ClampTitleMenuIndex(selectedTitleMenuIndex - 1);
                 BattleUI.Instance?.SetTitleMenuSelection(selectedTitleMenuIndex);
                 AudioManager.Instance?.PlayCursorSe();
@@ -297,6 +328,8 @@ namespace SRPG.Stage
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                quitConfirmationPending = false;
+                BattleUI.Instance?.SetTitleExitConfirmation(false);
                 selectedTitleMenuIndex = ClampTitleMenuIndex(selectedTitleMenuIndex + 1);
                 BattleUI.Instance?.SetTitleMenuSelection(selectedTitleMenuIndex);
                 AudioManager.Instance?.PlayCursorSe();
@@ -326,6 +359,14 @@ namespace SRPG.Stage
                     ShowOptionsScreen();
                     break;
                 case 3:
+                    if (!quitConfirmationPending)
+                    {
+                        quitConfirmationPending = true;
+                        BattleUI.Instance?.SetTitleExitConfirmation(true);
+                        AudioManager.Instance?.PlayConfirmSe();
+                        break;
+                    }
+
                     AudioManager.Instance?.PlayConfirmSe();
                     DevLogger.Log("EXIT selected.");
                     Application.Quit();
@@ -472,20 +513,23 @@ namespace SRPG.Stage
             }
 
             var resolution = ResolutionOptions[selectedResolutionIndex];
-            Screen.SetResolution(resolution.x, resolution.y, GetCurrentFullScreenMode());
+            var displayMode = GetCurrentFullScreenMode();
+            Screen.SetResolution(resolution.x, resolution.y, displayMode);
+            GameSaveData.SaveDisplaySettings(resolution.x, resolution.y, displayMode != FullScreenMode.Windowed);
             AudioManager.Instance?.PlayCursorSe();
-            BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex, FormatResolution(resolution), FormatDisplayMode(GetCurrentFullScreenMode()));
-            Debug.Log($"Resolution changed: {resolution.x}x{resolution.y}, Display: {(Screen.fullScreen ? "Full Screen" : "Window")}");
+            BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex, FormatResolution(resolution), FormatDisplayMode(displayMode));
+            DevLogger.Log($"Resolution changed: {resolution.x}x{resolution.y}, Display: {FormatDisplayMode(displayMode)}");
         }
 
         private void ToggleFullscreen()
         {
             var resolution = ResolutionOptions[GetClosestResolutionIndex(Screen.width, Screen.height)];
-            var targetMode = Screen.fullScreen ? FullScreenMode.Windowed : FullScreenMode.ExclusiveFullScreen;
+            var targetMode = Screen.fullScreen ? FullScreenMode.Windowed : FullScreenMode.FullScreenWindow;
             Screen.SetResolution(resolution.x, resolution.y, targetMode);
+            GameSaveData.SaveDisplaySettings(resolution.x, resolution.y, targetMode != FullScreenMode.Windowed);
             AudioManager.Instance?.PlayConfirmSe();
             BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex, FormatResolution(resolution), FormatDisplayMode(targetMode));
-            Debug.Log($"Display mode changed: {(Screen.fullScreen ? "Full Screen" : "Window")} {resolution.x}x{resolution.y}");
+            DevLogger.Log($"Display mode changed: {FormatDisplayMode(targetMode)} {resolution.x}x{resolution.y}");
         }
 
         private string FormatResolution(Vector2Int resolution)
@@ -500,7 +544,21 @@ namespace SRPG.Stage
 
         private FullScreenMode GetCurrentFullScreenMode()
         {
-            return Screen.fullScreen ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
+            return Screen.fullScreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+        }
+
+        private void ApplySavedDisplaySettings()
+        {
+            if (!GameSaveData.TryGetDisplaySettings(out var width, out var height, out var fullscreen))
+            {
+                selectedResolutionIndex = GetClosestResolutionIndex(Screen.width, Screen.height);
+                return;
+            }
+
+            selectedResolutionIndex = GetClosestResolutionIndex(width, height);
+            var resolution = ResolutionOptions[selectedResolutionIndex];
+            var mode = fullscreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+            Screen.SetResolution(resolution.x, resolution.y, mode);
         }
 
         private int GetClosestResolutionIndex(int width, int height)
@@ -532,7 +590,7 @@ namespace SRPG.Stage
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                selectedStageIndex = ClampStageIndex(selectedStageIndex - 1);
+                selectedStageIndex = ClampUnlockedStageIndex(selectedStageIndex - 1);
                 BattleUI.Instance?.ShowStageSelect(stages, selectedStageIndex);
                 AudioManager.Instance?.PlayCursorSe();
                 return;
@@ -540,7 +598,7 @@ namespace SRPG.Stage
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                selectedStageIndex = ClampStageIndex(selectedStageIndex + 1);
+                selectedStageIndex = ClampUnlockedStageIndex(selectedStageIndex + 1);
                 BattleUI.Instance?.ShowStageSelect(stages, selectedStageIndex);
                 AudioManager.Instance?.PlayCursorSe();
                 return;
@@ -549,6 +607,12 @@ namespace SRPG.Stage
             var quickStartIndex = GetQuickStartStageIndex();
             if (quickStartIndex >= 0)
             {
+                if (!GameSaveData.IsStageUnlocked(quickStartIndex, stages.Count))
+                {
+                    AudioManager.Instance?.PlayCancelSe();
+                    return;
+                }
+
                 AudioManager.Instance?.PlayConfirmSe();
                 LoadStageAt(quickStartIndex);
                 return;
@@ -610,6 +674,23 @@ namespace SRPG.Stage
             }
 
             if (stageIndex >= stages.Count)
+            {
+                return 0;
+            }
+
+            return stageIndex;
+        }
+
+        private int ClampUnlockedStageIndex(int stageIndex)
+        {
+            EnsureStages();
+            var highestUnlocked = GameSaveData.GetHighestUnlockedStageIndex(stages.Count);
+            if (stageIndex < 0)
+            {
+                return highestUnlocked;
+            }
+
+            if (stageIndex > highestUnlocked)
             {
                 return 0;
             }

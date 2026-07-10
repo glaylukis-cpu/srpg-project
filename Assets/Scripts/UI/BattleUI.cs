@@ -3,7 +3,9 @@ using System.Collections;
 using System.Text;
 using SRPG.Audio;
 using SRPG.Battle;
+using SRPG.Debugging;
 using SRPG.Grid;
+using SRPG.Persistence;
 using SRPG.Stage;
 using SRPG.Units;
 using UnityEngine;
@@ -66,6 +68,7 @@ namespace SRPG.UI
         [SerializeField] private Image titleFooterFrame;
         [SerializeField] private Image titleFooterPanel;
         [SerializeField] private Text titlePromptText;
+        [SerializeField] private Text titleVersionText;
         [SerializeField] private Image optionsFrame;
         [SerializeField] private Image optionsPanel;
         [SerializeField] private Text optionsHeaderText;
@@ -108,7 +111,6 @@ namespace SRPG.UI
         private const float UiPulseDuration = 0.14f;
         private static readonly Vector2 UiReferenceResolution = new Vector2(1280f, 720f);
         private readonly List<string> battleLogEntries = new List<string>();
-        private readonly Dictionary<int, StageBestResult> sessionBestResults = new Dictionary<int, StageBestResult>();
         private readonly Image[] stageSelectRowPanels = new Image[MaxStageSelectRows];
         private readonly Text[] stageSelectRowNumberTexts = new Text[MaxStageSelectRows];
         private readonly Text[] stageSelectRowNameTexts = new Text[MaxStageSelectRows];
@@ -131,6 +133,8 @@ namespace SRPG.UI
         private bool stageSelectObjectsInitialized;
         private bool tutorialHintActive;
         private bool resultVisible;
+        private bool titleExitConfirmationPending;
+        private bool enemyThreatVisible;
         private string currentResultStyleKey = string.Empty;
         private int tutorialHintStep = -1;
         private StageData currentStageData;
@@ -298,7 +302,8 @@ namespace SRPG.UI
         public void SetEnemyThreatVisible(bool visible)
         {
             EnsureTextObjects();
-            enemyThreatText.text = visible ? "Enemy Threat: ON" : "Enemy Threat: OFF";
+            enemyThreatVisible = visible;
+            enemyThreatText.text = visible ? "ENEMY THREAT   ON" : "ENEMY THREAT   OFF";
             PlayEnemyThreatToggleAnimation(visible);
         }
 
@@ -367,7 +372,6 @@ namespace SRPG.UI
             HideTitleScreen();
             HideStageIntro();
             HideTutorialHint();
-            UpdateSessionBestResult(result, rating, turnNumber, playersAlive, playerHpTotal);
             resultVisible = true;
             ApplyResultPanelStyle(result);
             SetResultPanelVisible(true);
@@ -480,6 +484,7 @@ namespace SRPG.UI
             HideOptionsScreen();
             ClearResult();
             SetBattleHudVisible(false);
+            titleExitConfirmationPending = false;
             SetTitleMenuSelection(selectedMenuIndex);
             RefreshTitlePromptText(false);
 
@@ -497,12 +502,20 @@ namespace SRPG.UI
 
             SetTitleOverlayVisible(false);
             titleText.text =
-                "PUZZLE SRPG PROTOTYPE\n" +
-                "v0.2 Locked Playable Build\n\n" +
+                "FINAL ESCAPE TACTICS\n" +
+                $"Version {Application.version}\n\n" +
                 "Six compact tactical puzzles.\n" +
                 "Read enemy ranges. Plan the order. Commit cleanly.\n\n" +
                 "Enter: Stage Select";
             titleText.enabled = true;
+        }
+
+        public void SetTitleExitConfirmation(bool pending)
+        {
+            EnsureTextObjects();
+            titleExitConfirmationPending = pending;
+            RefreshTitleMenuText();
+            RefreshTitlePromptText(false);
         }
 
         public void SetTitleMenuSelection(int selectedMenuIndex)
@@ -954,12 +967,12 @@ namespace SRPG.UI
 
             if (enemyThreatText == null)
             {
-                enemyThreatText = CreateText("EnemyThreatText", new Vector2(-22f, -24f), new Vector2(1f, 1f), TextAnchor.UpperRight, 14, new Vector2(180f, 20f));
+                enemyThreatText = CreateText("EnemyThreatText", new Vector2(-18f, -16f), new Vector2(1f, 1f), TextAnchor.MiddleCenter, 14, new Vector2(188f, 24f));
             }
             enemyThreatText.fontSize = 14;
-            enemyThreatText.alignment = TextAnchor.UpperRight;
-            enemyThreatText.color = BattleHudAccentTextColor();
-            ConfigureRect(enemyThreatText.rectTransform, new Vector2(-22f, -24f), new Vector2(1f, 1f), new Vector2(180f, 20f));
+            enemyThreatText.alignment = TextAnchor.MiddleCenter;
+            enemyThreatText.color = new Color(0.68f, 0.72f, 0.76f, 1f);
+            ConfigureRect(enemyThreatText.rectTransform, new Vector2(-18f, -16f), new Vector2(1f, 1f), new Vector2(188f, 24f));
 
             if (controlsText == null)
             {
@@ -1625,19 +1638,7 @@ namespace SRPG.UI
                 var scale = 0.985f + 0.015f * t;
                 SetPanelPairScale(battleThreatFrame, battleThreatPanel, scale);
                 SetLocalScale(enemyThreatText, scale);
-                if (battleThreatFrame != null)
-                {
-                    battleThreatFrame.color = visible
-                        ? new Color(0.58f + 0.12f * lift, 0.42f + 0.12f * lift, 0.18f + 0.03f * lift, 0.62f + 0.18f * lift)
-                        : new Color(0.58f, 0.42f, 0.18f, 0.62f + 0.1f * lift);
-                }
-
-                if (battleThreatPanel != null)
-                {
-                    battleThreatPanel.color = visible
-                        ? new Color(0.038f, 0.034f + 0.018f * lift, 0.028f, 0.82f + 0.08f * lift)
-                        : BattleHudPanelColor();
-                }
+                ApplyEnemyThreatStateVisual(visible, lift);
 
                 elapsed += Time.deltaTime;
                 yield return null;
@@ -1651,19 +1652,30 @@ namespace SRPG.UI
         {
             SetPanelPairScale(battleThreatFrame, battleThreatPanel, 1f);
             SetLocalScale(enemyThreatText, 1f);
+            ApplyEnemyThreatStateVisual(enemyThreatVisible, 0f);
+        }
+
+        private void ApplyEnemyThreatStateVisual(bool visible, float pulse)
+        {
             if (battleThreatFrame != null)
             {
-                battleThreatFrame.color = BattleHudFrameColor();
+                battleThreatFrame.color = visible
+                    ? new Color(0.08f + 0.08f * pulse, 0.78f + 0.12f * pulse, 0.68f + 0.10f * pulse, 0.98f)
+                    : new Color(0.30f + 0.07f * pulse, 0.33f + 0.07f * pulse, 0.36f + 0.07f * pulse, 0.92f);
             }
 
             if (battleThreatPanel != null)
             {
-                battleThreatPanel.color = BattleHudPanelColor();
+                battleThreatPanel.color = visible
+                    ? new Color(0.02f + 0.02f * pulse, 0.24f + 0.06f * pulse, 0.22f + 0.06f * pulse, 0.96f)
+                    : new Color(0.035f + 0.015f * pulse, 0.045f + 0.015f * pulse, 0.055f + 0.015f * pulse, 0.94f);
             }
 
             if (enemyThreatText != null)
             {
-                enemyThreatText.color = BattleHudAccentTextColor();
+                enemyThreatText.color = visible
+                    ? new Color(0.82f, 1f, 0.95f, 1f)
+                    : new Color(0.68f, 0.72f, 0.76f, 1f);
             }
         }
 
@@ -1782,75 +1794,12 @@ namespace SRPG.UI
             return builder.ToString();
         }
 
-        private void UpdateSessionBestResult(string result, string rating, int turnNumber, int playersAlive, int playerHpTotal)
-        {
-            if (string.IsNullOrEmpty(result) || !result.StartsWith("VICTORY") || currentStageNumber <= 0)
-            {
-                return;
-            }
-
-            var candidate = new StageBestResult
-            {
-                Rating = rating,
-                TurnNumber = turnNumber,
-                Survivors = playersAlive,
-                HpTotal = playerHpTotal
-            };
-
-            if (!sessionBestResults.TryGetValue(currentStageNumber, out var currentBest) || IsBetterStageResult(candidate, currentBest))
-            {
-                sessionBestResults[currentStageNumber] = candidate;
-            }
-        }
-
-        private bool IsBetterStageResult(StageBestResult candidate, StageBestResult currentBest)
-        {
-            var candidateRatingScore = GetRatingScore(candidate.Rating);
-            var currentRatingScore = GetRatingScore(currentBest.Rating);
-
-            if (candidateRatingScore != currentRatingScore)
-            {
-                return candidateRatingScore > currentRatingScore;
-            }
-
-            if (candidate.TurnNumber != currentBest.TurnNumber)
-            {
-                return candidate.TurnNumber < currentBest.TurnNumber;
-            }
-
-            if (candidate.Survivors != currentBest.Survivors)
-            {
-                return candidate.Survivors > currentBest.Survivors;
-            }
-
-            return candidate.HpTotal > currentBest.HpTotal;
-        }
-
-        private int GetRatingScore(string rating)
-        {
-            switch (rating)
-            {
-                case "S":
-                    return 5;
-                case "A":
-                    return 4;
-                case "B":
-                    return 3;
-                case "C":
-                    return 2;
-                case "D":
-                    return 1;
-                default:
-                    return 0;
-            }
-        }
-
         private string BuildStageBestResultText(int stageNumber)
         {
             var builder = new StringBuilder();
-            builder.AppendLine("<color=#FFD98F>Current Session Best</color>");
+            builder.AppendLine("<color=#FFD98F>Best Record</color>");
 
-            if (!sessionBestResults.TryGetValue(stageNumber, out var bestResult))
+            if (!GameSaveData.TryGetStageRecord(stageNumber, out var bestResult))
             {
                 builder.Append("<color=#AEB7C2>No Record Yet</color>");
                 return builder.ToString();
@@ -1925,7 +1874,7 @@ namespace SRPG.UI
             }
 
             controlsLogged = true;
-            Debug.Log("SRPG Prototype Controls:\nClick Ally: Select\nHover Enemy: Preview\nClick Enemy: Info / Attack\nClick Blue Tile: Move\nW: Wait / Confirm\nU: Undo Move\nShift+U: Reset Turn\nR: Restart Stage\nEsc/S: Stage Select\nSpace: Toggle Threat / Selected Enemy Range\nEnter: Start/Next/Retry");
+            DevLogger.Log("Final Escape Tactics Controls:\nClick Ally: Select\nHover Enemy: Preview\nClick Enemy: Info / Attack\nClick Blue Tile: Move\nW: Wait / Confirm\nU: Undo Move\nShift+U: Reset Turn\nR: Restart Stage\nEsc/S: Stage Select\nSpace: Toggle Threat / Selected Enemy Range\nEnter: Start/Next/Retry");
         }
 
         private string BuildStageForceSummary(StageData data)
@@ -2371,12 +2320,12 @@ namespace SRPG.UI
 
                 if (stageSelectRowNameTexts[i] == null)
                 {
-                    stageSelectRowNameTexts[i] = CreateText($"StageSelectRowNameText_{i + 1}", new Vector2(154f, rowY - 5f), new Vector2(0f, 1f), TextAnchor.UpperLeft, 21, new Vector2(270f, 32f));
+                    stageSelectRowNameTexts[i] = CreateText($"StageSelectRowNameText_{i + 1}", new Vector2(154f, rowY - 5f), new Vector2(0f, 1f), TextAnchor.UpperLeft, 21, new Vector2(210f, 32f));
                 }
 
                 if (stageSelectRowDifficultyTexts[i] == null)
                 {
-                    stageSelectRowDifficultyTexts[i] = CreateText($"StageSelectRowDifficultyText_{i + 1}", new Vector2(426f, rowY - 5f), new Vector2(0f, 1f), TextAnchor.UpperRight, 19, new Vector2(92f, 32f));
+                    stageSelectRowDifficultyTexts[i] = CreateText($"StageSelectRowDifficultyText_{i + 1}", new Vector2(376f, rowY - 5f), new Vector2(0f, 1f), TextAnchor.UpperRight, 19, new Vector2(132f, 32f));
                     stageSelectRowDifficultyTexts[i].color = new Color(0.82f, 0.78f, 1f, 1f);
                 }
             }
@@ -2519,15 +2468,33 @@ namespace SRPG.UI
 
                 var stage = stages[i];
                 var isSelected = i == selectedStageIndex;
+                var isUnlocked = GameSaveData.IsStageUnlocked(i, stages.Count);
+                var isCleared = GameSaveData.IsStageCleared(i + 1);
                 stageSelectRowPanels[i].color = isSelected
                     ? GetStageSelectSelectedRowColor()
                     : new Color(0.012f, 0.043f, 0.072f, 0.56f);
                 stageSelectRowNumberTexts[i].text = isSelected ? $"\u25C6 {i + 1}" : $"{i + 1}";
-                stageSelectRowNameTexts[i].text = stage.DisplayName;
-                stageSelectRowDifficultyTexts[i].text = $"[{stage.DifficultyLabel}]";
+                stageSelectRowNameTexts[i].text = isUnlocked ? stage.DisplayName : "Locked";
+                stageSelectRowDifficultyTexts[i].text = !isUnlocked
+                    ? "[LOCKED]"
+                    : isCleared
+                        ? "[CLEARED]"
+                        : $"[{stage.DifficultyLabel}]";
+
+                if (!isUnlocked)
+                {
+                    var lockedColor = new Color(0.42f, 0.45f, 0.5f, 0.9f);
+                    stageSelectRowNumberTexts[i].color = lockedColor;
+                    stageSelectRowNameTexts[i].color = lockedColor;
+                    stageSelectRowDifficultyTexts[i].color = lockedColor;
+                    continue;
+                }
+
                 stageSelectRowNumberTexts[i].color = isSelected ? new Color(1f, 0.92f, 0.58f, 1f) : new Color(1f, 0.86f, 0.58f, 1f);
                 stageSelectRowNameTexts[i].color = isSelected ? new Color(1f, 0.94f, 0.76f, 1f) : new Color(0.94f, 0.96f, 1f, 1f);
-                stageSelectRowDifficultyTexts[i].color = GetDifficultyColor(stage.DifficultyLabel, isSelected);
+                stageSelectRowDifficultyTexts[i].color = isCleared
+                    ? new Color(0.38f, 0.86f, 0.62f, 1f)
+                    : GetDifficultyColor(stage.DifficultyLabel, isSelected);
             }
         }
 
@@ -2787,6 +2754,14 @@ namespace SRPG.UI
             titlePromptText.fontSize = 20;
             ConfigureRect(titlePromptText.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(920f, 34f));
 
+            if (titleVersionText == null)
+            {
+                titleVersionText = CreateText("TitleVersionText", new Vector2(-204f, -30f), new Vector2(1f, 1f), TextAnchor.UpperRight, 14, new Vector2(360f, 44f));
+            }
+            titleVersionText.color = new Color(0.8f, 0.82f, 0.84f, 0.9f);
+            titleVersionText.text = $"FINAL ESCAPE TACTICS  v{Application.version}\nDeveloped by GlayL";
+            ConfigureRect(titleVersionText.rectTransform, new Vector2(-204f, -30f), new Vector2(1f, 1f), new Vector2(360f, 44f));
+
             RefreshTitleMenuText();
             RefreshTitlePromptText(false);
             UpdateTitleHighlightPosition();
@@ -2958,6 +2933,7 @@ namespace SRPG.UI
             SetImageEnabled(titleFooterFrame, visible);
             SetImageEnabled(titleFooterPanel, visible);
             SetTextEnabled(titlePromptText, visible);
+            SetTextEnabled(titleVersionText, visible);
         }
 
         private void SetOptionsOverlayVisible(bool visible)
@@ -2989,7 +2965,9 @@ namespace SRPG.UI
             titlePromptText.alignment = TextAnchor.MiddleCenter;
             titlePromptText.text = optionsMode
                 ? "<color=#FFD98F>Left / Right</color>: Adjust      <color=#C99A45>◆</color>      <color=#FFD98F>Enter</color>: Toggle / Back      <color=#C99A45>◆</color>      <color=#FFD98F>Esc</color>: Title"
-                : "<color=#FFD98F>Enter</color>: Confirm      <color=#C99A45>◆</color>      <color=#FFD98F>Up / Down</color>: Select      <color=#C99A45>◆</color>      <color=#FFD98F>Esc</color>: Back";
+                : titleExitConfirmationPending
+                    ? "<color=#FFD98F>Enter</color>: Confirm Exit      <color=#C99A45>◆</color>      <color=#FFD98F>Esc</color>: Cancel"
+                    : "<color=#FFD98F>Enter</color>: Confirm      <color=#C99A45>◆</color>      <color=#FFD98F>Up / Down</color>: Select";
         }
 
         private void BringTitleObjectsToFront()
@@ -3017,6 +2995,7 @@ namespace SRPG.UI
                 ConfigureRect(titlePromptText.rectTransform, Vector2.zero, new Vector2(0.5f, 0.5f), new Vector2(920f, 34f));
             }
             BringToFront(titlePromptText);
+            BringToFront(titleVersionText);
         }
 
         private void BringOptionsObjectsToFront()
@@ -3063,7 +3042,7 @@ namespace SRPG.UI
                 return;
             }
 
-            var labels = new[] { "Start", "Stage Select", "Options", "Exit" };
+            var labels = new[] { "New Game", "Stage Select", "Options", titleExitConfirmationPending ? "Exit?" : "Exit" };
             var texts = new[] { titleStartText, titleStageSelectText, titleOptionsText, titleExitText };
             for (var i = 0; i < texts.Length; i++)
             {
@@ -3154,14 +3133,6 @@ namespace SRPG.UI
             }
 
             titleBackgroundImage.enabled = false;
-        }
-
-        private struct StageBestResult
-        {
-            public string Rating;
-            public int TurnNumber;
-            public int Survivors;
-            public int HpTotal;
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]

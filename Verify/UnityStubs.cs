@@ -382,7 +382,23 @@ namespace UnityEngine
 
     public static class Application
     {
+        public static string version => "0.6.0";
         public static void Quit() { }
+    }
+
+    public static class PlayerPrefs
+    {
+        private static readonly Dictionary<string, int> IntValues = new Dictionary<string, int>();
+        private static readonly Dictionary<string, float> FloatValues = new Dictionary<string, float>();
+        private static readonly Dictionary<string, string> StringValues = new Dictionary<string, string>();
+
+        public static int GetInt(string key, int defaultValue = 0) => IntValues.TryGetValue(key, out var value) ? value : defaultValue;
+        public static float GetFloat(string key, float defaultValue = 0f) => FloatValues.TryGetValue(key, out var value) ? value : defaultValue;
+        public static string GetString(string key, string defaultValue = "") => StringValues.TryGetValue(key, out var value) ? value : defaultValue;
+        public static void SetInt(string key, int value) => IntValues[key] = value;
+        public static void SetFloat(string key, float value) => FloatValues[key] = value;
+        public static void SetString(string key, string value) => StringValues[key] = value;
+        public static void Save() { }
     }
 }
 

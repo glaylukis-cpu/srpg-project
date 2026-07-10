@@ -425,7 +425,7 @@ namespace SRPG.Battle
             }
 
             var actingUnit = selectedUnit;
-            Debug.Log($"{actingUnit.name} waited");
+            DevLogger.Log($"{actingUnit.name} waited");
             BattleUI.Instance?.AddBattleLog($"{actingUnit.name} waited");
             AudioManager.Instance?.PlayWaitSe();
             actingUnit.PlayWaitEffect();
@@ -468,7 +468,7 @@ namespace SRPG.Battle
             BattleUI.Instance?.SetSelectedUnit(unit);
             ShowSelectedUnitRanges(unit);
             AudioManager.Instance?.PlayUndoSe();
-            Debug.Log($"{unit.name} movement undone.");
+            DevLogger.Log($"{unit.name} movement undone.");
         }
 
         private void TryRestorePlayerTurn()
@@ -506,7 +506,7 @@ namespace SRPG.Battle
             BattleUI.Instance?.NotifyTutorialResetTurnSucceeded();
             RestoreEnemyThreatStateAfterUndo(restoredEnemyThreatVisible);
             AudioManager.Instance?.PlayResetTurnSe();
-            Debug.Log($"Turn {manager.TurnNumber} restored to player turn start.");
+            DevLogger.Log($"Turn {manager.TurnNumber} restored to player turn start.");
         }
 
         private void RestoreEnemyThreatStateAfterUndo(bool enemyThreatVisible)

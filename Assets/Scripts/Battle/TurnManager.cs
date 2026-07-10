@@ -199,7 +199,7 @@ namespace SRPG.Battle
             }
 
             unit.SetHasActed(true);
-            Debug.Log($"{unit.name} acted.");
+            DevLogger.Log($"{unit.name} acted.");
 
             if (CheckVictory())
             {
@@ -262,7 +262,7 @@ namespace SRPG.Battle
 
             StopCoroutine(enemyTurnCoroutine);
             enemyTurnCoroutine = null;
-            Debug.Log("Enemy turn stopped for stage select.");
+            DevLogger.Log("Enemy turn stopped for stage select.");
         }
 
         private void Awake()
@@ -307,7 +307,7 @@ namespace SRPG.Battle
                 ResetPlayerUnitActions();
             }
 
-            Debug.Log($"Turn {turnNumber}: {currentPhase}");
+            DevLogger.Log($"Turn {turnNumber}: {currentPhase}");
             BattleUI.Instance?.SetTurnInfo(turnNumber, currentPhase.ToString());
 
             if (!CheckDefeat())
@@ -331,7 +331,7 @@ namespace SRPG.Battle
             }
 
             currentPhase = TurnPhase.EnemyTurn;
-            Debug.Log($"Turn {turnNumber}: {currentPhase}");
+            DevLogger.Log($"Turn {turnNumber}: {currentPhase}");
             BattleUI.Instance?.SetTurnInfo(turnNumber, currentPhase.ToString());
             enemyTurnCoroutine = StartCoroutine(EnemyTurnRoutine());
         }
@@ -712,6 +712,15 @@ namespace SRPG.Battle
 
             BattleUI.Instance?.ClearAttackPreview();
             var evaluation = BuildClearEvaluation(battleResult);
+            if (battleResult == BattleResult.Victory)
+            {
+                StageManager.Instance?.RecordStageClear(
+                    evaluation.Rating,
+                    evaluation.TurnNumber,
+                    evaluation.PlayersAlive,
+                    evaluation.PlayerHpTotal);
+            }
+
             LogClearEvaluation(evaluation);
             BattleUI.Instance?.ShowResult(
                 resultText,

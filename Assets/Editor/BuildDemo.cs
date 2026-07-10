@@ -12,11 +12,13 @@ namespace SRPG.EditorTools
     public static class BuildDemo
     {
         private const string BuildScenePath = "Assets/GeneratedBuildScenes/AutoBootstrap.unity";
-        private const string WindowsBuildPath = "Builds/Windows/FinalEscapeTacticsDemo.exe";
+        private const string WindowsBuildDirectory = "Builds/Windows/Release";
+        private const string WindowsBuildPath = WindowsBuildDirectory + "/FinalEscapeTactics.exe";
 
         public static void BuildWindows()
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(WindowsBuildPath));
+            ValidateReleaseSettings();
+            PrepareBuildDirectory();
             string scenePath = EnsureBootstrapScene();
 
             var buildOptions = new BuildPlayerOptions
@@ -24,7 +26,7 @@ namespace SRPG.EditorTools
                 scenes = new[] { scenePath },
                 locationPathName = WindowsBuildPath,
                 target = BuildTarget.StandaloneWindows64,
-                options = BuildOptions.None
+                options = BuildOptions.StrictMode
             };
 
             Debug.Log($"Starting Windows build: {WindowsBuildPath}");
@@ -36,6 +38,41 @@ namespace SRPG.EditorTools
             {
                 throw new InvalidOperationException($"Windows build failed: {summary.result}");
             }
+        }
+
+        private static void ValidateReleaseSettings()
+        {
+            if (string.IsNullOrWhiteSpace(PlayerSettings.companyName) || PlayerSettings.companyName == "DefaultCompany")
+            {
+                throw new InvalidOperationException("Release build requires a non-default Company Name.");
+            }
+
+            if (string.IsNullOrWhiteSpace(PlayerSettings.productName) || PlayerSettings.productName.Contains("unity-"))
+            {
+                throw new InvalidOperationException("Release build requires a final Product Name.");
+            }
+
+            if (string.IsNullOrWhiteSpace(PlayerSettings.bundleVersion))
+            {
+                throw new InvalidOperationException("Release build requires a version.");
+            }
+        }
+
+        private static void PrepareBuildDirectory()
+        {
+            var projectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
+            var outputDirectory = Path.GetFullPath(WindowsBuildDirectory);
+            if (!outputDirectory.StartsWith(projectRoot + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException("Release build directory must remain inside the project.");
+            }
+
+            if (Directory.Exists(outputDirectory))
+            {
+                Directory.Delete(outputDirectory, true);
+            }
+
+            Directory.CreateDirectory(outputDirectory);
         }
 
         private static string EnsureBootstrapScene()

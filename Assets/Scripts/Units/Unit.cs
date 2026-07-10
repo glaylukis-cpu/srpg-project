@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using SRPG.Audio;
+using SRPG.Debugging;
 using SRPG.Grid;
 using SRPG.UI;
 using SRPG.Visual;
@@ -246,7 +247,7 @@ namespace SRPG.Units
 
             currentHp -= appliedDamage;
             UpdateHpDisplay();
-            Debug.Log($"{name} took {damage} damage. HP: {Mathf.Max(0, currentHp)}/{maxHp}");
+            DevLogger.Log($"{name} took {damage} damage. HP: {Mathf.Max(0, currentHp)}/{maxHp}");
 
             if (currentHp <= 0)
             {
@@ -424,7 +425,7 @@ namespace SRPG.Units
                 gridManager.RemoveUnit(this);
             }
 
-            Debug.Log($"{name} defeated.");
+            DevLogger.Log($"{name} defeated.");
             BattleUI.Instance?.AddBattleLog($"{name} defeated");
             AudioManager.Instance?.PlayKoSe();
             DamagePopup.ShowText(transform.position + new Vector3(0f, 0.28f, -0.25f), "KO", new Color(1f, 0.86f, 0.22f, 1f), 0.24f, 48);

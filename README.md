@@ -1,6 +1,6 @@
-# Puzzle SRPG Prototype v0.2
+# Final Escape Tactics v0.6
 
-Unity 2D short puzzle-SRPG prototype.
+Unity 2D short puzzle-SRPG commercial candidate.
 
 The project is built around an empty-scene runtime setup. Press Play in an empty scene and the core managers, camera, UI, grid, stage loader, stage manager, terrain, and units are created automatically.
 
@@ -17,6 +17,8 @@ The project is built around an empty-scene runtime setup. Press Play in an empty
 - Stage select screen
 - Polished panel-based stage select layout with highlighted stage rows, chapter card, selected-stage detail, decorated header, and controls footer
 - Six-stage progression
+- Persistent sequential stage unlocking and clear records
+- Persistent audio and display settings
 - Runtime 8x8 grid generation
 - StageData-driven unit and terrain setup
 - Obstacles and Goal tiles
@@ -90,7 +92,7 @@ Unity batchmode compile:
 & "C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Unity.com" -batchmode -quit -nographics -projectPath "<project path>" -logFile "<project path>\UnityBatchmode.log"
 ```
 
-Current v0.2 status:
+Current verification baseline:
 
 - Dotnet compile: passing
 - Unity batchmode compile: passing
@@ -99,6 +101,16 @@ Current v0.2 status:
 - Editor play full clear: confirmed by user
 
 See `Docs/CurrentPrototypeStatus.md`, `Docs/SixStagePlaytestRecord.md`, `Docs/v0.2StateLock.md`, and `Docs/VisualDirection2DHD.md` for the current state and visual direction notes.
+
+## Windows Release Build
+
+```powershell
+& "C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Unity.com" -batchmode -quit -nographics -projectPath "<project path>" -executeMethod SRPG.EditorTools.BuildDemo.BuildWindows -logFile "<project path>\Logs\windows-release-build.log"
+```
+
+Output: `Builds/Windows/Release/FinalEscapeTactics.exe`
+
+Commercial release blockers and manual validation are tracked in `Docs/CommercialReadinessAudit.md`.
 
 ## Title Background Replacement
 
