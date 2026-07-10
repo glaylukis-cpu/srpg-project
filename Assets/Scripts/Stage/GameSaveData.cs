@@ -17,6 +17,7 @@ namespace SRPG.Persistence
 
         private const string SaveVersionKey = Prefix + "Version";
         private const string HighestUnlockedStageKey = Prefix + "Progress.HighestUnlockedStage";
+        private const string KnownStageCountKey = Prefix + "Progress.KnownStageCount";
         private const string MasterVolumeKey = Prefix + "Settings.MasterVolume";
         private const string BgmVolumeKey = Prefix + "Settings.BgmVolume";
         private const string SeVolumeKey = Prefix + "Settings.SeVolume";
@@ -85,9 +86,29 @@ namespace SRPG.Persistence
             }
 
             PlayerPrefs.SetInt(GetStageKey(stageNumber, "Cleared"), 1);
+            PlayerPrefs.SetInt(KnownStageCountKey, Mathf.Max(PlayerPrefs.GetInt(KnownStageCountKey, 0), totalStages));
             var nextUnlockedStage = Mathf.Min(totalStages, stageNumber + 1);
             var currentUnlockedStage = PlayerPrefs.GetInt(HighestUnlockedStageKey, 1);
             PlayerPrefs.SetInt(HighestUnlockedStageKey, Mathf.Max(currentUnlockedStage, nextUnlockedStage));
+            PlayerPrefs.Save();
+        }
+
+        public static void ResetProgress(int totalStages)
+        {
+            EnsureInitialized();
+            var savedStageCount = PlayerPrefs.GetInt(KnownStageCountKey, 0);
+            var stagesToClear = Mathf.Max(totalStages, savedStageCount);
+            for (var stageNumber = 1; stageNumber <= stagesToClear; stageNumber++)
+            {
+                PlayerPrefs.DeleteKey(GetStageKey(stageNumber, "Cleared"));
+                PlayerPrefs.DeleteKey(GetStageKey(stageNumber, "Rating"));
+                PlayerPrefs.DeleteKey(GetStageKey(stageNumber, "Turn"));
+                PlayerPrefs.DeleteKey(GetStageKey(stageNumber, "Survivors"));
+                PlayerPrefs.DeleteKey(GetStageKey(stageNumber, "HpTotal"));
+            }
+
+            PlayerPrefs.SetInt(HighestUnlockedStageKey, 1);
+            PlayerPrefs.SetInt(KnownStageCountKey, Mathf.Max(0, totalStages));
             PlayerPrefs.Save();
         }
 

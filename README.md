@@ -19,6 +19,7 @@ The project is built around an empty-scene runtime setup. Press Play in an empty
 - Six-stage progression
 - Persistent sequential stage unlocking and clear records
 - Persistent audio and display settings
+- Confirmed progress reset that preserves audio and display settings
 - Runtime 8x8 grid generation
 - StageData-driven unit and terrain setup
 - Obstacles and Goal tiles

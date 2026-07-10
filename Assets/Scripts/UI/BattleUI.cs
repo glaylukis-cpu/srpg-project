@@ -550,7 +550,7 @@ namespace SRPG.UI
             SetBattleHudVisible(true);
         }
 
-        public void ShowOptionsScreen(AudioManager audioManager, int selectedOptionIndex, string resolutionOverride = null, string displayModeOverride = null)
+        public void ShowOptionsScreen(AudioManager audioManager, int selectedOptionIndex, string resolutionOverride = null, string displayModeOverride = null, bool resetProgressConfirmation = false, bool resetProgressCompleted = false)
         {
             EnsureTextObjects();
             HideTutorialHint();
@@ -560,13 +560,13 @@ namespace SRPG.UI
             SetBattleHudVisible(false);
             SetTitleOverlayVisible(false);
 
-            selectedOptionsRow = Mathf.Max(0, Mathf.Min(selectedOptionIndex, 6));
+            selectedOptionsRow = Mathf.Max(0, Mathf.Min(selectedOptionIndex, 7));
             if (titleBackgroundImage != null && titleBackgroundImage.sprite != null)
             {
                 titleBackgroundImage.enabled = true;
             }
 
-            RefreshOptionsText(audioManager, resolutionOverride, displayModeOverride);
+            RefreshOptionsText(audioManager, resolutionOverride, displayModeOverride, resetProgressConfirmation, resetProgressCompleted);
             SetOptionsOverlayVisible(true);
             BringOptionsObjectsToFront();
         }
@@ -2796,7 +2796,7 @@ namespace SRPG.UI
             titleExitText = EnsureTitleMenuChildText(titleExitText, "ExitText", new Vector2(0f, -36f), TextAnchor.MiddleCenter, 21, new Vector2(260f, 28f));
         }
 
-        private void RefreshOptionsText(AudioManager audioManager, string resolutionOverride = null, string displayModeOverride = null)
+        private void RefreshOptionsText(AudioManager audioManager, string resolutionOverride = null, string displayModeOverride = null, bool resetProgressConfirmation = false, bool resetProgressCompleted = false)
         {
             if (optionsBodyText == null)
             {
@@ -2809,6 +2809,7 @@ namespace SRPG.UI
             var mute = audioManager != null && audioManager.MuteAll;
             var resolution = string.IsNullOrEmpty(resolutionOverride) ? $"{Screen.width} x {Screen.height}" : resolutionOverride;
             var displayMode = string.IsNullOrEmpty(displayModeOverride) ? (Screen.fullScreen ? "Full Screen" : "Window") : displayModeOverride;
+            var resetValue = resetProgressConfirmation ? "<color=#E98272>ENTER AGAIN</color>" : resetProgressCompleted ? "<color=#63D49C>COMPLETE</color>" : "Progress";
 
             var lines = new[]
             {
@@ -2818,10 +2819,18 @@ namespace SRPG.UI
                 BuildOptionLine(3, "Mute", mute ? "ON" : "OFF"),
                 BuildOptionLine(4, "Resolution", resolution),
                 BuildOptionLine(5, "Display", displayMode),
-                BuildOptionLine(6, "Back", "Title")
+                BuildOptionLine(6, "Reset Data", resetValue),
+                BuildOptionLine(7, "Back", "Title")
             };
 
             optionsBodyText.text = string.Join("\n", lines);
+
+            if (optionsFooterText != null)
+            {
+                optionsFooterText.text = resetProgressConfirmation
+                    ? "Enter: Confirm Reset    Esc: Cancel"
+                    : "Left / Right: Adjust    Enter: Toggle / Back    Esc: Title";
+            }
         }
 
         private string BuildOptionLine(int row, string label, string value)

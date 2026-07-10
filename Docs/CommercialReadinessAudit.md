@@ -22,6 +22,7 @@ test after the release-blocking asset and platform items below are resolved.
 - Persistent clear status and best result per stage.
 - Locked and cleared state display in Stage Select.
 - Locked-stage protection for both menu confirmation and 1-6 quick start.
+- Two-step progress reset that preserves audio and display settings.
 - Two-step Exit confirmation with Esc/Backspace cancellation.
 - Product/version/developer text on the title screen.
 - Development-only input, turn, stage-load, and combat logs are suppressed in release builds.
@@ -58,7 +59,7 @@ test after the release-blocking asset and platform items below are resolved.
 
 - Controller support and remappable controls.
 - Accessibility pass for color-only information, text size, and screen shake/flash options.
-- A dedicated credits/licenses screen and an in-build save-data reset action.
+- A dedicated credits/licenses screen.
 - Crash-report/support instructions and a public support contact.
 - Automated play-mode tests for save migration, progression, and stage completion.
 

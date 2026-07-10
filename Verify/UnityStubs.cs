@@ -398,6 +398,12 @@ namespace UnityEngine
         public static void SetInt(string key, int value) => IntValues[key] = value;
         public static void SetFloat(string key, float value) => FloatValues[key] = value;
         public static void SetString(string key, string value) => StringValues[key] = value;
+        public static void DeleteKey(string key)
+        {
+            IntValues.Remove(key);
+            FloatValues.Remove(key);
+            StringValues.Remove(key);
+        }
         public static void Save() { }
     }
 }

@@ -25,6 +25,8 @@ namespace SRPG.Stage
         private bool wasBattleEnded;
         private bool waitForResultConfirmRelease;
         private bool quitConfirmationPending;
+        private bool resetProgressConfirmationPending;
+        private bool resetProgressCompleted;
 
         private static readonly Vector2Int[] ResolutionOptions =
         {
@@ -277,6 +279,8 @@ namespace SRPG.Stage
             stageSelectOpen = true;
             optionsOpen = false;
             quitConfirmationPending = false;
+            resetProgressConfirmationPending = false;
+            resetProgressCompleted = false;
             selectedStageIndex = ClampStageIndex(hasLoadedStage ? currentStageIndex : selectedStageIndex);
             selectedStageIndex = ClampUnlockedStageIndex(selectedStageIndex);
             TurnManager.Instance?.StopActiveEnemyTurn();
@@ -296,6 +300,8 @@ namespace SRPG.Stage
             stageSelectOpen = false;
             optionsOpen = false;
             quitConfirmationPending = false;
+            resetProgressConfirmationPending = false;
+            resetProgressCompleted = false;
             selectedTitleMenuIndex = ClampTitleMenuIndex(selectedMenuIndex);
             PlayerController.Instance?.ResetControllerState();
             BattleUI.Instance?.SetSelectedUnit(null);
@@ -381,9 +387,22 @@ namespace SRPG.Stage
             optionsOpen = true;
             selectedOptionsIndex = 0;
             selectedResolutionIndex = GetClosestResolutionIndex(Screen.width, Screen.height);
-            BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex);
+            resetProgressConfirmationPending = false;
+            resetProgressCompleted = false;
+            RefreshOptionsScreen();
             AudioManager.Instance?.PlayTitleBgm();
             DevLogger.Log("Options screen opened.");
+        }
+
+        private void RefreshOptionsScreen(string resolutionOverride = null, string displayModeOverride = null)
+        {
+            BattleUI.Instance?.ShowOptionsScreen(
+                AudioManager.Instance,
+                selectedOptionsIndex,
+                resolutionOverride,
+                displayModeOverride,
+                resetProgressConfirmationPending,
+                resetProgressCompleted);
         }
 
         private void HandleOptionsInput()
@@ -391,22 +410,33 @@ namespace SRPG.Stage
             if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
             {
                 AudioManager.Instance?.PlayCancelSe();
+                if (resetProgressConfirmationPending)
+                {
+                    resetProgressConfirmationPending = false;
+                    RefreshOptionsScreen();
+                    return;
+                }
+
                 ShowTitleScreen(2);
                 return;
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                resetProgressConfirmationPending = false;
+                resetProgressCompleted = false;
                 selectedOptionsIndex = ClampOptionsIndex(selectedOptionsIndex - 1);
-                BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex);
+                RefreshOptionsScreen();
                 AudioManager.Instance?.PlayCursorSe();
                 return;
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                resetProgressConfirmationPending = false;
+                resetProgressCompleted = false;
                 selectedOptionsIndex = ClampOptionsIndex(selectedOptionsIndex + 1);
-                BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex);
+                RefreshOptionsScreen();
                 AudioManager.Instance?.PlayCursorSe();
                 return;
             }
@@ -436,7 +466,7 @@ namespace SRPG.Stage
                     AudioManager.Instance.MuteAll = !AudioManager.Instance.MuteAll;
                 }
 
-                BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex);
+                RefreshOptionsScreen();
                 return;
             }
 
@@ -448,9 +478,39 @@ namespace SRPG.Stage
 
             if (selectedOptionsIndex == 6)
             {
+                HandleResetProgress();
+                return;
+            }
+
+            if (selectedOptionsIndex == 7)
+            {
                 AudioManager.Instance?.PlayCancelSe();
                 ShowTitleScreen(2);
             }
+        }
+
+        private void HandleResetProgress()
+        {
+            if (!resetProgressConfirmationPending)
+            {
+                resetProgressConfirmationPending = true;
+                resetProgressCompleted = false;
+                AudioManager.Instance?.PlayConfirmSe();
+                RefreshOptionsScreen();
+                return;
+            }
+
+            GameSaveData.ResetProgress(stages.Count);
+            currentStageIndex = 0;
+            selectedStageIndex = 0;
+            hasLoadedStage = false;
+            allClear = false;
+            wasBattleEnded = false;
+            resetProgressConfirmationPending = false;
+            resetProgressCompleted = true;
+            AudioManager.Instance?.PlayConfirmSe();
+            RefreshOptionsScreen();
+            DevLogger.Log("Saved stage progress reset.");
         }
 
         private void AdjustOption(float delta)
@@ -496,7 +556,8 @@ namespace SRPG.Stage
             }
 
             AudioManager.Instance?.PlayCursorSe();
-            BattleUI.Instance?.ShowOptionsScreen(audio, selectedOptionsIndex);
+            resetProgressCompleted = false;
+            RefreshOptionsScreen();
         }
 
         private void CycleResolution(int direction)
@@ -516,8 +577,9 @@ namespace SRPG.Stage
             var displayMode = GetCurrentFullScreenMode();
             Screen.SetResolution(resolution.x, resolution.y, displayMode);
             GameSaveData.SaveDisplaySettings(resolution.x, resolution.y, displayMode != FullScreenMode.Windowed);
+            resetProgressCompleted = false;
             AudioManager.Instance?.PlayCursorSe();
-            BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex, FormatResolution(resolution), FormatDisplayMode(displayMode));
+            RefreshOptionsScreen(FormatResolution(resolution), FormatDisplayMode(displayMode));
             DevLogger.Log($"Resolution changed: {resolution.x}x{resolution.y}, Display: {FormatDisplayMode(displayMode)}");
         }
 
@@ -527,8 +589,9 @@ namespace SRPG.Stage
             var targetMode = Screen.fullScreen ? FullScreenMode.Windowed : FullScreenMode.FullScreenWindow;
             Screen.SetResolution(resolution.x, resolution.y, targetMode);
             GameSaveData.SaveDisplaySettings(resolution.x, resolution.y, targetMode != FullScreenMode.Windowed);
+            resetProgressCompleted = false;
             AudioManager.Instance?.PlayConfirmSe();
-            BattleUI.Instance?.ShowOptionsScreen(AudioManager.Instance, selectedOptionsIndex, FormatResolution(resolution), FormatDisplayMode(targetMode));
+            RefreshOptionsScreen(FormatResolution(resolution), FormatDisplayMode(targetMode));
             DevLogger.Log($"Display mode changed: {FormatDisplayMode(targetMode)} {resolution.x}x{resolution.y}");
         }
 
@@ -717,10 +780,10 @@ namespace SRPG.Stage
         {
             if (optionIndex < 0)
             {
-                return 6;
+                return 7;
             }
 
-            if (optionIndex > 6)
+            if (optionIndex > 7)
             {
                 return 0;
             }
